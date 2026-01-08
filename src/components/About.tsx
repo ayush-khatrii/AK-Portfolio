@@ -28,8 +28,8 @@ const infoData = [
   {
     icon: FiMail,
     label: "Email",
-    value: "ayushkhatrii.dev@gmail.com",
-    href: "mailto:ayushkhatrii.dev@gmail.com",
+    value: "ayushkhatri.dev@gmail.com",
+    href: "mailto:ayushkhatri.dev@gmail.com",
   },
   {
     icon: FiGlobe,
@@ -45,7 +45,7 @@ const infoData = [
   {
     icon: FiCode,
     label: "Role",
-    value: "Full-Stack Developer & Editor",
+    value: "Full-Stack Developer",
   },
 ]
 
