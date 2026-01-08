@@ -20,7 +20,6 @@ const page = () => {
       <Skills />
       <Projects />
       <Contact />
-      <Footer />
     </div>
   )
 }

@@ -28,6 +28,9 @@ const GithubContribution = () => {
       <GitHubCalendar
         blockSize={13}
         fontSize={12}
+        showWeekdayLabels={[
+          "sun", "mon", "tue", "wed", "thu", "fri", "sat"
+        ]}
         weekStart={1}
         username="ayush-khatrii"
         theme={{

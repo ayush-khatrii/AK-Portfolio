@@ -44,6 +44,17 @@ type WorkItem = {
 
 const work: WorkItem[] = [
   {
+    title: "Portlinks India",
+    position: "Fullstack Developer",
+    date: "Nov 2025 – Present",
+    content: [
+      "Developed from scratch a highly secure dashboard with advanced IP based security for Portlinks India.",
+    ],
+    location: "Gujarat, India",
+    techStack: ["Next.js", "MongoDB", "Mongoose", "Tailwind CSS"],
+    icon: FiBriefcase,
+  },
+  {
     title: "Self-Employed",
     position: "Freelance Web Developer",
     date: "June 2024 – Present",

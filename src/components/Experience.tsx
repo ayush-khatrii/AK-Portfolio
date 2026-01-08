@@ -30,7 +30,7 @@ const Experience = () => {
         <Accordion type="multiple" className="w-full grid grid-cols-1">
           {work.map((item, idx) => (
             <AccordionItem
-              key={idx}
+              key={`${item.title}-${idx}`}
               value={`item-${idx}`}
               className="  last:border-none"
             >

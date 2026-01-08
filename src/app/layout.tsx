@@ -1,8 +1,3 @@
-import type { Metadata } from "next";
-import {
-  JetBrains_Mono,
-  Geist_Mono
-} from "next/font/google"
 import "./globals.css";
 import { ThemeProvider } from "@/providers";
 import { Toaster } from "@/components/ui/sonner";
@@ -43,6 +38,7 @@ export default function RootLayout({
             </div>
             <div className="max-w-3xl md:mx-auto px-5">
               {children}
+              hello ak
               <Footer />
             </div>
           </main>
@@ -52,3 +48,4 @@ export default function RootLayout({
     </html>
   );
 }
+
