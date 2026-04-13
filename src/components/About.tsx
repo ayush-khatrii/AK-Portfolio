@@ -10,17 +10,11 @@ import {
 } from "react-icons/fi"
 import { Button } from "./ui/button"
 
-// CURRENT DATES
-const currentYear = new Date().getFullYear()
-const currentMonth = new Date().getMonth()
-const currentDay = new Date().getDate()
-
-// BIRTH DATES
-const birthDay = 15
-const birthMonth = 3
-const birthYear = 2003
-
+// BIRTH DATE
+const birthYear = 2003;
+const age = new Date().getFullYear() - birthYear;
 let age = currentYear - birthYear
+
 if (currentMonth < birthMonth || (currentMonth === birthMonth && currentDay < birthDay)) age--
 
 // INFO DATA
