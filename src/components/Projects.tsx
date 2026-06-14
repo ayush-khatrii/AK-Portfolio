@@ -15,7 +15,7 @@ const Projects = () => {
         <h1 className="text-3xl font-bold my-2 mb-10">Projects</h1>
       </div>
 
-      <div className="grid grid-cols-1 gap-4">
+      <div className="grid md:grid-cols-2 gap-4">
         {project.slice(0, 3).map((item, idx) => (
           <motion.div
             initial={{ opacity: 0, y: 50 }}

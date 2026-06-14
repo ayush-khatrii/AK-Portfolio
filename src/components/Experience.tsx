@@ -1,14 +1,20 @@
-"use client"
+"use client";
 
-import React from "react"
-import { motion } from "motion/react"
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
-import { FiCalendar, FiMapPin } from "react-icons/fi"
-import { Badge } from "./ui/badge"
+import React from "react";
+import { motion } from "motion/react";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion";
+import { FiCalendar, FiMapPin } from "react-icons/fi";
+import { Badge } from "./ui/badge";
 import { TbArrowBadgeRightFilled } from "react-icons/tb";
-import { work } from "@/constants"
-
-
+import { work } from "@/constants";
+import { Button } from "./ui/button";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 const Experience = () => {
   return (
@@ -34,14 +40,18 @@ const Experience = () => {
               value={`item-${idx}`}
               className="  last:border-none"
             >
-              <AccordionTrigger className="group cursor-pointer flex items-center justify-between hover:no-underline transition-all">
+              <AccordionTrigger className="group  cursor-pointer flex items-center justify-between hover:no-underline transition-all">
                 <div className="flex items-center gap-4 text-left">
-                  {item.icon && <item.icon className="text-primary text-lg border rounded-xl bg-foreground/10 p-2.5 size-10 transition-all group-hover:scale-105 group-hover:bg-primary/10" />}
+                  {item.icon && (
+                    <item.icon className="text-primary text-lg border rounded-xl bg-foreground/10 p-2.5 size-10 transition-all group-hover:scale-105 group-hover:bg-primary/10" />
+                  )}
                   <div>
-                    <h2 className="font-semibold text-foreground text-base md:text-lg">
+                    <h2 className="font-medium text-foreground text-base md:text-lg">
                       {item.position}
                     </h2>
-                    <p className="text-sm md:text-base text-foreground/70">{item.title}</p>
+                    <p className="text-sm font-thin md:text-base text-foreground/70">
+                      {item.title}
+                    </p>
                   </div>
                 </div>
               </AccordionTrigger>
@@ -62,29 +72,48 @@ const Experience = () => {
                 </div>
                 <ul className="space-y-2 text-foreground/80 text-base md:text-lg leading-relaxed">
                   {item.content.map((point, i) => (
-                    <li key={i} className="flex items-start gap-3">
+                    <li
+                      key={`${item.workId || item.title}-${point}-${i}`}
+                      className="flex items-start gap-3"
+                    >
                       <TbArrowBadgeRightFilled className="text-primary mt-1" />
                       <span className="flex-1 font-normal">{point}</span>
                     </li>
                   ))}
                 </ul>
+                <Link
+                  href={`/work/${item.workId}`}
+                  target="_blank"
+                  className="inline-flex"
+                >
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-primary border-primary hover:bg-primary/10 cursor-pointer"
+                  >
+                    Know More <ArrowRight />
+                  </Button>
+                </Link>
                 <div className="mt-6">
-                  <span className="font-medium text-foreground">Tech Stack/Tools:</span>{" "}
+                  <span className="font-medium text-foreground">
+                    Tech Stack/Tools:
+                  </span>{" "}
                   <div className="flex flex-wrap gap-2 mt-3">
-                    {
-                      item.techStack.map((tech, i) => (
-                        <motion.div
-                          key={idx}
-                          initial={{ opacity: 0, y: 10 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.3, delay: i * 0.2 }}
+                    {item.techStack.map((tech, i) => (
+                      <motion.div
+                        key={`${item.workId || item.title}-${tech}-${i}`}
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3, delay: i * 0.2 }}
+                      >
+                        <Badge
+                          variant="secondary"
+                          className="text-sm font-normal cursor-pointer border text-foreground/85"
                         >
-                          <Badge variant="secondary" className="text-sm cursor-pointer border text-foreground/85">
-                            {tech}
-                          </Badge>
-                        </motion.div>
-                      ))
-                    }
+                          {tech}
+                        </Badge>
+                      </motion.div>
+                    ))}
                   </div>
                 </div>
               </AccordionContent>
@@ -93,7 +122,7 @@ const Experience = () => {
         </Accordion>
       </motion.div>
     </div>
-  )
-}
+  );
+};
 
-export default Experience
+export default Experience;

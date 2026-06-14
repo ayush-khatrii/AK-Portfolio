@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/accordion"
 import { FiLink } from "react-icons/fi";
 import { FaGithub } from "react-icons/fa";
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 
 const Page = () => {
 	return (
@@ -41,54 +42,62 @@ const Page = () => {
 						key={idx}
 						className="rounded-md overflow-hidden border border-foreground/15 flex flex-col"
 					>
-						<div className="p-5 flex flex-col flex-grow">
-							<h2 className="text-xl font-medium mb-1">{item.title}</h2>
+						<motion.div
+							initial={{ opacity: 0, y: 50 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.3, delay: idx * 0.2 }}
+							key={idx}
+						>
+							<Card className="flex flex-col h-full border-foreground/15">
 
-							<p className="text-base line-clamp-2 font-normal text-muted-foreground mb-6 flex-grow">
-								{item.desc}
-							</p>
-							<motion.div
-								key={idx}
-								className="flex flex-wrap gap-2 mb-6"
-							>
-								{item.techStack &&
-									item.techStack.map((tech, techIdx) => (
-										<motion.div
-											key={techIdx}
-											initial={{ opacity: 0, y: 10 }}
-											whileInView={{ opacity: 1, y: 0 }}
-											transition={{ duration: 0.3, delay: techIdx * 0.1 }}
-										>
-											<Badge variant="secondary" className="text-xs border text-foreground/85">
-												{tech}
-											</Badge>
-										</motion.div>
-									))}
-							</motion.div>
+								<CardHeader className="pb-2">
+									<h2 className="text-xl font-medium">
+										{item.title}
+									</h2>
+								</CardHeader>
 
-							<motion.div
-								initial={{ opacity: 0, y: 50 }}
-								whileInView={{ opacity: 1, y: 0 }}
-								transition={{ duration: 0.3, delay: 0.2 }}
-								className="flex gap-3">
-								{item.liveLink && (
-									<Button variant="outline" size="sm" asChild>
-										<a href={item.liveLink} target="_blank" rel="noopener noreferrer">
-											<FiLink className="h-4 w-4" />
-											Website
-										</a>
-									</Button>
-								)}
-								{item.githubLink && (
-									<Button variant="default" size="sm" asChild>
-										<a href={item.githubLink} target="_blank" rel="noopener noreferrer">
-											<FaGithub className="h-4 w-4" />
-											Source
-										</a>
-									</Button>
-								)}
-							</motion.div>
-						</div>
+								<CardContent className="flex flex-col flex-grow pt-0">
+									<p className="text-lg line-clamp-2 font-normal text-muted-foreground mb-6">
+										{item.desc}
+									</p>
+
+									<div className="flex flex-wrap gap-2 mb-6">
+										{item.techStack?.map((tech, techIdx) => (
+											<motion.div
+												key={techIdx}
+												initial={{ opacity: 0, y: 10 }}
+												whileInView={{ opacity: 1, y: 0 }}
+												transition={{ duration: 0.3, delay: techIdx * 0.1 }}
+											>
+												<Badge variant="secondary" className="text-base border text-foreground/85">
+													{tech}
+												</Badge>
+											</motion.div>
+										))}
+									</div>
+								</CardContent>
+
+								<CardFooter className="gap-3 pt-0">
+									{item.liveLink && (
+										<Button variant="outline" size="sm" asChild>
+											<a href={item.liveLink} target="_blank" rel="noopener noreferrer">
+												<FiLink className="h-4 w-4" />
+												Website
+											</a>
+										</Button>
+									)}
+									{item.githubLink && (
+										<Button variant="default" size="sm" asChild>
+											<a href={item.githubLink} target="_blank" rel="noopener noreferrer">
+												<FaGithub className="h-4 w-4" />
+												Source
+											</a>
+										</Button>
+									)}
+								</CardFooter>
+
+							</Card>
+						</motion.div>
 					</motion.div>
 				))}
 			</div>

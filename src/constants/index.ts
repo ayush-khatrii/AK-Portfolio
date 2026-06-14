@@ -33,6 +33,7 @@ const skills = [
 ];
 
 type WorkItem = {
+  workId?: string;
   title: string;
   position: string;
   date: string;
@@ -44,17 +45,32 @@ type WorkItem = {
 
 const work: WorkItem[] = [
   {
+    workId: "portlinks-india",
     title: "Portlinks India",
     position: "Fullstack Developer",
     date: "Nov 2025 – Present",
-    content: [
-      "Developed from scratch a highly secure dashboard with advanced IP based security for Portlinks India.",
-    ],
     location: "Gujarat, India",
-    techStack: ["Next.js", "MongoDB", "Mongoose", "Tailwind CSS"],
+    content: [
+      "Architected an end-to-end Project Management System (PMS) that automated lead-to-invoice workflows, cutting internal administrative turnaround time by an estimated 40%.",
+      "Engineered an operational Admin Dashboard from scratch, reducing unauthorized access vulnerabilities to zero via custom OAuth RBAC, reCAPTCHA v3, and multi-attempt IP blocking.",
+      "Built a high-performance messaging engine using Redis and BullMQ, offloading high-volume bulk email operations to process thousands of weekly dispatches with 99.9% queue uptime.",
+      "Developed a low-latency IoT pipeline via Python (PySerial, Socket.IO) and Node.js, streaming real-time weigh-scale telemetry and executing instant local invoice printing in under 200ms.",
+    ],
+    techStack: [
+      "Next.js",
+      "Node.js",
+      "Python",
+      "Socket.IO",
+      "Redis",
+      "BullMQ",
+      "MongoDB",
+      "Flask",
+      "Tailwind CSS",
+    ],
     icon: FiBriefcase,
   },
   {
+    workId: "self-employed",
     title: "Self-Employed",
     position: "Freelance Web Developer",
     date: "June 2024 – Present",
@@ -76,6 +92,7 @@ const work: WorkItem[] = [
     icon: FiBriefcase,
   },
   {
+    workId: "freelance-video-editor",
     title: "Freelance Projects",
     position: "Video Editor & Content Designer",
     date: "Dec 2023 – Dec 2024",
