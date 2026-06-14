@@ -1,21 +1,17 @@
-"use client"
-import { motion } from "motion/react"
-import Link from "next/link"
+"use client";
+import { motion } from "motion/react";
+import Link from "next/link";
 import {
   FiExternalLink,
   FiMail,
   FiGlobe,
   FiMapPin,
   FiCode,
-} from "react-icons/fi"
-import { Button } from "./ui/button"
+} from "react-icons/fi";
+import { Button } from "./ui/button";
 
 // BIRTH DATE
 const birthYear = 2003;
-const age = new Date().getFullYear() - birthYear;
-let age = currentYear - birthYear
-
-if (currentMonth < birthMonth || (currentMonth === birthMonth && currentDay < birthDay)) age--
 
 // INFO DATA
 const infoData = [
@@ -41,9 +37,13 @@ const infoData = [
     label: "Role",
     value: "Full-Stack Developer",
   },
-]
+];
 
 const About = () => {
+  // DYNAMIC AGE LOGIC
+  const currentYear = new Date().getFullYear();
+  const age = currentYear - birthYear;
+
   return (
     <div className="pt-10 py-5">
       <motion.h1
@@ -60,22 +60,30 @@ const About = () => {
         transition={{ duration: 0.5, delay: 0.09 }}
         className="text-muted-foreground leading-relaxed text-base md:text-lg"
       >
-        Hey there! I’m <span className="font-semibold text-foreground">Ayush Khatri</span>, a {age}-year-old passionate{" "}
-        <span className="text-primary font-medium">Full-Stack Web Developer</span>.
-        Passionate about crafting dynamic, responsive, and user-centric web apps. Always learning, always building — one project at a time.
-        <br /><br />
+        Hey there! I’m{" "}
+        <span className="font-semibold text-foreground">Ayush Khatri</span>, a{" "}
+        {age}-year-old passionate{" "}
+        <span className="text-primary font-medium">
+          Full-Stack Web Developer
+        </span>
+        . Passionate about crafting dynamic, responsive, and user-centric web
+        apps. Always learning, always building — one project at a time.
+        <br />
+        <br />
         <span className="font-normal">
-          Beyond coding, I enjoy editing and refining content that tells stories and connects ideas beautifully.
-          I'm constantly exploring new technologies and improving my skills to build impactful projects that make a difference.
+          Beyond coding, I enjoy editing and refining content that tells stories
+          and connects ideas beautifully. I'm constantly exploring new
+          technologies and improving my skills to build impactful projects that
+          make a difference.
         </span>
         <Link
           href="/about"
           className="inline-flex items-center gap-1 mx-1 text-primary underline transition-all"
-
         >
           Know more about me <FiExternalLink className="text-primary" />
         </Link>
-        <br /><br />
+        <br />
+        <br />
         <span className="flex gap-3 items-center">
           Check out my Resume here:
           <Button asChild size={"xs"}>
@@ -96,12 +104,9 @@ const About = () => {
         className="my-8 grid grid-cols-1 md:grid-cols-2 gap-4"
       >
         {infoData.map((item, index) => {
-          const Icon = item.icon
+          const Icon = item.icon;
           return (
-            <div
-              key={index}
-              className="flex items-center gap-5 mt-5"
-            >
+            <div key={index} className="flex items-center gap-5 mt-5">
               <Icon className="text-primary text-lg border rounded-xl bg-foreground/10 p-2.5 size-10" />
               <div>
                 <p className="text-sm text-muted-foreground">{item.label}</p>
@@ -119,11 +124,11 @@ const About = () => {
                 )}
               </div>
             </div>
-          )
+          );
         })}
       </motion.div>
     </div>
-  )
-}
+  );
+};
 
-export default About
+export default About;
