@@ -3,15 +3,57 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { motion } from "framer-motion";
-import { Mail, Copy, Send } from "lucide-react";
+import { Mail, Copy, Send, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { useState, FormEvent } from "react";
 
 const EMAIL_ADDRESS = "ayushkhatri.dev@gmail.com";
 
 const Contact = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const copyEmailToClipboard = () => {
     navigator.clipboard.writeText(EMAIL_ADDRESS);
-    toast.success("Email address copied!")
+    toast.success("Email address copied!");
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!name.trim() || !email.trim() || !message.trim()) {
+      toast.error("Please fill in all fields.");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: name.trim(), email: email.trim(), message: message.trim() }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        toast.error(data.error || "Something went wrong. Please try again.");
+        return;
+      }
+
+      toast.success(data.message || "Message sent successfully!");
+      // Reset form
+      setName("");
+      setEmail("");
+      setMessage("");
+    } catch {
+      toast.error("Failed to send message. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
 
@@ -28,7 +70,7 @@ const Contact = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 gap-8">
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={handleSubmit}>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -42,6 +84,8 @@ const Contact = () => {
                 id="name"
                 name="name"
                 placeholder="Your name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 required
               />
             </motion.div>
@@ -59,6 +103,8 @@ const Contact = () => {
                 name="email"
                 type="email"
                 placeholder="your.email@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </motion.div>
@@ -75,6 +121,8 @@ const Contact = () => {
                 id="message"
                 name="message"
                 placeholder="Your message here..."
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
                 required
                 rows={5}
               />
@@ -88,8 +136,19 @@ const Contact = () => {
               <Button
                 type="submit"
                 className="font-bold w-full"
+                disabled={isSubmitting}
               >
-                Send Message
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    <Send className="h-4 w-4 mr-2" />
+                    Send Message
+                  </>
+                )}
               </Button>
             </motion.div>
           </form>

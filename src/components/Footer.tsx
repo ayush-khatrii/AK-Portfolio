@@ -30,7 +30,7 @@ const socials = [
 const Footer = () => {
   return (
     <div className="relative h-[300px] w-full">
-      <footer className="relative w-full border-border/40 overflow-hidden pb-10">
+      <footer className="relative w-full border-border/40  pb-10">
         <div className="flex flex-col items-center justify-center px-6 gap-6 text-center relative z-10">
           <div className="flex items-center gap-6">
             {socials.map((social, idx) => (
@@ -39,7 +39,7 @@ const Footer = () => {
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-foreground/60 hover:text-primary transition-all duration-200"
+                className="text-foreground/60 hover:text-primary transition-all"
                 whileHover={{ scale: 1.3, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 title={social.name}

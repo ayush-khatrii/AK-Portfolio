@@ -1,5 +1,3 @@
-// Component ported from https://codepen.io/JuanFuentes/full/rgXKGQ
-
 import { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 
 interface TextPressureProps {
@@ -43,8 +41,8 @@ const debounce = (func: (...args: any[]) => void, delay: number) => {
 
 const TextPressure: React.FC<TextPressureProps> = ({
   text = 'Compressa',
-  fontFamily = 'Compressa VF',
-  fontUrl = 'https://res.cloudinary.com/dr6lvwubh/raw/upload/v1529908256/CompressaPRO-GX.woff2',
+  fontFamily = 'Roboto Flex',
+  fontUrl = 'https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght@8..144,25..151,100..1000&display=swap',
   width = true,
   weight = true,
   italic = true,
@@ -52,7 +50,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
   flex = true,
   stroke = false,
   scale = false,
-  textColor = '#FFFFFFAB',
+  textColor = '#FFFFFF',
   strokeColor = '#FF0000',
   strokeWidth = 2,
   className = '',
@@ -151,8 +149,8 @@ const TextPressure: React.FC<TextPressureProps> = ({
 
           const d = dist(mouseRef.current, charCenter);
 
-          const wdth = width ? Math.floor(getAttr(d, maxDist, 5, 200)) : 100;
-          const wght = weight ? Math.floor(getAttr(d, maxDist, 100, 900)) : 400;
+          const wdth = width ? Math.floor(getAttr(d, maxDist, 75, 200)) : 100;
+          const wght = weight ? Math.floor(getAttr(d, maxDist, 400, 900)) : 400;
           const italVal = italic ? getAttr(d, maxDist, 0, 1).toFixed(2) : '0';
           const alphaVal = alpha ? getAttr(d, maxDist, 0, 1).toFixed(2) : '1';
 
@@ -177,11 +175,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
   const styleElement = useMemo(() => {
     return (
       <style>{`
-        @font-face {
-          font-family: '${fontFamily}';
-          src: url('${fontUrl}');
-          font-style: normal;
-        }
+        @import url('${fontUrl}');
         .stroke span {
           position: relative;
           color: ${textColor};
@@ -205,8 +199,9 @@ const TextPressure: React.FC<TextPressureProps> = ({
       {styleElement}
       <h1
         ref={titleRef}
-        className={`text-pressure-title ${className} ${flex ? 'flex justify-between' : ''
-          } ${stroke ? 'stroke' : ''} uppercase text-center`}
+        className={`text-pressure-title ${className} ${
+          flex ? 'flex justify-between' : ''
+        } ${stroke ? 'stroke' : ''} uppercase text-center`}
         style={{
           fontFamily,
           fontSize: fontSize,
@@ -214,7 +209,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
           transform: `scale(1, ${scaleY})`,
           transformOrigin: 'center top',
           margin: 0,
-          fontWeight: 100,
+          fontWeight: 300,
           color: stroke ? undefined : textColor
         }}
       >
@@ -225,7 +220,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
               spansRef.current[i] = el;
             }}
             data-char={char}
-            className="inline-block"
+            className="inline-block font-medium"
           >
             {char}
           </span>
