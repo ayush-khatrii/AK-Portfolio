@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 
 interface TextPressureProps {
@@ -149,8 +150,8 @@ const TextPressure: React.FC<TextPressureProps> = ({
 
           const d = dist(mouseRef.current, charCenter);
 
-          const wdth = width ? Math.floor(getAttr(d, maxDist, 75, 200)) : 100;
-          const wght = weight ? Math.floor(getAttr(d, maxDist, 400, 900)) : 400;
+          const wdth = width ? Math.floor(getAttr(d, maxDist, 5, 200)) : 100;
+          const wght = weight ? Math.floor(getAttr(d, maxDist, 100, 900)) : 400;
           const italVal = italic ? getAttr(d, maxDist, 0, 1).toFixed(2) : '0';
           const alphaVal = alpha ? getAttr(d, maxDist, 0, 1).toFixed(2) : '1';
 
@@ -209,7 +210,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
           transform: `scale(1, ${scaleY})`,
           transformOrigin: 'center top',
           margin: 0,
-          fontWeight: 300,
+          fontWeight: 100,
           color: stroke ? undefined : textColor
         }}
       >
@@ -220,7 +221,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
               spansRef.current[i] = el;
             }}
             data-char={char}
-            className="inline-block font-medium"
+            className="inline-block"
           >
             {char}
           </span>
