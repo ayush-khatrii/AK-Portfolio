@@ -1,84 +1,39 @@
 "use client";
+
 import { motion } from "motion/react";
-import { FaGithub, FaLinkedin, FaEnvelope, FaInstagram } from "react-icons/fa";
+import { ArrowUpRight, Github, Instagram, Linkedin } from "lucide-react";
 import { FaXTwitter } from "react-icons/fa6";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import TextPressure from "./TextExpand";
 
 const socials = [
-  {
-    name: "GitHub",
-    icon: <FaGithub className="w-5 h-5" />,
-    url: "https://github.com/ayush-khatrii",
-  },
-  {
-    name: "LinkedIn",
-    icon: <FaLinkedin className="w-5 h-5" />,
-    url: "https://www.linkedin.com/in/ayushkhatrii",
-  },
-  {
-    name: "Twitter",
-    icon: <FaXTwitter className="w-5 h-5" />,
-    url: "https://x.com/khatri_ayush15",
-  },
-  {
-    name: "Instagram",
-    icon: <FaInstagram className="w-5 h-5" />,
-    url: "https://www.instagram.com/ayush.khatrii",
-  },
+  { name: "GitHub", icon: Github, url: "https://github.com/ayush-khatrii" },
+  { name: "LinkedIn", icon: Linkedin, url: "https://www.linkedin.com/in/ayushkhatrii" },
+  { name: "Twitter", icon: FaXTwitter, url: "https://x.com/khatri_ayush15" },
+  { name: "Instagram", icon: Instagram, url: "https://www.instagram.com/ayush.khatrii" },
 ];
 
-const Footer = () => {
-  return (
-    <div className="relative h-[300px] w-full">
-      <footer className="relative w-full border-border/40  pb-10">
-        <div className="flex flex-col items-center justify-center px-6 gap-6 text-center relative z-10">
-          <div className="flex items-center flex-wrap justify-center gap-4">
-            {socials.map((social, idx) => (
-              <motion.a
-                key={idx}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-border bg-background text-foreground/70 transition-all duration-300"
-                whileHover={{
-                  backgroundColor: "var(--color-accent)",
-                  color: "var(--color-accent-foreground)",
-                  borderColor: "var(--color-accent)",
-                  scale: 1.05,
-                }}
-                whileTap={{ scale: 0.95 }}
-                title={social.name}
-              >
-                {social.icon}
-                <span className="text-sm font-medium">{social.name}</span>
-              </motion.a>
-            ))}
-          </div>
-        </div>
-      </footer>
-      <div style={{ position: "relative", height: "", opacity: .6 }}>
-        <TextPressure
-          text="Ayush Khatri"
-          flex
-          alpha={false}
-          stroke
-          width
-          weight
-          textColor="#ececec"
-          strokeColor="#000000"
-          className="opacity-50"
-        />
+const Footer = () => (
+  <footer className="overflow-hidden pb-8 pt-12">
+    <Separator className="bg-border/40" />
+    <div className="flex flex-col gap-5 py-5 sm:flex-row sm:items-center sm:justify-between">
+      <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Social endpoints</p>
+      <div className="flex flex-wrap gap-1">
+        {socials.map(({ name, icon: Icon, url }) => (
+          <Button key={name} asChild variant="ghost" size="sm" className="group h-10 rounded-md text-xs text-muted-foreground hover:text-foreground">
+            <a href={url} target="_blank" rel="noopener noreferrer" title={name}><Icon className="size-3.5" />{name}<ArrowUpRight className="size-3 opacity-50 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></a>
+          </Button>
+        ))}
       </div>
-      <motion.p
-        className="text-sm text-center pb-10 text-muted-foreground/70 mt-4"
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-      >
-        © {new Date().getFullYear()} Crafted with ❤️ and curiosity.
-      </motion.p>
     </div>
-  );
-};
+    <div className="relative h-24 opacity-50 sm:h-36">
+      <TextPressure text="Ayush Khatri" flex alpha={false} stroke width weight textColor="currentColor" strokeColor="currentColor" className="text-foreground" />
+    </div>
+    <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mt-5 text-center font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground/70">
+      © {new Date().getFullYear()} Crafted with ❤️ and curiosity.
+    </motion.p>
+  </footer>
+);
 
 export default Footer;

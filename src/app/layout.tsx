@@ -31,13 +31,13 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${dm_mono.className} `}>
         <ThemeProvider attribute="class" defaultTheme="dark">
-          <main className="">
-            <div className="mb-20  z-[300]">
-              <Navbar />
-            </div>
-            <div className="max-w-3xl md:mx-auto px-5">
-              {children}
-              <Footer />
+          <main>
+            <Navbar />
+            <div className="w-full px-5 pt-24 sm:px-5">
+              <div className="mx-auto w-full max-w-5xl">
+                {children}
+                <Footer />
+              </div>
             </div>
           </main>
           <Toaster position="top-center" />

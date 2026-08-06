@@ -1,11 +1,13 @@
 "use client";
+
+import { useState, type FormEvent } from "react";
+import { motion } from "motion/react";
+import { Copy, Loader2, Send } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { motion } from "framer-motion";
-import { Mail, Copy, Send, Loader2 } from "lucide-react";
-import { toast } from "sonner";
-import { useState, FormEvent } from "react";
+import SectionHeading from "@/components/SectionHeading";
 
 const EMAIL_ADDRESS = "ayushkhatri.dev@gmail.com";
 
@@ -22,30 +24,24 @@ const Contact = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     if (!name.trim() || !email.trim() || !message.trim()) {
       toast.error("Please fill in all fields.");
       return;
     }
 
     setIsSubmitting(true);
-
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: name.trim(), email: email.trim(), message: message.trim() }),
       });
-
       const data = await res.json();
-
       if (!res.ok) {
         toast.error(data.error || "Something went wrong. Please try again.");
         return;
       }
-
       toast.success(data.message || "Message sent successfully!");
-      // Reset form
       setName("");
       setEmail("");
       setMessage("");
@@ -56,125 +52,47 @@ const Contact = () => {
     }
   };
 
+  const fields = [
+    {
+      id: "name",
+      label: "Name",
+      node: <Input id="name" name="name" placeholder="Your name" value={name} onChange={(e) => setName(e.target.value)} required className="h-11 border-border/40 bg-muted/20 font-mono text-sm focus-visible:border-primary/40" />,
+    },
+    {
+      id: "email",
+      label: "Email",
+      node: <Input id="email" name="email" type="email" placeholder="your.email@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required className="h-11 border-border/40 bg-muted/20 font-mono text-sm focus-visible:border-primary/40" />,
+    },
+  ];
 
   return (
-    <section className="py-10">
-      <div className="">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.09 }}
-          className="mb-10">
-          <h1 className="text-3xl font-bold mb-2">Get in Touch</h1>
-          <p className="">Have a question or want to work together? Drop me a message.</p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 gap-8">
-          <form className="space-y-4" onSubmit={handleSubmit}>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.09 }}
-            >
-              <label
-                htmlFor="name" className="block text-sm font-medium mb-1">
-                Name
-              </label>
-              <Input
-                id="name"
-                name="name"
-                placeholder="Your name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.09 }}
-            >
-              <label htmlFor="email" className="block text-sm font-medium  mb-1">
-                Email
-              </label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="your.email@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.09 }}
-            >
-              <label htmlFor="message" className="block text-sm font-medium mb-1">
-                Message
-              </label>
-              <Textarea
-                id="message"
-                name="message"
-                placeholder="Your message here..."
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                required
-                rows={5}
-              />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.09 }}
-            >
-              <Button
-                type="submit"
-                className="font-bold w-full"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="h-4 w-4 animate-spin mr-2" />
-                    Sending...
-                  </>
-                ) : (
-                  <>
-                    <Send className="h-4 w-4 mr-2" />
-                    Send Message
-                  </>
-                )}
-              </Button>
-            </motion.div>
-          </form>
-
-          <div className="flex flex-col items-center text-center sm:flex-row justify-between gap-3 pt-4">
-            <p className="text-sm text-muted-foreground">
-              Or reach me directly at: <span className="text-foreground">{EMAIL_ADDRESS}</span>
-            </p>
-            <motion.div
-
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.09 }}
-              className="flex gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={copyEmailToClipboard}
-              >
-                <Copy className="h-4 w-4" />
-                Copy
-              </Button>
-            </motion.div>
+    <section id="contact" className="scroll-mt-24 overflow-x-hidden py-12 sm:py-16">
+      <SectionHeading index="07" label="Open Channel" title="Get in Touch" />
+      <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="border-t border-border/40">
+        <form onSubmit={handleSubmit}>
+          {fields.map((field, index) => (
+            <div key={field.id} className="grid gap-2 border-b border-border/40 py-4 sm:grid-cols-[3rem_8rem_1fr] sm:items-center sm:gap-4">
+              <span className="hidden font-mono text-[10px] text-muted-foreground/50 sm:block">0{index + 1}</span>
+              <label htmlFor={field.id} className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">{field.label}</label>
+              {field.node}
+            </div>
+          ))}
+          <div className="grid gap-2 border-b border-border/40 py-4 sm:grid-cols-[3rem_8rem_1fr] sm:items-start sm:gap-4">
+            <span className="hidden pt-3 font-mono text-[10px] text-muted-foreground/50 sm:block">03</span>
+            <label htmlFor="message" className="pt-0 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground sm:pt-3">Message</label>
+            <Textarea id="message" name="message" placeholder="Your message here..." value={message} onChange={(e) => setMessage(e.target.value)} required rows={5} className="min-h-36 resize-y border-border/40 bg-muted/20 font-mono text-sm focus-visible:border-primary/40" />
           </div>
+          <div className="flex justify-end py-4">
+            <Button type="submit" className="h-11 w-full sm:w-auto" disabled={isSubmitting}>
+              {isSubmitting ? <><Loader2 className="animate-spin" />Sending...</> : <><Send />Send Message</>}
+            </Button>
+          </div>
+        </form>
+        <div className="flex flex-col gap-3 border-y border-border/40 bg-muted/20 px-3 py-4 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-pretty text-sm text-muted-foreground">Or reach me directly at: <span className="break-all font-mono text-foreground">{EMAIL_ADDRESS}</span></p>
+          <Button variant="outline" size="sm" onClick={copyEmailToClipboard} className="h-11 border-border/40 sm:h-9"><Copy />Copy</Button>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

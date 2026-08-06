@@ -21,6 +21,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5,
     },
     {
+      url: 'https://ayushkhatri.in/gallery',
+      lastModified: new Date().toISOString(),
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
+    {
       url: 'https://ayushkhatri.in/contact',
       lastModified: new Date().toISOString(),
       changeFrequency: 'weekly',

@@ -1,128 +1,62 @@
 "use client";
 
-import React from "react";
 import { motion } from "motion/react";
-import {
-  Accordion,
-  AccordionItem,
-  AccordionTrigger,
-  AccordionContent,
-} from "@/components/ui/accordion";
-import { FiCalendar, FiMapPin } from "react-icons/fi";
-import { Badge } from "./ui/badge";
-import { TbArrowBadgeRightFilled } from "react-icons/tb";
-import { work } from "@/constants";
-import { Button } from "./ui/button";
-import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { ArrowUpRight, CalendarDays, MapPin } from "lucide-react";
+import { work } from "@/constants";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import SectionHeading from "@/components/SectionHeading";
 
-const Experience = () => {
-  return (
-    <div className="w-full py-10">
-      <motion.h1
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="text-xl md:text-3xl font-bold my-2 text-primary"
-      >
-        Work Experience
-      </motion.h1>
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="mt-6"
-      >
-        <Accordion type="multiple" className="w-full grid grid-cols-1">
-          {work.map((item, idx) => (
-            <AccordionItem
-              key={`${item.title}-${idx}`}
-              value={`item-${idx}`}
-              className="  last:border-none"
-            >
-              <AccordionTrigger className="group  cursor-pointer flex items-center justify-between hover:no-underline transition-all">
-                <div className="flex items-center gap-4 text-left">
-                  {item.icon && (
-                    <item.icon className="text-primary text-lg border rounded-xl bg-foreground/10 p-2.5 size-10 transition-all group-hover:scale-105 group-hover:bg-primary/10" />
-                  )}
-                  <div>
-                    <h2 className="font-medium text-foreground text-base md:text-lg">
-                      {item.position}
-                    </h2>
-                    <p className="text-sm font-thin md:text-base text-foreground/70">
-                      {item.title}
-                    </p>
-                  </div>
+const Experience = () => (
+  <section id="experience" className="scroll-mt-24 overflow-x-hidden py-12 sm:py-16">
+    <SectionHeading index="04" label="Career Log" title="Work Experience" count={`${work.length} ENTRIES`} />
+    <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="section-rail">
+      <Accordion type="multiple" className="border-t border-border/40">
+        {work.map((item, index) => (
+          <AccordionItem key={`${item.title}-${index}`} value={`experience-${index}`} className="border-border/40 transition-colors duration-200 hover:border-primary/40">
+            <AccordionTrigger className="group min-h-16 cursor-pointer gap-3 py-3.5 text-left hover:no-underline sm:py-4">
+              <div className="grid min-w-0 flex-1 grid-cols-[2rem_minmax(0,1fr)] items-center gap-2 sm:grid-cols-[2.5rem_minmax(13rem,1.2fr)_minmax(13rem,1fr)_auto] sm:gap-4">
+                <span className="font-mono text-[10px] text-muted-foreground/60">0{index + 1}</span>
+                <div className="min-w-0">
+                  <h3 className="text-balance text-base font-medium tracking-tight sm:text-lg">{item.position}</h3>
+                  <p className="mt-0.5 text-xs text-muted-foreground sm:text-sm">{item.title}</p>
+                  <p className="mt-1 font-mono text-[10px] text-muted-foreground sm:hidden">{item.date}</p>
                 </div>
-              </AccordionTrigger>
-              <AccordionContent className="pb-6 pt-2 space-y-4">
-                <div className="flex flex-wrap items-center gap-3 text-sm text-foreground/70">
-                  <div className="flex items-center gap-1">
-                    <FiCalendar className="font-normal text-muted-foreground" />
-                    <span className="font-normal text-muted-foreground">
-                      {item.date}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <FiMapPin className="font-normal text-muted-foreground" />
-                    <span className="font-normal text-muted-foreground">
-                      {item.location}
-                    </span>
-                  </div>
+                <div className="hidden flex-wrap gap-1 sm:flex">
+                  {item.techStack.slice(0, 3).map((tech) => <Badge key={tech} variant="outline" className="border-border/40 bg-muted/50 font-mono text-[10px] font-normal text-muted-foreground">{tech}</Badge>)}
+                  {item.techStack.length > 3 && <Badge variant="outline" className="border-border/40 font-mono text-[10px] font-normal text-muted-foreground">+{item.techStack.length - 3}</Badge>}
                 </div>
-                <ul className="space-y-2 text-foreground/80 text-base md:text-lg leading-relaxed">
-                  {item.content.map((point, i) => (
-                    <li
-                      key={`${item.workId || item.title}-${point}-${i}`}
-                      className="flex items-start gap-3"
-                    >
-                      <TbArrowBadgeRightFilled className="text-primary mt-1" />
-                      <span className="flex-1 font-normal">{point}</span>
-                    </li>
+                <span className="hidden whitespace-nowrap font-mono text-[10px] text-muted-foreground sm:block">{item.date}</span>
+              </div>
+            </AccordionTrigger>
+            <AccordionContent className="pb-7 pt-2">
+              <div className="ml-0 border-l-2 border-primary pl-4 sm:ml-[3.5rem] sm:pl-6">
+                <div className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-[10px] text-primary sm:text-xs">
+                  <span className="flex items-center gap-1.5"><CalendarDays className="size-3.5" />date = {item.date}</span>
+                  <span className="flex items-center gap-1.5"><MapPin className="size-3.5" />location = {item.location}</span>
+                </div>
+                <ul className="mt-6 space-y-4">
+                  {item.content.map((point, pointIndex) => (
+                    <li key={`${item.workId || item.title}-${point}-${pointIndex}`} className="border-l-2 border-border/40 pl-3 text-pretty text-sm leading-relaxed text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground/80">{point}</li>
                   ))}
                 </ul>
-                <Link
-                  href={`/work/${item.workId}`}
-                  target="_blank"
-                  className="inline-flex"
-                >
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-primary border-primary hover:bg-primary/10 cursor-pointer"
-                  >
-                    Know More <ArrowRight />
-                  </Button>
-                </Link>
-                <div className="mt-6">
-                  <span className="font-medium text-foreground">
-                    Tech Stack/Tools:
-                  </span>{" "}
-                  <div className="flex flex-wrap gap-2 mt-3">
-                    {item.techStack.map((tech, i) => (
-                      <motion.div
-                        key={`${item.workId || item.title}-${tech}-${i}`}
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.3, delay: i * 0.2 }}
-                      >
-                        <Badge
-                          variant="secondary"
-                          className="text-sm font-normal cursor-pointer border text-foreground/85"
-                        >
-                          {tech}
-                        </Badge>
-                      </motion.div>
-                    ))}
-                  </div>
+                <div className="mt-6 flex flex-wrap gap-1.5">
+                  {item.techStack.map((tech) => <Badge key={tech} variant="outline" className="border-border/40 bg-muted/50 font-mono text-[10px] font-normal text-foreground/80">{tech}</Badge>)}
                 </div>
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </motion.div>
-    </div>
-  );
-};
+                <div className="mt-6 border-t border-border/30 pt-4">
+                  <Button asChild variant="ghost" size="sm" className="h-9 text-primary">
+                    <Link href={`/work/${item.workId}`} target="_blank">Know More <ArrowUpRight /></Link>
+                  </Button>
+                </div>
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    </motion.div>
+  </section>
+);
 
 export default Experience;
