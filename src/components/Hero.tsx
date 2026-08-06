@@ -103,7 +103,9 @@ const Hero = () => {
         </motion.div>
       </motion.div>
     </section>
-  );
+   </div>
+  </>
+ );
 };
 
 export default Hero;
