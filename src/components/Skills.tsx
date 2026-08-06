@@ -1,44 +1,44 @@
 "use client";
 
-import { skills } from "@/constants";
-import { Badge } from "./ui/badge";
 import { motion } from "motion/react";
+import { skills } from "@/constants";
+import { Badge } from "@/components/ui/badge";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import SectionHeading from "@/components/SectionHeading";
 
-const Skills = () => {
- return (
-  <section className="py-10">
-   <h1 className="text-xl md:text-3xl font-bold my-2 text-primary">Skills</h1>
-   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-    {skills.map((skillCategory, index) => (
-     <div key={index}>
-      <h1 className="text-base my-4 opacity-80">{skillCategory?.category}</h1>
-      <motion.div
-       className="flex flex-wrap items-center gap-2"
-       initial={{ opacity: 0, y: 20 }}
-       whileInView={{ opacity: 1, y: 0 }}
-       transition={{ duration: 1, ease: "easeOut" }}
-      >
-       {skillCategory?.items.map((skill, idx) => (
-        <motion.div
-         key={idx}
-         initial={{ opacity: 0, y: 10 }}
-         whileInView={{ opacity: 1, y: 0 }}
-         transition={{ duration: 0.3, delay: idx * 0.1 }}
-        >
-         <Badge
-          variant="secondary"
-          className="text-sm font-normal cursor-pointer border text-foreground/85"
-         >
-          {skill}
-         </Badge>
-        </motion.div>
-       ))}
-      </motion.div>
-     </div>
-    ))}
-   </div>
+const Skills = () => (
+  <section className="overflow-x-hidden py-12 sm:py-16">
+    <SectionHeading index="05" label="Runtime Matrix" title="Skills" count={`${skills.length} GROUPS`} />
+    <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="border border-border/30">
+      <Table>
+        <TableHeader>
+          <TableRow className="border-border/40 hover:bg-transparent">
+            <TableHead className="h-10 w-12 px-3 font-mono text-[10px] uppercase">ID</TableHead>
+            <TableHead className="h-10 px-3 font-mono text-[10px] uppercase">Capability</TableHead>
+            <TableHead className="hidden h-10 px-3 font-mono text-[10px] uppercase sm:table-cell">Runtime / Toolchain</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {skills.map((skillCategory, index) => (
+            <TableRow key={skillCategory.category} className="border-border/40 align-top hover:bg-muted/50">
+              <TableCell className="px-3 py-4 font-mono text-[10px] text-muted-foreground/60">0{index + 1}</TableCell>
+              <TableCell className="px-3 py-4">
+                <p className="text-sm font-medium text-foreground">{skillCategory.category}</p>
+                <div className="mt-3 flex flex-wrap gap-1 sm:hidden">
+                  {skillCategory.items.map((skill) => <Badge key={skill} variant="outline" className="border-border/40 bg-muted/50 font-mono text-[10px] font-normal">{skill}</Badge>)}
+                </div>
+              </TableCell>
+              <TableCell className="hidden px-3 py-4 sm:table-cell">
+                <div className="flex flex-wrap gap-1">
+                  {skillCategory.items.map((skill) => <Badge key={skill} variant="outline" className="border-border/40 bg-muted/50 font-mono text-[10px] font-normal text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground">{skill}</Badge>)}
+                </div>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </motion.div>
   </section>
- );
-};
+);
 
 export default Skills;

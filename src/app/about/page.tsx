@@ -1,99 +1,57 @@
 "use client";
-import {
-  Timeline,
-  TimelineContent,
-  TimelineDate,
-  TimelineHeader,
-  TimelineIndicator,
-  TimelineItem,
-  TimelineSeparator,
-  TimelineTitle,
-} from "@/components/ui/timeline";
-import { motion } from "framer-motion";
 
-const birthYear = 2003;
-const age = new Date().getFullYear() - birthYear;
+import { motion } from "motion/react";
+import { Building2, MapPin } from "lucide-react";
+import About from "@/components/About";
+import GithubContribution from "@/components/GithubContribution";
+import SectionHeading from "@/components/SectionHeading";
 
 const education = [
   {
     id: 1,
     date: "2021 - 2024",
-    title: "Bachelor's in Computer Applications",
-    description:
-      "Studied software development and web technologies at DNV International College.",
+    course: "Bachelor's in Computer Applications",
+    institution: "DNV International College",
+    location: "Gujarat, India",
+    description: "Studied software development and web technologies at DNV International College.",
   },
   {
     id: 2,
     date: "2010 - 2021",
-    title: "Primary & Higher Education",
-    description:
-      "Completed schooling at Modern School, building a strong academic foundation",
+    course: "Primary & Higher Education",
+    institution: "Modern School",
+    location: "Gujarat, India",
+    description: "Completed schooling at Modern School, building a strong academic foundation",
   },
 ];
 
-const About = () => {
-  return (
-    <section className="max-w-4xl mx-auto py-10" id="about">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-        className="mb-12"
-      >
-        <h2 className="text-3xl md:text-4xl font-semibold mb-6 text-foreground">
-          About Me
-        </h2>
-        <p className="text-muted-foreground leading-relaxed text-base md:text-lg">
-          Hey there! I’m{" "}
-          <span className="font-semibold text-foreground">Ayush Khatri</span>, a{" "}
-          {age}-year-old passionate{" "}
-          <span className="text-primary font-medium">
-            Full-Stack Web Developer
-          </span>
-          . Passionate about crafting dynamic, responsive, and user-centric web
-          apps. Always learning, always building — one project at a time.
-          <br />
-          <br />
-          <span className="font-normal">
-            Beyond coding, I enjoy editing and refining content that tells
-            stories and connects ideas beautifully. I'm constantly exploring new
-            technologies and improving my skills to build impactful projects
-            that make a difference.
-          </span>
-        </p>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        viewport={{ once: true }}
-      >
-        <h3 className="text-2xl font-semibold mb-8 text-foreground">
-          Education Timeline
-        </h3>
-        <Timeline defaultValue={2}>
-          {education.map((item) => (
-            <TimelineItem
-              key={item.id}
-              step={item.id}
-              className="group-data-[orientation=vertical]/timeline:ms-10"
-            >
-              <TimelineHeader>
-                <TimelineSeparator className="group-data-[orientation=vertical]/timeline:-left-7 group-data-[orientation=vertical]/timeline:h-[calc(100%-1.5rem-0.25rem)] group-data-[orientation=vertical]/timeline:translate-y-6.5" />
-                <TimelineDate className="text-sm">{item.date}</TimelineDate>
-                <TimelineTitle className="text-base">{item.title}</TimelineTitle>
-                <TimelineIndicator className="flex size-5 items-center justify-center group-data-completed/timeline-item:border-2 group-data-completed/timeline-item:bg-transparent group-data-completed/timeline-item:text-primary-foreground group-data-[orientation=vertical]/timeline:-left-7">
-                </TimelineIndicator>
-              </TimelineHeader>
-              <TimelineContent className="text-base">{item.description}</TimelineContent>
-            </TimelineItem>
-          ))}
-        </Timeline>
-      </motion.div>
+const Page = () => (
+  <div className="overflow-x-hidden">
+    <About sectionIndex="01" />
+    <section className="py-12 sm:py-16">
+      <SectionHeading index="02" label="Learning Log" title="Education Timeline" count={`${education.length} ENTRIES`} />
+      <motion.ol initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="relative space-y-0">
+        <span aria-hidden="true" className="absolute bottom-7 left-[5px] top-7 w-px bg-border/70" />
+        {education.map((item) => (
+          <li key={item.id} className="relative border-b border-border/40 py-6 pl-8 first:border-t sm:pl-10">
+            <span aria-hidden="true" className="absolute left-0 top-7 size-3 rounded-full border-2 border-primary bg-background shadow-[0_0_0_4px_var(--background)]" />
+            <div className="grid gap-4 sm:grid-cols-[8rem_minmax(0,1fr)] sm:gap-8">
+              <time className="h-fit w-fit border border-border/50 bg-muted/50 px-2 py-1 font-mono text-[10px] text-foreground sm:text-xs">{item.date}</time>
+              <div>
+                <h3 className="text-balance text-base font-semibold tracking-tight sm:text-lg">{item.course}</h3>
+                <div className="mt-2 flex flex-col gap-2 text-xs text-muted-foreground sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-5">
+                  <span className="flex items-center gap-2"><Building2 className="size-3.5 text-primary" />{item.institution}</span>
+                  <span className="flex items-center gap-2"><MapPin className="size-3.5 text-primary" />{item.location}</span>
+                </div>
+                <p className="mt-3 max-w-2xl text-pretty text-sm leading-relaxed text-muted-foreground">{item.description}</p>
+              </div>
+            </div>
+          </li>
+        ))}
+      </motion.ol>
     </section>
-  );
-}
+    <GithubContribution />
+  </div>
+);
 
-export default About;
+export default Page;

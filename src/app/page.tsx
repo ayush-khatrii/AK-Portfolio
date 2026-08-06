@@ -10,7 +10,7 @@ import React from "react";
 
 const page = () => {
  return (
-  <div className="h-full md:px-5">
+  <div className="h-full">
    <Hero />
    <About />
    <GithubContribution />
