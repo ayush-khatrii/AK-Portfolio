@@ -47,12 +47,43 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
-    const { name, email, message } = await req.json();
+    const body: unknown = await req.json();
 
-    // Validate required fields
-    if (!name || !email || !message) {
+    if (!body || typeof body !== "object") {
       return NextResponse.json(
-        { error: "All fields (name, email, message) are required." },
+        { error: "Invalid form submission." },
+        { status: 400 }
+      );
+    }
+
+    const { name, email, phone, message } = body as Record<string, unknown>;
+
+    // Validate and normalize every required field before using it.
+    if (
+      typeof name !== "string" ||
+      typeof email !== "string" ||
+      typeof phone !== "string" ||
+      typeof message !== "string" ||
+      !name.trim() ||
+      !email.trim() ||
+      !phone.trim() ||
+      !message.trim()
+    ) {
+      return NextResponse.json(
+        { error: "All fields (name, email, WhatsApp number, message) are required." },
+        { status: 400 }
+      );
+    }
+
+    const normalizedName = name.trim();
+    const normalizedEmail = email.trim();
+    const normalizedPhone = phone.trim();
+    const normalizedMessage = message.trim();
+    const phoneDigits = normalizedPhone.replace(/\D/g, "");
+
+    if (phoneDigits.length < 7 || phoneDigits.length > 15) {
+      return NextResponse.json(
+        { error: "Enter a valid WhatsApp number with country code." },
         { status: 400 }
       );
     }
@@ -70,11 +101,12 @@ export async function POST(req: NextRequest) {
     const telegramMessage = [
       "\uD83D\uDCE9 <b>New Contact Form Submission</b>",
       "",
-      `\uD83D\uDC64 <b>Name:</b> ${escapeHtml(name)}`,
-      `\u2709\uFE0F <b>Email:</b> ${escapeHtml(email)}`,
+      `\uD83D\uDC64 <b>Name:</b> ${escapeHtml(normalizedName)}`,
+      `\u2709\uFE0F <b>Email:</b> ${escapeHtml(normalizedEmail)}`,
+      `\uD83D\uDCF1 <b>WhatsApp:</b> <a href="https://wa.me/${phoneDigits}">${escapeHtml(normalizedPhone)}</a>`,
       "",
       `\uD83D\uDCDD <b>Message:</b>`,
-      escapeHtml(message),
+      escapeHtml(normalizedMessage),
     ].join("\n");
 
     // Send to Telegram

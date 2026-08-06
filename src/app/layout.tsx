@@ -1,24 +1,15 @@
-// @ts-ignore
 import "./globals.css";
 import { ThemeProvider } from "@/providers";
 import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/Navbar";
 import { siteMetadata } from "@/lib/sitemetadata";
 import Footer from "@/components/Footer";
-import { Poppins, JetBrains_Mono, DM_Mono } from "next/font/google";
-const jetBrains_mono = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
-});
+import { DM_Mono } from "next/font/google";
 
 const dm_mono = DM_Mono({
   subsets: ["latin"],
   weight: ["300", "400", "500"],
 });
-// const geist_mono = Geist_Mono({
-//   subsets: ["latin"],
-//   weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
-// });
 
 export const metadata = siteMetadata;
 
@@ -28,9 +19,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark" suppressHydrationWarning>
       <body className={`${dm_mono.className} `}>
-        <ThemeProvider attribute="class" defaultTheme="dark">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
           <main>
             <Navbar />
             <div className="w-full px-5 pt-24 sm:px-5">

@@ -30,7 +30,7 @@ const Skills = () => (
               </TableCell>
               <TableCell className="hidden px-3 py-4 sm:table-cell">
                 <div className="flex flex-wrap gap-1">
-                  {skillCategory.items.map((skill) => <Badge key={skill} variant="outline" className="border-border/40 bg-muted/50 font-mono text-[10px] font-normal text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground">{skill}</Badge>)}
+                  {skillCategory.items.map((skill) => <Badge key={skill} variant="default" className="border-border/40 bg-muted/50 font-mono text-[10px] font-normal text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground">{skill}</Badge>)}
                 </div>
               </TableCell>
             </TableRow>

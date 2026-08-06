@@ -7,6 +7,7 @@ import { motion } from "motion/react";
 import { Menu, Terminal, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import ThemeButton from "@/components/ThemeButton";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -16,8 +17,6 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetDescription,
-  SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
@@ -88,43 +87,44 @@ const Navbar = () => {
           </NavigationMenuList>
         </NavigationMenu>
 
-        <div className="hidden sm:block">
-          <Button asChild variant="outline" size="sm" className="h-9 border-border/40 bg-background/40 font-mono text-xs hover:border-primary/40">
-            <a href="mailto:ayushkhatri.dev@gmail.com">
-              Contact <ArrowUpRight className="size-3.5" />
-            </a>
-          </Button>
-        </div>
-
-        <Sheet>
-          <SheetTrigger asChild className="sm:hidden">
-            <Button variant="ghost" size="icon" className="size-11" aria-label="Open navigation">
-              <Menu className="size-5" />
+        <div className="flex items-center gap-1.5">
+          <div className="hidden sm:block">
+            <Button asChild variant="outline" size="sm" className="h-9 border-border/40 bg-background/40 font-mono text-xs hover:border-primary/40">
+              <a href="mailto:ayushkhatri.dev@gmail.com">
+                Contact <ArrowUpRight className="size-3.5" />
+              </a>
             </Button>
-          </SheetTrigger>
-          <SheetContent side="right" className="w-[min(88vw,22rem)] border-l border-border/40 bg-background p-0">
-            <SheetHeader className="border-b border-border/40 p-5 text-left">
-              <SheetTitle className="font-mono text-sm">NAVIGATION_INDEX</SheetTitle>
-              <SheetDescription className="font-mono text-xs">Select a destination.</SheetDescription>
-            </SheetHeader>
-            <div className="p-3">
-              {navItems.map((item, index) => (
-                <SheetClose asChild key={item.path}>
-                  <Link
-                    href={item.path}
-                    className={cn(
-                      "flex min-h-14 items-center justify-between border-b border-border/30 px-3 font-mono text-sm transition-colors hover:bg-muted/50",
-                      pathname === item.path && "bg-primary/10 text-primary",
-                    )}
-                  >
-                    <span><span className="mr-3 text-xs text-muted-foreground/50">0{index + 1}</span>{item.name}</span>
-                    <ArrowUpRight className="size-4" />
-                  </Link>
-                </SheetClose>
-              ))}
-            </div>
-          </SheetContent>
-        </Sheet>
+          </div>
+
+          <ThemeButton />
+
+          <Sheet>
+            <SheetTrigger asChild className="sm:hidden">
+              <Button variant="ghost" size="icon" className="size-11" aria-label="Open navigation">
+                <Menu className="size-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[min(88vw,22rem)] border-l border-border/40 bg-background p-0 pt-14">
+              <SheetTitle className="sr-only">Navigation</SheetTitle>
+              <div className="p-3">
+                {navItems.map((item, index) => (
+                  <SheetClose asChild key={item.path}>
+                    <Link
+                      href={item.path}
+                      className={cn(
+                        "flex min-h-14 items-center justify-between border-b border-border/30 px-3 font-mono text-sm transition-colors hover:bg-muted/50",
+                        pathname === item.path && "bg-primary/10 text-primary",
+                      )}
+                    >
+                      <span><span className="mr-3 text-xs text-muted-foreground/50">0{index + 1}</span>{item.name}</span>
+                      <ArrowUpRight className="size-4" />
+                    </Link>
+                  </SheetClose>
+                ))}
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
       </nav>
     </header>
   );

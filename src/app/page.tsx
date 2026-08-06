@@ -1,6 +1,5 @@
 "use client";
 import About from "@/components/About";
-import Contact from "@/components/Contact";
 import Experience from "@/components/Experience";
 import GithubContribution from "@/components/GithubContribution";
 import Hero from "@/components/Hero";
@@ -19,7 +18,6 @@ const page = () => {
    <Experience />
    <Skills />
    <Projects />
-   <Contact />
   </div>
  );
 };
