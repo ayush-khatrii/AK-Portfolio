@@ -22,12 +22,7 @@ const Experience = () => (
     id="experience"
     className="scroll-mt-24 overflow-x-hidden border-t border-dotted border-border/60 px-4 py-8 sm:px-6 sm:py-10 lg:px-8"
   >
-    <SectionHeading
-      index="04"
-      label="Career Log"
-      title="Work Experience"
-      count={`${work.length} ENTRIES`}
-    />
+    <SectionHeading title="Work Experience" description="Roles where I turned ideas into reliable products and practical solutions." />
     <motion.div
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -36,13 +31,13 @@ const Experience = () => (
     >
       <Accordion
         type="multiple"
-        className="grid grid-cols-1 items-start gap-3 lg:grid-cols-2"
+        className="grid grid-cols-1 items-start border-l border-t border-dotted border-border/50 lg:grid-cols-2"
       >
         {work.map((item, index) => (
           <AccordionItem
             key={`${item.title}-${index}`}
             value={`experience-${index}`}
-            className="overflow-hidden border border-dashed border-border/50 bg-background transition-colors duration-200 hover:border-primary/40 data-[state=open]:border-primary/40"
+            className="overflow-hidden border border-dashed border-border bg-background/30 transition-colors duration-200 hover:border-primary/40 data-[state=open]:border-primary/40"
           >
             <AccordionTrigger className="group min-h-36 cursor-pointer items-start gap-3 px-4 py-4 text-left hover:bg-muted/30 hover:no-underline sm:px-5">
               <div className="flex min-w-0 flex-1 items-start gap-3 pr-1">
@@ -79,7 +74,7 @@ const Experience = () => (
               </div>
             </AccordionTrigger>
 
-            <AccordionContent className="border-t border-dashed border-border/40 px-4 pb-5 pt-5 sm:px-5">
+            <AccordionContent className="border-t border-dotted border-border/40 px-4 pb-5 pt-5 sm:px-5">
               <div className="border-l-2 border-primary/30 pl-4">
                 <div className="flex flex-wrap gap-x-5 gap-y-2 font-mono text-[10px] text-primary sm:text-xs">
                   <span className="flex items-center gap-1.5">
@@ -96,7 +91,7 @@ const Experience = () => (
                   {item.content.map((point, pointIndex) => (
                     <li
                       key={`${item.workId || item.title}-${point}-${pointIndex}`}
-                      className="border-l-2 border-border/40 pl-3 text-pretty text-sm leading-relaxed text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground/80"
+                      className="relative border-l-2 border-border/40 pl-5 text-pretty text-sm leading-relaxed text-muted-foreground transition-colors before:absolute before:left-2 before:top-[0.65em] before:size-1.5 before:rounded-full before:bg-primary hover:border-primary/40 hover:text-foreground/80"
                     >
                       {point}
                     </li>
@@ -115,7 +110,7 @@ const Experience = () => (
                   ))}
                 </div>
 
-                <div className="mt-5 border-t border-dashed border-border/30 pt-4">
+                <div className="mt-5 border-t border-dotted border-border/30 pt-4">
                   <Button asChild variant="ghost" size="sm" className="text-primary">
                     <Link
                       href={`/work/${item.workId}`}

@@ -16,13 +16,13 @@ const infoData = [
   { icon: Code2, label: "Role", value: "Full-Stack Developer" },
 ];
 
-const About = ({ sectionIndex = "02" }: { sectionIndex?: string }) => {
+const About = () => {
   const currentYear = new Date().getFullYear();
   const age = currentYear - birthYear;
 
   return (
     <section id="about" className="scroll-mt-24 overflow-x-hidden border-t border-dotted border-border/60 px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
-      <SectionHeading index={sectionIndex} label="Identity" title="About Me" />
+      <SectionHeading title="About Me" description="A little about who I am, what I build, and what drives my work." />
       <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(20rem,0.85fr)] lg:gap-10">
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="border-l border-dotted border-border/60 pl-4 sm:pl-6">
           <p className="max-w-full text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base">

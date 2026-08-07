@@ -151,7 +151,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
           const d = dist(mouseRef.current, charCenter);
 
           const wdth = width ? Math.floor(getAttr(d, maxDist, 5, 200)) : 100;
-          const wght = weight ? Math.floor(getAttr(d, maxDist, 100, 900)) : 400;
+          const wght = weight ? Math.floor(getAttr(d, maxDist, 250, 900)) : 400;
           const italVal = italic ? getAttr(d, maxDist, 0, 1).toFixed(2) : '0';
           const alphaVal = alpha ? getAttr(d, maxDist, 0, 1).toFixed(2) : '1';
 
@@ -200,9 +200,8 @@ const TextPressure: React.FC<TextPressureProps> = ({
       {styleElement}
       <h1
         ref={titleRef}
-        className={`text-pressure-title ${className} ${
-          flex ? 'flex justify-between' : ''
-        } ${stroke ? 'stroke' : ''} uppercase text-center`}
+        className={`text-pressure-title ${className} ${flex ? 'flex justify-between' : ''
+          } ${stroke ? 'stroke' : ''} uppercase text-center font-medium`}
         style={{
           fontFamily,
           fontSize: fontSize,
@@ -210,7 +209,7 @@ const TextPressure: React.FC<TextPressureProps> = ({
           transform: `scale(1, ${scaleY})`,
           transformOrigin: 'center top',
           margin: 0,
-          fontWeight: 'normal',
+          fontWeight: 'bold',
           color: stroke ? undefined : textColor
         }}
       >

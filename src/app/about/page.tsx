@@ -27,9 +27,9 @@ const education = [
 
 const Page = () => (
   <div className="overflow-x-hidden">
-    <About sectionIndex="01" />
+    <About />
     <section className="border-t border-dotted border-border/60 px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
-      <SectionHeading index="02" label="Learning Log" title="Education Timeline" count={`${education.length} ENTRIES`} />
+      <SectionHeading title="Education Timeline" description="The academic foundation that shaped my path into software development." />
       <motion.ol initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="relative space-y-0">
         <span aria-hidden="true" className="absolute bottom-7 left-[5px] top-7 border-l border-dotted border-border/70" />
         {education.map((item) => (

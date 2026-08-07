@@ -41,7 +41,7 @@ const WorkDetailPage = async ({
         <h2 id="work-details-title" className="text-xl font-medium tracking-tight sm:text-2xl">Work details</h2>
         <ul className="section-rail mt-6 space-y-5">
           {item.content.map((point, index) => (
-            <li key={`${item.workId}-${index}`} className="text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base">{point}</li>
+            <li key={`${item.workId}-${index}`} className="relative pl-5 text-pretty text-sm leading-relaxed text-muted-foreground before:absolute before:left-0 before:top-[0.65em] before:size-1.5 before:rounded-full before:bg-primary sm:text-base">{point}</li>
           ))}
         </ul>
       </section>

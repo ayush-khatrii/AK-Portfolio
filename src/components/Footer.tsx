@@ -14,8 +14,12 @@ const socials = [
 ];
 
 const Footer = () => (
-  <footer className="overflow-hidden border-t border-dotted border-border/60 pb-6 pt-8">
-    <div className="grid grid-cols-2 border-y border-dotted border-border/60 sm:grid-cols-4">
+  <footer className="relative border-t border-dotted border-border/60 pb-6">
+    <div
+      aria-hidden="true"
+      className="opacity-50 pointer-events-none absolute inset-x-0 bottom-0 -z-10 mx-auto h-[28rem] max-w-5xl bg-[radial-gradient(ellipse_at_50%_100%,color-mix(in_oklab,var(--primary)_20%,transparent)_0%,color-mix(in_oklab,var(--primary)_9%,transparent)_38%,transparent_52%)]"
+    />
+    <div className="relative z-10 grid grid-cols-2 border-y border-dotted border-border/60 sm:grid-cols-4">
       {socials.map(({ name, icon: Icon, url }, index) => (
         <MagicCard
           key={name}
@@ -44,10 +48,10 @@ const Footer = () => (
         </MagicCard>
       ))}
     </div>
-    <div className="relative mt-6 h-20 opacity-40 sm:h-28">
+    <div className="relative z-10 mt-6 mb-10 h-20 px-10 opacity-40 sm:h-40 sm:opacity-50 lg:h-48">
       <TextPressure text="Ayush Khatri" flex alpha={false} stroke width weight textColor="currentColor" strokeColor="currentColor" className="text-foreground" />
     </div>
-    <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mt-4 text-center font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground/70">
+    <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="relative z-10 mt-4 text-center font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground/70">
       © {new Date().getFullYear()} Crafted with ❤️ and curiosity.
     </motion.p>
   </footer>

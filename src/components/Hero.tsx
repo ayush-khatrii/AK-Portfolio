@@ -43,22 +43,6 @@ const Hero = () => {
       aria-labelledby="hero-title"
       className="relative min-h-[clamp(34rem,72svh,42rem)] overflow-hidden"
     >
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 opacity-45 [background-image:radial-gradient(circle,var(--border)_1px,transparent_1px)] [background-size:1.125rem_1.125rem] [mask-image:linear-gradient(to_bottom,black,transparent_88%)]"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute left-1/2 top-[-11rem] h-[30rem] w-[42rem] max-w-[95vw] -translate-x-1/2 rounded-full bg-primary/[0.08] blur-3xl"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute left-1/2 top-[44%] size-[19rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dotted border-primary/15 sm:size-[28rem]"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute left-1/2 top-[44%] size-[13rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dotted border-border/60 sm:size-[20rem]"
-      />
       <motion.div
         variants={containerVariants}
         initial={shouldReduceMotion ? false : "hidden"}

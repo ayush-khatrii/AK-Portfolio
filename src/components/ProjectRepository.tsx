@@ -19,13 +19,13 @@ const badgeClassName =
 const ProjectRepository = ({ items }: { items: ProjectItem[] }) => (
   <Accordion
     type="multiple"
-    className="grid grid-cols-1 items-start gap-3 lg:grid-cols-2"
+    className="grid grid-cols-1 items-start border-l border-t border-dotted border-border/50 lg:grid-cols-2"
   >
     {items.map((item, index) => (
       <AccordionItem
         key={`${item.title}-${index}`}
         value={`project-${index}`}
-        className="overflow-hidden border border-dashed border-border/50 bg-background transition-colors duration-200 hover:border-primary/40 data-[state=open]:border-primary/40"
+        className="overflow-hidden  border border-dashed border-border bg-background/30 transition-colors duration-200 hover:border-primary/40 data-[state=open]:border-primary/40"
       >
         <AccordionTrigger className="group min-h-28 cursor-pointer items-start gap-3 px-4 py-4 text-left hover:bg-muted/30 hover:no-underline sm:px-5">
           <div className="flex min-w-0 flex-1 items-start gap-3 pr-1">
@@ -52,7 +52,7 @@ const ProjectRepository = ({ items }: { items: ProjectItem[] }) => (
           </div>
         </AccordionTrigger>
 
-        <AccordionContent className="border-t border-dashed border-border/40 px-4 pb-5 pt-5 sm:px-5">
+        <AccordionContent className="border-t border-dotted border-border/40 px-4 pb-5 pt-5 sm:px-5">
           <div className="border-l-2 border-primary/30 pl-4">
             <p className="text-pretty text-sm leading-relaxed text-muted-foreground">
               {item.desc}
@@ -70,7 +70,7 @@ const ProjectRepository = ({ items }: { items: ProjectItem[] }) => (
               ))}
             </div>
 
-            <div className="mt-5 flex flex-wrap gap-2 border-t border-dashed border-border/30 pt-4">
+            <div className="mt-5 flex flex-wrap gap-2 border-t border-dotted border-border/30 pt-4">
               {item.liveLink && (
                 <Button
                   asChild

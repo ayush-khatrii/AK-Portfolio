@@ -10,7 +10,7 @@ const ThemeButton = () => {
     <Button
       type="button"
       variant="outline"
-      size="icon"
+      size="icon-sm"
       className="relative border-border/40 bg-background/40"
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
       aria-label="Toggle color theme"

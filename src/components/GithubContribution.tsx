@@ -13,9 +13,9 @@ const formatDate = (dateString: string) => new Intl.DateTimeFormat("en-US", {
   weekday: "short",
 }).format(new Date(dateString));
 
-const GithubContribution = ({ sectionIndex = "03" }: { sectionIndex?: string }) => (
+const GithubContribution = () => (
   <section className="overflow-x-hidden border-t border-dotted border-border/60 px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
-    <SectionHeading index={sectionIndex} label="Activity Stream" title="GitHub Graph" />
+    <SectionHeading title="GitHub Graph" description="A snapshot of my recent coding activity and open-source consistency." />
     <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="w-full border-y border-dotted border-border/60 bg-muted/20 px-2 py-5 sm:px-4">
       <GitHubCalendar
         blockSize={15}

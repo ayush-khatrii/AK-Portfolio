@@ -8,7 +8,7 @@ import SectionHeading from "@/components/SectionHeading";
 
 const Skills = () => (
   <section className="overflow-x-hidden border-t border-dotted border-border/60 px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
-    <SectionHeading index="05" label="Runtime Matrix" title="Skills" count={`${skills.length} GROUPS`} />
+    <SectionHeading title="Skills" description="The technologies and tools I use to design, build, and ship products." />
     <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="border-y border-dotted border-border/60">
       <Table>
         <TableHeader>

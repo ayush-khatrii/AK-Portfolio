@@ -40,7 +40,7 @@ const GalleryPage = async () => {
 
   return (
     <section className="min-h-[70svh] overflow-x-hidden px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
-      <SectionHeading index="01" label="Personal Archive" title="Gallery" count={`${String(images.length).padStart(2, "0")} ${images.length === 1 ? "IMAGE" : "IMAGES"}`} />
+      <SectionHeading title="Gallery" description="A visual collection of moments, interests, and work beyond the code." />
       <DraggableGallery images={images} />
     </section>
   );

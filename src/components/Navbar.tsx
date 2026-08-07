@@ -48,7 +48,7 @@ const Navbar = () => {
           scrolled && "border-border/70 bg-background/95 shadow-lg supports-[backdrop-filter]:bg-background/85",
         )}
       >
-        <div className="flex h-14 items-stretch">
+        <div className="flex h-12 items-stretch">
           <div className="flex shrink-0 items-center px-3 sm:px-4 lg:pr-6">
             <Link
               href="/"
@@ -75,9 +75,8 @@ const Navbar = () => {
                         href={item.path}
                         aria-current={active ? "page" : undefined}
                         className={cn(
-                          "relative flex min-h-11 items-center rounded-md px-3 font-mono text-xs transition-colors hover:bg-muted/50 hover:text-foreground lg:px-4",
-                          active ? "bg-muted/40 text-foreground" : "text-muted-foreground",
-                        )}
+                          "relative flex min-h-11 items-center rounded-md px-3 font-mono text-xs transition-colors hover:text-primary lg:px-4",
+                          active ? "text-foreground" : "text-muted-foreground",)}
                       >
                         {item.name}
                         {active && (
@@ -96,7 +95,7 @@ const Navbar = () => {
 
           <div className="ml-auto flex shrink-0 items-center gap-1.5 px-1.5 sm:px-2">
             <div className="hidden md:block">
-              <Button asChild size="sm" className="h-9 font-mono text-xs">
+              <Button asChild size="xs" className="font-mono text-xs">
                 <a href="mailto:ayushkhatri.dev@gmail.com">
                   Contact <ArrowUpRight className="size-3.5" />
                 </a>
