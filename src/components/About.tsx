@@ -21,13 +21,13 @@ const About = () => {
   const age = currentYear - birthYear;
 
   return (
-    <section id="about" className="scroll-mt-24 overflow-x-hidden border-t border-dotted border-border/60 px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
-      <SectionHeading title="About Me" description="A little about who I am, what I build, and what drives my work." />
-      <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(20rem,0.85fr)] lg:gap-10">
-        <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="border-l border-dotted border-border/60 pl-4 sm:pl-6">
+    <section id="about" className="scroll-mt-24 overflow-x-hidden px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+      <SectionHeading title="About Me" description="" />
+      <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1.17fr)_minmax(20rem,0.85fr)] lg:gap-10">
+        <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="">
           <p className="max-w-full text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base">
             Hey there! I’m <span className="font-medium text-foreground">Ayush Khatri</span>, a {age}-year-old passionate <code className="rounded border border-border/60 bg-muted/70 px-1.5 py-0.5 font-mono text-[0.88em] font-medium text-foreground">Full-Stack Web Developer</code>. Passionate about crafting dynamic, responsive, and user-centric web apps. Always learning, always building — one project at a time.
-            <br /><br />
+          <br /><br />
             <span className="font-normal">Beyond coding, I enjoy editing and refining content that tells stories and connects ideas beautifully. I&apos;m constantly exploring new technologies and improving my skills to build impactful projects that make a difference.</span>
           </p>
           <div className="mt-4 flex flex-wrap items-center gap-2">

@@ -13,6 +13,7 @@ import {
 import { FaXTwitter } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
 import { MagicCard } from "@/components/magic-card";
+import Scanner from "@/components/ScannerWaves";
 
 const socials = [
   { name: "X", icon: FaXTwitter, url: "https://x.com/khatri_ayush15" },
@@ -43,6 +44,37 @@ const Hero = () => {
       aria-labelledby="hero-title"
       className="relative min-h-[clamp(34rem,72svh,42rem)] overflow-hidden"
     >
+      <div aria-hidden="true" className="absolute inset-0 z-0">
+        <Scanner
+          color1="#7ccf00"
+          color2="#7ccf00"
+          color3="#7ccf00"
+          speed={0.5}
+          sweepSpeed={0.25}
+          sweepWidth={1.6}
+          sweepFalloff={6}
+          scale={1.25}
+          frequency={2}
+          ripple={0.1}
+          bandDensity={11}
+          lineSharpness={5.5}
+          glow={0.22}
+          scanDirection="vertical"
+          colorSpread={0.7}
+          brightness={1}
+          contrast={1.15}
+          softness={5}
+          vignette={1}
+          scanline
+          grain
+          grainIntensity={0}
+          opacity={1}
+          mouseInteraction
+          mouseRadius={1.5}
+          mouseStrength={0.5}
+        />
+      </div>
+
       <motion.div
         variants={containerVariants}
         initial={shouldReduceMotion ? false : "hidden"}
