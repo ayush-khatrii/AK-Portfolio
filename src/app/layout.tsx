@@ -1,14 +1,14 @@
+// @ts-ignore
 import "./globals.css";
 import { ThemeProvider } from "@/providers";
 import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/Navbar";
 import { siteMetadata } from "@/lib/sitemetadata";
 import Footer from "@/components/Footer";
-import { DM_Mono } from "next/font/google";
+import localFont from "next/font/local";
 
-const dm_mono = DM_Mono({
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
+const dm_mono = localFont({
+  src: "./fonts/GeistMonoVF.woff",
 });
 
 export const metadata = siteMetadata;
@@ -27,10 +27,10 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          <main>
+          <main className="min-h-screen">
             <Navbar />
-            <div className="w-full px-5 pt-24 sm:px-5">
-              <div className="mx-auto w-full max-w-5xl">
+            <div className="w-full px-3 sm:px-4">
+              <div className="relative mx-auto min-h-screen w-full max-w-6xl border-x border-dashed-2 border-border pt-24">
                 {children}
                 <Footer />
               </div>

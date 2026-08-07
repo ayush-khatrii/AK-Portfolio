@@ -145,6 +145,6 @@
   }
 
   .section-rail {
-    @apply border-l border-border/40 pl-4 sm:pl-6;
+    @apply border-l border-dotted border-border/40 pl-4 sm:pl-6;
   }
 }

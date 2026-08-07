@@ -9,17 +9,17 @@ import Skills from "@/components/Skills";
 import React from "react";
 
 const page = () => {
- return (
-  <div className="h-full">
-   <Hero />
-   <AvailabilityBanner />
-   <About />
-   <GithubContribution />
-   <Experience />
-   <Skills />
-   <Projects />
-  </div>
- );
+  return (
+    <div className="h-full">
+      <Hero />
+      <AvailabilityBanner />
+      <About />
+      <GithubContribution />
+      <Experience />
+      <Skills />
+      <Projects />
+    </div>
+  );
 };
 
 export default page;

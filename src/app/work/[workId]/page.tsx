@@ -20,7 +20,7 @@ const WorkDetailPage = async ({
   if (!item) notFound();
 
   return (
-    <article className="min-h-[70svh] py-10 sm:py-16">
+    <article className="min-h-[70svh] px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
       <Button asChild variant="ghost" size="sm" className="mb-10 h-11 px-0 font-mono text-xs text-muted-foreground hover:bg-transparent hover:text-foreground">
         <Link href="/#experience"><ArrowLeft />Back to experience</Link>
       </Button>

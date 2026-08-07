@@ -28,12 +28,12 @@ const education = [
 const Page = () => (
   <div className="overflow-x-hidden">
     <About sectionIndex="01" />
-    <section className="py-12 sm:py-16">
+    <section className="border-t border-dotted border-border/60 px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
       <SectionHeading index="02" label="Learning Log" title="Education Timeline" count={`${education.length} ENTRIES`} />
       <motion.ol initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="relative space-y-0">
-        <span aria-hidden="true" className="absolute bottom-7 left-[5px] top-7 w-px bg-border/70" />
+        <span aria-hidden="true" className="absolute bottom-7 left-[5px] top-7 border-l border-dotted border-border/70" />
         {education.map((item) => (
-          <li key={item.id} className="relative border-b border-border/40 py-6 pl-8 first:border-t sm:pl-10">
+          <li key={item.id} className="relative border-b border-dotted border-border/50 py-5 pl-8 first:border-t sm:pl-10">
             <span aria-hidden="true" className="absolute left-0 top-7 size-3 rounded-full border-2 border-primary bg-background shadow-[0_0_0_4px_var(--background)]" />
             <div className="grid gap-4 sm:grid-cols-[8rem_minmax(0,1fr)] sm:gap-8">
               <time className="h-fit w-fit border border-border/50 bg-muted/50 px-2 py-1 font-mono text-[10px] text-foreground sm:text-xs">{item.date}</time>

@@ -14,15 +14,19 @@ const formatDate = (dateString: string) => new Intl.DateTimeFormat("en-US", {
 }).format(new Date(dateString));
 
 const GithubContribution = ({ sectionIndex = "03" }: { sectionIndex?: string }) => (
-  <section className="overflow-x-hidden py-12 sm:py-16">
+  <section className="overflow-x-hidden border-t border-dotted border-border/60 px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
     <SectionHeading index={sectionIndex} label="Activity Stream" title="GitHub Graph" />
-    <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="w-full border border-border/30 bg-muted/20 p-4 sm:p-6">
+    <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="w-full border-y border-dotted border-border/60 bg-muted/20 px-2 py-5 sm:px-4">
       <GitHubCalendar
-        blockSize={14}
-        blockMargin={3}
+        blockSize={15}
+        blockMargin={4}
         blockRadius={3}
-        fontSize={13}
+        fontSize={12}
         style={{ width: "100%" }}
+        theme={{
+          light: ["var(--muted)", "var(--primary)"],
+          dark: ["var(--muted)", "var(--primary)"],
+        }}
         showWeekdayLabels={["sun", "mon", "tue", "wed", "thu", "fri", "sat"]}
         weekStart={1}
         username="ayush-khatrii"
@@ -30,6 +34,7 @@ const GithubContribution = ({ sectionIndex = "03" }: { sectionIndex?: string }) 
           React.cloneElement(block, {
             "data-tooltip-id": "github-tooltip",
             "data-tooltip-html": `${activity.count} activities on ${formatDate(activity.date)}`,
+            "data-tooltip-place": "top",
           })
         }
       />
