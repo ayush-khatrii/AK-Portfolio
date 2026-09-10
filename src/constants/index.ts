@@ -245,7 +245,7 @@ const project = [
 ];
 
 const galleryImages = [
-  { src: "https://pub-af34f3541dfc46e5a8aa21faf70e7de6.r2.dev/1-1.jpeg", title: "Me 1", alt: "Me 1 — Ayush Khatri" },
+  { src: "https://pub-af34f3541dfc46e5a8aa21faf70e7de6.r2.dev/i-1.jpeg", title: "Me 1", alt: "Me 1 — Ayush Khatri" },
   { src: "https://pub-af34f3541dfc46e5a8aa21faf70e7de6.r2.dev/1-2.jpeg", title: "Me 2", alt: "Me 2 — Ayush Khatri" },
   { src: "https://pub-af34f3541dfc46e5a8aa21faf70e7de6.r2.dev/1-3.jpeg", title: "Me 3", alt: "Me 3 — Ayush Khatri" },
   { src: "https://pub-af34f3541dfc46e5a8aa21faf70e7de6.r2.dev/1-4.jpeg", title: "Me 4", alt: "Me 4 — Ayush Khatri" },
