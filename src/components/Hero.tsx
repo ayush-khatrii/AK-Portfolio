@@ -1,201 +1,82 @@
-"use client";
-
 import Link from "next/link";
-import { motion, useReducedMotion, type Variants } from "motion/react";
 import {
-  ArrowDown,
+  ArrowDownToLine,
   ArrowUpRight,
-  Code2,
+  ArrowRight,
   Github,
   Instagram,
   Linkedin,
+  MapPin,
 } from "lucide-react";
 import { FaXTwitter } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
-import { MagicCard } from "@/components/magic-card";
+import { aboutContent } from "@/constants";
 
 const socials = [
-  { name: "X", icon: FaXTwitter, url: "https://x.com/khatri_ayush15" },
-  {
-    name: "Instagram",
-    icon: Instagram,
-    url: "https://www.instagram.com/ayush.khatrii",
-  },
   { name: "GitHub", icon: Github, url: "https://github.com/ayush-khatrii" },
-  {
-    name: "LinkedIn",
-    icon: Linkedin,
-    url: "https://www.linkedin.com/in/ayushkhatrii",
-  },
+  { name: "LinkedIn", icon: Linkedin, url: "https://www.linkedin.com/in/ayushkhatrii" },
+  { name: "X", icon: FaXTwitter, url: "https://x.com/khatri_ayush15" },
+  { name: "Instagram", icon: Instagram, url: "https://www.instagram.com/ayush.khatrii" },
 ];
 
-const containerVariants: Variants = {
-  hidden: {},
-  visible: {
-    transition: {
-      delayChildren: 0.08,
-      staggerChildren: 0.1,
-    },
-  },
-};
+const entrance = "motion-safe:animate-in motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-3 motion-safe:duration-700 motion-safe:fill-mode-both";
 
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 18 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  },
-};
+const Hero = () => (
+  <section aria-labelledby="hero-title" className="relative isolate overflow-hidden px-5 pb-10 pt-10 sm:px-8 sm:pb-12 sm:pt-16 lg:pt-20">
+    <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-96 bg-[radial-gradient(ellipse_at_50%_0%,var(--color-primary),transparent_65%)] opacity-[0.07]" />
+    <div className="mx-auto flex w-full max-w-4xl flex-col items-center text-center">
+      <div className={`${entrance} mb-7 inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/80 px-3 py-2 text-[10px] text-muted-foreground sm:mb-9 sm:text-xs`}>
+        <span aria-hidden="true" className="size-1.5 rounded-full bg-primary" />
+        {aboutContent.role}
+        <span aria-hidden="true" className="mx-1 h-3 w-px bg-border" />
+        <span className="inline-flex items-center gap-1"><MapPin className="size-3" aria-hidden="true" />India</span>
+      </div>
 
-const reducedMotionVariants: Variants = {
-  hidden: { opacity: 1, y: 0 },
-  visible: { opacity: 1, y: 0 },
-};
+      <p className={`${entrance} mb-4 text-sm font-medium tracking-tight text-muted-foreground [animation-delay:80ms] sm:text-base`}>
+        Hey, I’m <span className="text-foreground">{aboutContent.name}</span><span className="text-primary">.</span>
+      </p>
+      <h1 id="hero-title" className={`${entrance} tracking-tighter max-w-[18ch] text-balance font-sans md:text-6xl text-3xl font-semibold leading-[1.08]  [animation-delay:140ms]`}>
+        I Build things on the internet<br />
+      </h1>
+      <p className={`${entrance} mt-5 max-w-lg md:max-w-[50ch] text-pretty text-sm leading-7 text-muted-foreground [animation-delay:220ms] sm:text-base sm:leading-8`}>
+        Engineering Functional Applications and solid Backend Services
+      </p>
 
-const Hero = () => {
-  const shouldReduceMotion = useReducedMotion();
-  const variants = shouldReduceMotion
-    ? reducedMotionVariants
-    : itemVariants;
+      <div className={`${entrance} mt-8 flex w-full max-w-sm flex-col items-stretch justify-center gap-3 [animation-delay:300ms] min-[400px]:max-w-none min-[400px]:flex-row sm:mt-9`}>
+        <Button asChild size="lg" className="group min-h-12 rounded-xl px-6 text-xs sm:text-sm">
+          <Link href="/projects">View projects <ArrowRight className="transition-transform group-hover:translate-x-1 motion-reduce:transition-none" aria-hidden="true" /></Link>
+        </Button>
+        <Button asChild variant="outline" size="lg" className="min-h-12 rounded-xl px-6 text-xs sm:text-sm">
+          <a href="/resume-ak.pdf" download="Ayush-Khatri-Resume.pdf">Download résumé <ArrowDownToLine aria-hidden="true" /></a>
+        </Button>
+      </div>
 
-  return (
-    <section
-      aria-labelledby="hero-title"
-      className="relative isolate flex min-h-0 items-center justify-center px-4 py-10 sm:min-h-[calc(100svh-var(--header-height,0px))] sm:px-6 sm:py-16 lg:px-8 lg:py-20"
-    >
-      <motion.div
-        variants={containerVariants}
-        initial={shouldReduceMotion ? false : "hidden"}
-        animate="visible"
-        className="mx-auto flex w-full min-w-0 max-w-5xl flex-col items-center text-center"
-      >
-        <motion.div
-          variants={variants}
-          className="mb-6 flex max-w-full justify-center sm:mb-8 lg:mb-10"
-        >
-          <div className="inline-flex max-w-full items-center justify-center gap-2 rounded-full border border-dotted border-border/70 bg-background/70 px-3 py-2 font-mono text-[9px] uppercase leading-relaxed tracking-[0.08em] text-muted-foreground backdrop-blur-sm sm:gap-2.5 sm:px-4 sm:text-[10px] sm:tracking-[0.13em]">
-            <Code2
-              className="size-3 shrink-0 text-primary sm:size-3.5"
-              aria-hidden="true"
-            />
-
-            <span className="min-w-0">Fullstack Developer / India</span>
-
-            <span
-              aria-hidden="true"
-              className="relative flex size-1.5 shrink-0 sm:size-2"
-            >
-              <span className="absolute inline-flex size-full animate-ping rounded-full bg-primary opacity-40 motion-reduce:animate-none" />
-              <span className="relative inline-flex size-full rounded-full bg-primary" />
-            </span>
-          </div>
-        </motion.div>
-
-        <motion.h1
-          id="hero-title"
-          variants={variants}
-          className="max-w-full text-balance text-[clamp(2rem,10vw,6.75rem)] font-medium leading-[1.05] tracking-[-0.065em] text-foreground"
-        >
-          Ayush Khatri
-          <span
-            aria-hidden="true"
-            className="animate-pulse text-primary motion-reduce:animate-none"
-          >
-            _
-          </span>
-        </motion.h1>
-
-        <motion.p
-          variants={variants}
-          className="mt-5 font-italic max-w-[30ch] text-pretty text-[11px] leading-[1.8] text-muted-foreground min-[375px]:text-xs sm:mt-7 sm:max-w-[42ch] sm:text-sm md:text-base lg:text-lg"
-        >
-          Engineering{" "}
-          <span className="font-medium text-foreground">
-            functional, modern and fast web applications
-          </span>{" "}
-          and solid backend services.
-        </motion.p>
-
-        <motion.div
-          variants={variants}
-          className="mt-6 flex w-full max-w-xs flex-wrap items-center justify-center gap-2.5 sm:mt-8 sm:max-w-none sm:gap-3"
-        >
-          <Button
-            asChild
-            variant="default"
-            size="lg"
-          // className="min-h-11 flex-1 gap-2 px-4 text-xs sm:flex-none sm:px-6 sm:text-sm [&_svg]:size-3.5 sm:[&_svg]:size-4"
-          >
-            <Link href="/projects">
-              Explore
-              <ArrowUpRight aria-hidden="true" />
-            </Link>
-          </Button>
-
-          <Button
-            asChild
-            variant="outline"
-            size="lg"
-          // className="min-h-11 flex-1 gap-2 px-4 text-xs sm:flex-none sm:px-6 sm:text-sm [&_svg]:size-3.5 sm:[&_svg]:size-4"
-          >
-            <a href="/resume-ak.pdf" target="_blank" rel="noopener noreferrer">
-              Résumé
-              <ArrowDown aria-hidden="true" />
-            </a>
-          </Button>
-        </motion.div>
-
-        <motion.div
-          variants={variants}
-          className="mt-8 grid w-full max-w-xs grid-cols-2 border-y border-dotted border-border/60 sm:mt-10 sm:max-w-2xl sm:grid-cols-4 lg:mt-12"
-        >
-          {socials.map(({ name, icon: Icon, url }, index) => (
-            <MagicCard
-              key={name}
-              gradientSize={140}
-              gradientColor="color-mix(in srgb, var(--primary) 14%, transparent)"
-              gradientFrom="var(--primary)"
-              gradientTo="var(--ring)"
-              gradientOpacity={5}
-              className={`min-w-full rounded-none border-0 ${index % 2 !== 0
-                ? "border-l border-dotted border-border/50"
-                : ""
-                } ${index > 1
-                  ? "border-t border-dotted border-border/50 sm:border-t-0"
-                  : ""
-                } ${index > 0
-                  ? "sm:border-l sm:border-dotted sm:border-border/50"
-                  : ""
-                }`}
-            >
-              <a
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative flex min-h-12 items-center justify-center gap-2 px-5 py-3 text-[10px] text-muted-foreground transition-colors hover:text-foreground focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring sm:min-h-14 sm:px-6 sm:text-xs motion-reduce:transition-none"
-              >
-                <Icon
-                  className="size-3.5 shrink-0 text-foreground sm:size-4"
-                  aria-hidden="true"
-                />
-
-                <span>{name}</span>
-
-                <ArrowUpRight
-                  className="absolute right-1.5 size-3 opacity-40 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100 sm:right-2.5 motion-reduce:transform-none motion-reduce:transition-none"
-                  aria-hidden="true"
-                />
-              </a>
-            </MagicCard>
+      <div className={`${entrance} mt-8 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 [animation-delay:380ms]`}>
+        <span className="text-[10px] text-muted-foreground">Find me on</span>
+        <ul className="flex items-center gap-1">
+          {socials.map(({ name, icon: Icon, url }) => (
+            <li key={name}>
+              <Button asChild variant="ghost" size="icon" className="size-11 rounded-xl text-muted-foreground hover:text-foreground">
+                <a href={url} target="_blank" rel="noopener noreferrer" aria-label={`${name} (opens in a new tab)`} title={name}><Icon className="size-4" aria-hidden="true" /></a>
+              </Button>
+            </li>
           ))}
-        </motion.div>
-      </motion.div>
-    </section>
-  );
-};
+        </ul>
+      </div>
+
+      <div className={`${entrance} mt-10 flex w-full flex-col items-center justify-between gap-4 border-t border-border/60 pt-5 [animation-delay:440ms] sm:mt-14 sm:flex-row`}>
+        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[10px] text-muted-foreground sm:text-xs">
+          <span className="text-foreground">My everyday stack</span>
+          <ul className="flex flex-wrap justify-center gap-x-3 gap-y-2">
+            {["Next.js", "TypeScript", "Node.js", "PostgreSQL"].map((tech) => <li key={tech}>{tech}</li>)}
+          </ul>
+        </div>
+        <Link href="/about" className="group inline-flex min-h-11 shrink-0 items-center gap-1.5 rounded-md px-2 text-xs text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+          More about me <ArrowUpRight className="size-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 motion-reduce:transition-none" aria-hidden="true" />
+        </Link>
+      </div>
+    </div>
+  </section>
+);
 
 export default Hero;
