@@ -4,7 +4,7 @@ import { galleryImages } from "@/constants";
 
 const GalleryPage = () => (
   <section className="min-h-[70svh] overflow-x-hidden px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
-    <SectionHeading title="Gallery" description="A visual collection of moments, interests, and work beyond the code." />
+    <SectionHeading title="Gallery" description="" />
     <div className="relative h-[600px] w-full sm:h-[640px] lg:h-[700px]">
       <CircularGallery
         items={galleryImages.map(({ src, title }) => ({ image: src, text: title }))}

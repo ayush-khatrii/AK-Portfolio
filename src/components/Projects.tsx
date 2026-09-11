@@ -10,7 +10,7 @@ import SectionHeading from "@/components/SectionHeading";
 
 const Projects = () => (
   <section className="overflow-x-hidden border-t border-dotted border-border/60 px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
-    <SectionHeading title="Projects" description="Selected work that highlights my approach to building useful digital experiences." />
+    <SectionHeading title="Projects" description="" />
     <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
       <ProjectRepository items={project} />
       <div className="mt-4 flex justify-end">

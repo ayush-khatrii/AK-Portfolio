@@ -38,7 +38,7 @@ const AboutProfile = () => (
             </span>
 
             <span className="min-w-0">
-              <span className="block font-mono text-[9px] uppercase leading-none tracking-wider text-muted-foreground sm:text-[10px]">
+              <span className="block font-mono text-[9px] uppercase leading-none tracking-wider text-muted-foreground sm:text-xs">
                 {item.label}
               </span>
 

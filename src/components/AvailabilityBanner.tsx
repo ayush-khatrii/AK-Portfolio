@@ -50,7 +50,7 @@ const AvailabilityBanner = () => {
         <div className="relative z-10 flex flex-col items-center gap-5 text-center">
           <SheetTrigger asChild>
             <button type="button" className="group max-w-2xl cursor-pointer text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
-              <Badge variant="outline" className="mb-3 gap-2 border-primary/30 bg-background/50 font-mono text-[10px] font-normal uppercase tracking-[0.12em] text-foreground">
+              <Badge variant="outline" className="mb-3 gap-2 border-primary/30 bg-background/50 font-mono text-xs font-normal uppercase tracking-[0.12em] text-foreground">
                 <span className="relative flex size-2" aria-hidden="true">
                   <span className="absolute inline-flex size-full animate-ping rounded-full bg-primary opacity-60 motion-reduce:animate-none" />
                   <span className="relative inline-flex size-2 rounded-full bg-primary" />

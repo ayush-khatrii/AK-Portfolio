@@ -26,7 +26,7 @@ const WorkDetailPage = async ({
       </Button>
 
       <header>
-        <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-primary sm:text-xs">Work Experience / {item.workId}</p>
+        <p className="font-mono text-xs uppercase tracking-[0.16em] text-primary sm:text-xs">Work Experience / {item.workId}</p>
         <h1 className="mt-4 text-balance text-3xl font-medium tracking-[-0.045em] sm:text-5xl">{item.position}</h1>
         <p className="mt-3 text-lg text-muted-foreground sm:text-xl">{item.title}</p>
         <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 font-mono text-xs text-muted-foreground">
@@ -50,7 +50,7 @@ const WorkDetailPage = async ({
         <h2 id="work-stack-title" className="text-xl font-medium tracking-tight sm:text-2xl">Tech Stack/Tools:</h2>
         <div className="mt-5 flex flex-wrap gap-1.5">
           {item.techStack.map((tech) => (
-            <Badge key={tech} variant="outline" className="border-border/40 bg-muted/50 font-mono text-[10px] font-normal text-foreground/80">{tech}</Badge>
+            <Badge key={tech} variant="outline" className="border-border/40 bg-muted/50 font-mono text-xs font-normal text-foreground/80">{tech}</Badge>
           ))}
         </div>
       </section>

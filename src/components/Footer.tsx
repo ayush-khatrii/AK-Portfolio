@@ -51,7 +51,7 @@ const Footer = ({ currentYear }: { currentYear: number }) => (
     <div className="relative z-10 mt-6 mb-10 h-20 px-10 opacity-40 sm:h-40 sm:opacity-50 lg:h-48">
       <TextPressure text="Ayush Khatri" flex alpha={false} stroke width weight textColor="currentColor" strokeColor="currentColor" className="text-foreground" />
     </div>
-    <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="relative z-10 mt-4 text-center font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground/70">
+    <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="relative z-10 mt-4 text-center font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground/70">
       © {currentYear} Crafted with ❤️ and curiosity.
     </motion.p>
   </footer>

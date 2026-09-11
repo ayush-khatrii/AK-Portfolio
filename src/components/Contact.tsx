@@ -115,14 +115,14 @@ export const ContactForm = ({ onSuccess }: ContactFormProps) => {
       <form onSubmit={handleSubmit}>
         {fields.map((field, index) => (
           <div key={field.id} className="grid gap-2 border-b border-border/40 py-4 sm:grid-cols-[3rem_8rem_1fr] sm:items-center sm:gap-4">
-            <span className="hidden font-mono text-[10px] text-muted-foreground/50 sm:block">0{index + 1}</span>
-            <label htmlFor={`${formId}-${field.id}`} className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">{field.label}</label>
+            <span className="hidden font-mono text-xs text-muted-foreground/50 sm:block">0{index + 1}</span>
+            <label htmlFor={`${formId}-${field.id}`} className="font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground">{field.label}</label>
             {field.node}
           </div>
         ))}
         <div className="grid gap-2 border-b border-border/40 py-4 sm:grid-cols-[3rem_8rem_1fr] sm:items-start sm:gap-4">
-          <span className="hidden pt-3 font-mono text-[10px] text-muted-foreground/50 sm:block">04</span>
-          <label htmlFor={`${formId}-message`} className="pt-0 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground sm:pt-3">Message</label>
+          <span className="hidden pt-3 font-mono text-xs text-muted-foreground/50 sm:block">04</span>
+          <label htmlFor={`${formId}-message`} className="pt-0 font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground sm:pt-3">Message</label>
           <Textarea id={`${formId}-message`} name="message" placeholder="Your message here..." value={message} onChange={(e) => setMessage(e.target.value)} required rows={5} className="min-h-36 resize-y border-border/40 bg-muted/20 font-mono text-sm focus-visible:border-primary/40" />
         </div>
         <div className="flex justify-end py-4">

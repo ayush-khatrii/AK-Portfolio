@@ -14,7 +14,7 @@ import { ExternalLink, Github } from "lucide-react";
 type ProjectItem = (typeof project)[number];
 
 const badgeClassName =
-  "max-w-full border-border/40 bg-muted/50 font-mono text-[10px] font-normal text-muted-foreground";
+  "max-w-full border-border/40 bg-muted/50 font-mono text-xs font-normal text-muted-foreground";
 
 const ProjectRepository = ({ items }: { items: ProjectItem[] }) => (
   <Accordion
@@ -29,7 +29,7 @@ const ProjectRepository = ({ items }: { items: ProjectItem[] }) => (
       >
         <AccordionTrigger className="group min-h-28 cursor-pointer items-start gap-3 px-4 py-4 text-left hover:bg-muted/30 hover:no-underline sm:px-5">
           <div className="flex min-w-0 flex-1 items-start gap-3 pr-1">
-            <span className="mt-1 shrink-0 font-mono text-[10px] text-muted-foreground/60">
+            <span className="mt-1 shrink-0 font-mono text-xs text-muted-foreground/60">
               {String(index + 1).padStart(2, "0")}
             </span>
             <div className="min-w-0 flex-1">
@@ -63,7 +63,7 @@ const ProjectRepository = ({ items }: { items: ProjectItem[] }) => (
                 <Badge
                   key={tech}
                   variant="outline"
-                  className="max-w-full border-border/40 bg-muted/50 font-mono text-[10px] font-normal text-foreground/80"
+                  className="max-w-full border-border/40 bg-muted/50 font-mono text-xs font-normal text-foreground/80"
                 >
                   {tech}
                 </Badge>

@@ -29,7 +29,7 @@ const skills = [
     items: [
       "Next.js",
       "React.js",
-      "Zustand",
+      // "Zustand",
       "Hono.js",
       "Express.js",
       "Node.js",
@@ -47,6 +47,10 @@ const skills = [
     category: "Dev & Ops Tools",
     items: ["VS Code", "Git/GitHub", "Postman", "AWS EC2"],
   },
+  {
+    category: "Workflow & AI",
+    items: ["VSCode", "Cursor", "ChatGPT", "Claude", "Gemini", "Redis"],
+  }
 ];
 
 type WorkItem = {
@@ -54,6 +58,7 @@ type WorkItem = {
   title: string;
   position: string;
   date: string;
+  employmentPeriod: { start: string; end?: string };
   location: string;
   content: string[];
   techStack: string[];
@@ -66,6 +71,7 @@ const work: WorkItem[] = [
     title: "Portlinks India",
     position: "Fullstack Developer",
     date: "Nov 2025 – Present",
+    employmentPeriod: { start: "11.2025" },
     location: "Gujarat, India",
     content: [
       "Architected an end-to-end Project Management System (PMS) that automated lead-to-invoice workflows, cutting internal administrative turnaround time by an estimated 40%.",
@@ -91,6 +97,7 @@ const work: WorkItem[] = [
     title: "Self-Employed",
     position: "Freelance Web Developer",
     date: "June 2024 – Present",
+    employmentPeriod: { start: "06.2024" },
     location: "Gujarat, India",
     content: [
       "Developed 5+ responsive websites using React, Next.js, and Tailwind CSS.",
@@ -113,6 +120,7 @@ const work: WorkItem[] = [
     title: "Freelance Projects",
     position: "Video Editor & Content Designer",
     date: "Dec 2023 – Dec 2024",
+    employmentPeriod: { start: "12.2023", end: "12.2024" },
     location: "Remote, India",
     content: [
       "Edited 50+ videos for multiple clients, including YouTube long-form content, Shorts, and Reels.",

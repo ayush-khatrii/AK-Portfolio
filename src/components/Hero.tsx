@@ -25,7 +25,7 @@ const Hero = () => (
   <section aria-labelledby="hero-title" className="relative isolate overflow-hidden px-5 pb-10 pt-10 sm:px-8 sm:pb-12 sm:pt-16 lg:pt-20">
     <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-96 bg-[radial-gradient(ellipse_at_50%_0%,var(--color-primary),transparent_65%)] opacity-[0.07]" />
     <div className="mx-auto flex w-full max-w-4xl flex-col items-center text-center">
-      <div className={`${entrance} mb-7 inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/80 px-3 py-2 text-[10px] text-muted-foreground sm:mb-9 sm:text-xs`}>
+      <div className={`${entrance} mb-7 inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/80 px-3 py-2 text-xs text-muted-foreground sm:mb-9 sm:text-xs`}>
         <span aria-hidden="true" className="size-1.5 rounded-full bg-primary" />
         {aboutContent.role}
         <span aria-hidden="true" className="mx-1 h-3 w-px bg-border" />
@@ -52,7 +52,7 @@ const Hero = () => (
       </div>
 
       <div className={`${entrance} mt-8 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 [animation-delay:380ms]`}>
-        <span className="text-[10px] text-muted-foreground">Find me on</span>
+        <span className="text-xs text-muted-foreground">Find me on</span>
         <ul className="flex items-center gap-1">
           {socials.map(({ name, icon: Icon, url }) => (
             <li key={name}>
@@ -65,7 +65,7 @@ const Hero = () => (
       </div>
 
       <div className={`${entrance} mt-10 flex w-full flex-col items-center justify-between gap-4 border-t border-border/60 pt-5 [animation-delay:440ms] sm:mt-14 sm:flex-row`}>
-        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[10px] text-muted-foreground sm:text-xs">
+        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-muted-foreground sm:text-xs">
           <span className="text-foreground">My everyday stack</span>
           <ul className="flex flex-wrap justify-center gap-x-3 gap-y-2">
             {["Next.js", "TypeScript", "Node.js", "PostgreSQL"].map((tech) => <li key={tech}>{tech}</li>)}
