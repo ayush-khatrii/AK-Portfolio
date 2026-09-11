@@ -1,6 +1,6 @@
 type SectionHeadingProps = {
   title: string;
-  description: string;
+  description?: string;
 };
 
 const SectionHeading = ({ title, description }: SectionHeadingProps) => (
