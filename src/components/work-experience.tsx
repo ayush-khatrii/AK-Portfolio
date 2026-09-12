@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useRef, useState, type ComponentProps, type ComponentType, type SVGProps } from "react"
+import { useCallback, useEffect, useRef, useState, type ComponentProps, type ComponentType, type SVGProps } from "react"
 import { differenceInMonths, format, parse } from "date-fns"
 import ReactMarkdown from "react-markdown"
 import Link from "next/link"
@@ -194,7 +194,13 @@ export function ExperiencePositionItem({
 
   const { start, end } = position.employmentPeriod
   const isOngoing = !end
-  const duration = formatDuration(start, end)
+  const [currentDate, setCurrentDate] = useState<Date | null>(null)
+
+  useEffect(() => {
+    if (isOngoing) setCurrentDate(new Date())
+  }, [isOngoing])
+
+  const duration = formatDuration(start, end, currentDate)
 
   return (
     <Collapsible
@@ -348,7 +354,7 @@ function Skill({ skill }: { skill: string }) {
   )
 }
 
-function formatDuration(start: string, end?: string): string {
+function formatDuration(start: string, end: string | undefined, currentDate: Date | null): string {
   const startHasMonth = start.includes(".")
   const endHasMonth = end ? end.includes(".") : true
 
@@ -362,7 +368,8 @@ function formatDuration(start: string, end?: string): string {
   }
 
   const startDate = parsePeriodDate(start, "first")
-  const endDate = end ? parsePeriodDate(end, "last") : new Date()
+  const endDate = end ? parsePeriodDate(end, "last") : currentDate
+  if (!endDate) return ""
 
   // +1 to count both the start and end months inclusively.
   const totalMonths = differenceInMonths(endDate, startDate) + 1
@@ -384,16 +391,16 @@ function formatDuration(start: string, end?: string): string {
 
 function formatPeriodLabel(value: string): string {
   if (!value.includes(".")) return value
-  return format(parse(value, "MM.yyyy", new Date()), "MMM yyyy")
+  return format(parsePeriodDate(value, "first"), "MMM yyyy")
 }
 
 function parsePeriodDate(str: string, fallbackMonth: "first" | "last"): Date {
   if (str.includes(".")) {
-    return parse(str, "MM.yyyy", new Date())
+    return parse(str, "MM.yyyy", new Date(0))
   }
   return parse(
     `${fallbackMonth === "last" ? "12" : "01"}.${str}`,
     "MM.yyyy",
-    new Date()
+    new Date(0)
   )
 }
