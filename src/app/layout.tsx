@@ -6,7 +6,12 @@ import Navbar from "@/components/Navbar";
 import { siteMetadata } from "@/lib/sitemetadata";
 import Footer from "@/components/Footer";
 import { getCurrentYear } from "@/lib/current-year";
-import { DM_Mono } from "next/font/google";
+import { Alan_Sans, DM_Mono } from "next/font/google";
+
+const alan_sans = Alan_Sans({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+});
 
 const dm_mono = DM_Mono({
   subsets: ["latin"],
@@ -24,7 +29,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
-      <body className={`${dm_mono.className} `}>
+      <body className={`${alan_sans.className}`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
