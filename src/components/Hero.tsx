@@ -47,7 +47,7 @@ const Hero = () => (
           <Link href="/projects">View projects <ArrowRight className="transition-transform group-hover:translate-x-1 motion-reduce:transition-none" aria-hidden="true" /></Link>
         </Button>
         <Button asChild variant="outline" size="lg" className="min-h-12 rounded-xl px-6 text-xs sm:text-sm">
-          <a href="/resume-ak.pdf" download="Ayush-Khatri-Resume.pdf">Download résumé <ArrowDownToLine aria-hidden="true" /></a>
+          <a href="/resume-ak.pdf" target="_blank" rel="noopener noreferrer" >Résumé <ArrowDownToLine aria-hidden="true" /></a>
         </Button>
       </div>
 
