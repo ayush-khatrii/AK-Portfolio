@@ -7,7 +7,6 @@ import {
   Instagram,
   Linkedin,
   MapPin,
-  ArrowUpRight
 } from "lucide-react";
 import { FaXTwitter } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
@@ -48,7 +47,7 @@ const Hero = () => (
           <Link href="/projects">View projects <ArrowRight className="transition-transform group-hover:translate-x-1 motion-reduce:transition-none" aria-hidden="true" /></Link>
         </Button>
         <Button asChild variant="outline" size="lg" className="min-h-12 rounded-xl px-6 text-xs sm:text-sm">
-          <a href="/resume-ak.pdf" target="_blank" rel="noopener noreferrer" >Résumé <ArrowUpRight aria-hidden="true" /></a>
+          <a href="/resume-ak.pdf" target="_blank" rel="noopener noreferrer" >Résumé</a>
         </Button>
       </div>
 
