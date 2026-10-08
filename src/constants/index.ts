@@ -140,6 +140,24 @@ const work: WorkItem[] = [
 
 const project = [
   {
+    title: "Srcmap — GitHub Repository Explorer",
+    desc: "Explore public GitHub repositories in a VS Code-style workspace without cloning. Browse files, read syntax-highlighted code, search within files, and share links to the exact code.",
+    githubLink: "https://github.com/ayush-khatrii/srcmap",
+    liveLink: "https://srcmap.cc",
+    image: "https://github.com/user-attachments/assets/f6b5ca64-63d9-4e4c-ae05-fae564ddd1fa",
+    techStack: [
+      "Next.js",
+      "React.js",
+      "TypeScript",
+      "TailwindCSS",
+      "Radix UI",
+      "Shiki",
+      "TanStack Query",
+      "nuqs",
+      "GitHub API",
+    ],
+  },
+  {
     "title": "LessonMap",
     "desc": "A full-stack AI-powered course creation platform that helps educators turn ideas into structured, shareable learning experiences with drag-and-drop curriculum building, resource management, learner progress tracking, and subscription-based premium features.",
     "githubLink": "https://github.com/ayush-khatrii/Lesson-Map",
