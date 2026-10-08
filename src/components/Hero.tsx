@@ -1,6 +1,5 @@
 import Link from "next/link";
 import {
-  ArrowDownToLine,
   ArrowUpRight,
   ArrowRight,
   Github,
@@ -22,10 +21,10 @@ const socials = [
 const entrance = "motion-safe:animate-in motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-3 motion-safe:duration-700 motion-safe:fill-mode-both";
 
 const Hero = () => (
-  <section aria-labelledby="hero-title" className="relative isolate overflow-hidden px-5 pb-10 pt-10 sm:px-8 sm:pb-12 sm:pt-16 lg:pt-20">
-    <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-96 bg-[radial-gradient(ellipse_at_50%_0%,var(--color-primary),transparent_65%)] opacity-[0.07]" />
+  <section aria-labelledby="hero-title" className="relative isolate overflow-hidden px-4 py-8 sm:px-8 sm:py-12 lg:py-14">
+    <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_50%_0%,var(--color-primary),transparent_75%)] opacity-[0.06] dark:opacity-[0.08]" />
     <div className="mx-auto flex w-full max-w-4xl flex-col items-center text-center">
-      <div className={`${entrance} mb-7 inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/80 px-3 py-2 text-xs text-muted-foreground sm:mb-9 sm:text-xs`}>
+      <div className={`${entrance} mb-6 inline-flex max-w-full flex-wrap items-center justify-center gap-2 rounded-full border border-border/70 bg-background/80 px-3 py-2 text-xs text-muted-foreground sm:mb-8`}>
         <span aria-hidden="true" className="size-1.5 rounded-full bg-primary" />
         {aboutContent.role}
         <span aria-hidden="true" className="mx-1 h-3 w-px bg-border" />
@@ -35,8 +34,8 @@ const Hero = () => (
       <p className={`${entrance} mb-4 text-sm font-medium tracking-tight text-muted-foreground [animation-delay:80ms] sm:text-base`}>
         Hey, I’m <span className="text-foreground">{aboutContent.name}</span><span className="text-primary">.</span>
       </p>
-      <h1 id="hero-title" className={`${entrance} tracking-tighter max-w-[18ch] text-balance font-sans md:text-6xl text-3xl font-semibold leading-[1.08]  [animation-delay:140ms]`}>
-        I Build things on the internet<br />
+      <h1 id="hero-title" className={`${entrance} max-w-[18ch] text-balance font-sans text-4xl font-semibold leading-[1.08] tracking-tighter [animation-delay:140ms] sm:text-5xl lg:text-6xl`}>
+        I Build things on the internet
       </h1>
       <p className={`${entrance} mt-5 max-w-lg md:max-w-[50ch] text-pretty text-sm leading-7 text-muted-foreground [animation-delay:220ms] sm:text-base sm:leading-8`}>
         Engineering Functional Applications and solid Backend Services

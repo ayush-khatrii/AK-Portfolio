@@ -40,22 +40,22 @@ const Navbar = () => {
   }, []);
 
   return (
-    <header className="pointer-events-none fixed inset-x-0 top-3 z-50 mx-auto w-full max-w-6xl px-3 sm:px-4 motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-top-2 motion-safe:duration-500">
+    <header className="sticky top-0 z-50 w-full bg-background/80 px-3 py-2 backdrop-blur-xl sm:px-4">
       <nav aria-label="Primary navigation" className={cn(
-        "pointer-events-auto rounded-2xl border border-border/60 bg-background/90 px-2 py-2.5 shadow-sm backdrop-blur-xl transition-[background-color,border-color,box-shadow] duration-300 motion-reduce:transition-none supports-[backdrop-filter]:bg-background/75",
+        "mx-auto max-w-6xl rounded-2xl border border-border/60 bg-background/90 px-2 py-2 shadow-sm transition-[background-color,border-color,box-shadow] duration-300 motion-reduce:transition-none supports-[backdrop-filter]:bg-background/75 sm:px-3",
         scrolled && "border-border bg-background/95 shadow-lg supports-[backdrop-filter]:bg-background/90",
       )}>
         <div className="flex items-center gap-2">
           <Link href="/" className="flex size-8 shrink-0 items-center justify-center rounded-md border border-primary/20 bg-primary/10 font-mono text-xs font-semibold transition-colors hover:bg-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" aria-label="Ayush Khatri — Home">AK</Link>
-          <span className="text-sm font-medium tracking-tight md:hidden">Ayush Khatri<span className="text-primary">.</span></span>
-          <ul className="hidden flex-1 items-centFer justify-center gap-1 md:flex">
+          <span className="min-w-0 flex-1 truncate text-sm font-medium tracking-tight md:hidden">Ayush Khatri<span className="text-primary">.</span></span>
+          <ul className="hidden flex-1 items-center justify-center gap-1 md:flex">
             {navItems.map((item) => (
               <li key={item.path}>
                 <Link href={item.path} aria-current={isActive(item.path) ? "page" : undefined} className={cn(
-                  "flex min-h-8 items-center gap-1.5 rounded-lg px-3 text-sm font-medium transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                  "flex min-h-11 items-center gap-1.5 rounded-lg px-3 text-sm font-medium transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                   isActive(item.path) ? "bg-muted text-foreground" : "text-muted-foreground",
                 )}>
-                  {isActive(item.path) && <span className="text-sm rounded-full bg-primary" aria-hidden="true" />}
+                  {isActive(item.path) && <span className="size-1.5 rounded-full bg-primary" aria-hidden="true" />}
                   {item.name}
                 </Link>
               </li>
