@@ -63,7 +63,7 @@ const Hero = () => (
         </ul>
       </div>
 
-      <div className={`${entrance} mt-10 flex w-full flex-col items-center justify-between gap-4 border-t border-border/60 pt-5 [animation-delay:440ms] sm:mt-14 sm:flex-row`}>
+      {/* <div className={`${entrance} mt-10 flex w-full flex-col items-center justify-between gap-4 border-t border-border/60 pt-5 [animation-delay:440ms] sm:mt-14 sm:flex-row`}>
         <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-muted-foreground sm:text-xs">
           <span className="text-foreground">My everyday stack</span>
           <ul className="flex flex-wrap justify-center gap-x-3 gap-y-2">
@@ -73,7 +73,7 @@ const Hero = () => (
         <Link href="/about" className="group inline-flex min-h-11 shrink-0 items-center gap-1.5 rounded-md px-2 text-xs text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
           More about me <ArrowUpRight className="size-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 motion-reduce:transition-none" aria-hidden="true" />
         </Link>
-      </div>
+      </div> */}
     </div>
   </section>
 );
