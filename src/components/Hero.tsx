@@ -163,7 +163,7 @@ export default function Hero() {
         <div
           className={`${entrance} flex flex-col gap-5 border-t border-border/70 pt-5 [animation-delay:350ms] sm:flex-row sm:items-center sm:justify-between sm:gap-6`}
         >
-          <div className="min-w-0">
+          {/* <div className="min-w-0">
             <p className="mb-2.5 text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
               Tools I work with
             </p>
@@ -178,7 +178,7 @@ export default function Hero() {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
 
           <div className="flex items-center justify-between gap-3 sm:justify-end">
             <span className="text-xs text-muted-foreground sm:sr-only">
