@@ -40,7 +40,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-background/80 px-3 py-2 backdrop-blur-xl sm:px-4">
+    <header className="sticky top-0 z-50 w-full bg-background/80 px-3 pb-0 pt-2 backdrop-blur-xl sm:px-4">
       <nav aria-label="Primary navigation" className={cn(
         "mx-auto max-w-6xl rounded-2xl border border-border/60 bg-background/90 px-2 py-2 shadow-sm transition-[background-color,border-color,box-shadow] duration-300 motion-reduce:transition-none supports-[backdrop-filter]:bg-background/75 sm:px-3",
         scrolled && "border-border bg-background/95 shadow-lg supports-[backdrop-filter]:bg-background/90",
