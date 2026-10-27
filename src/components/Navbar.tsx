@@ -1,215 +1,116 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import {
-  ArrowDown,
-  ArrowRight,
-  ArrowUpRight,
-  Github,
-  Instagram,
-  Linkedin,
-  MapPin,
-} from "lucide-react";
-import { FaXTwitter } from "react-icons/fa6";
-
+import { usePathname } from "next/navigation";
+import { Menu, ArrowUpRight, ArrowRight, House, UserRound, FolderOpen, Images, BookOpen } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { aboutContent } from "@/constants";
+import ThemeButton from "@/components/ThemeButton";
+import { Sheet, SheetClose, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 
-const socials = [
-  {
-    name: "GitHub",
-    icon: Github,
-    url: "https://github.com/ayush-khatrii",
-  },
-  {
-    name: "LinkedIn",
-    icon: Linkedin,
-    url: "https://www.linkedin.com/in/ayushkhatrii",
-  },
-  {
-    name: "X",
-    icon: FaXTwitter,
-    url: "https://x.com/khatri_ayush15",
-  },
-  {
-    name: "Instagram",
-    icon: Instagram,
-    url: "https://www.instagram.com/ayush.khatrii",
-  },
+const navItems = [
+  { name: "Home", path: "/", icon: House },
+  { name: "About", path: "/about", icon: UserRound },
+  { name: "Projects", path: "/projects", icon: FolderOpen },
+  { name: "Gallery", path: "/gallery", icon: Images },
+  { name: "Blogs", path: "/blogs", icon: BookOpen },
 ];
 
-const stack = ["Next.js", "TypeScript", "Node.js", "MongoDB"];
+const Navbar = () => {
+  const pathname = usePathname();
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+  const isActive = (path: string) => pathname === path || (path !== "/" && pathname.startsWith(${path}/));
 
-const entrance =
-  "motion-safe:animate-in motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-2 motion-safe:duration-700 motion-safe:fill-mode-both";
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-export default function Hero() {
+  useEffect(() => setOpen(false), [pathname]);
+
+  useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 768px)");
+    const closeOnDesktop = () => { if (desktop.matches) setOpen(false); };
+    desktop.addEventListener("change", closeOnDesktop);
+    return () => desktop.removeEventListener("change", closeOnDesktop);
+  }, []);
+
   return (
-    <section
-      aria-labelledby="hero-title"
-      className="relative isolate overflow-hidden px-4 pb-8 pt-4 sm:px-6 sm:pb-10 sm:pt-5 lg:px-8 lg:pb-12 lg:pt-6"
-    >
-      {/* Soft ambient background */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10"
-      >
-        <div className="absolute left-1/2 top-0 h-72 w-full max-w-3xl -translate-x-1/2 rounded-full bg-primary/[0.04] blur-3xl" />
-
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border/70 to-transparent" />
-      </div>
-
-      <div className="mx-auto w-full max-w-5xl">
-        {/* Compact introduction */}
-        <div
-          className={`${entrance} flex flex-wrap items-center justify-between gap-x-4 gap-y-3`}
-        >
-          <div className="inline-flex min-h-8 items-center gap-2 rounded-full border border-border/70 bg-muted/30 px-3 py-1.5">
-            <span className="relative flex size-2 shrink-0">
-              <span className="absolute inset-0 rounded-full bg-primary/25 motion-safe:animate-ping" />
-              <span className="relative size-2 rounded-full bg-primary" />
-            </span>
-
-            <span className="text-[10px] font-medium tracking-wide text-muted-foreground sm:text-xs">
-              Available for new projects
-            </span>
-          </div>
-
-          <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
-            <MapPin className="size-3.5" aria-hidden="true" />
-            Based in India
-          </span>
-        </div>
-
-        <div className="pb-8 pt-8 sm:pb-10 sm:pt-10 lg:pb-12 lg:pt-12">
-          <p
-            className={`${entrance} flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground [animation-delay:70ms] sm:text-base`}
-          >
-            <span>Hey, I’m</span>
-
-            <span className="font-medium text-foreground">
-              {aboutContent.name}
-              <span className="text-primary">.</span>
-            </span>
-
-            <span
-              aria-hidden="true"
-              className="mx-1 hidden h-px w-8 bg-border sm:block"
-            />
-
-            <span className="basis-full text-xs leading-6 sm:basis-auto">
-              {aboutContent.role}
-            </span>
-          </p>
-
-          <h1
-            id="hero-title"
-            className={`${entrance} mt-5 max-w-[15ch] text-balance text-[clamp(2.5rem,7vw,5.75rem)] font-semibold leading-[1.04] tracking-[-0.055em] text-foreground [animation-delay:140ms]`}
-          >
-            Ideas into code.
-            <br />
-            <span className="text-muted-foreground">
-              Code into impact.
-            </span>
-          </h1>
-
-          <div className="mt-6 flex flex-col gap-7 sm:mt-7 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
-            <p
-              className={`${entrance} max-w-[48ch] text-pretty text-sm leading-7 text-muted-foreground [animation-delay:210ms] sm:text-base sm:leading-8`}
-            >
-              I build thoughtful web experiences and dependable backend
-              services—turning complex requirements into applications
-              that feel simple to use.
-            </p>
-
-            <div
-              className={`${entrance} grid w-full grid-cols-1 gap-3 [animation-delay:280ms] min-[360px]:grid-cols-2 sm:flex sm:w-auto sm:items-center lg:shrink-0`}
-            >
-              <Button
-                asChild
-                size="lg"
-                className="group min-h-12 w-full gap-3 rounded-xl px-5 text-sm sm:w-auto"
-              >
-                <Link href="/projects">
-                  View projects
-                  <ArrowRight
-                    aria-hidden="true"
-                    className="size-4 transition-transform group-hover:translate-x-1 motion-reduce:transition-none"
-                  />
+    <header className="sticky top-0 z-50 w-full bg-background/80 px-3 py-2 backdrop-blur-xl sm:px-4">
+      <nav aria-label="Primary navigation" className={cn(
+        "mx-auto max-w-6xl rounded-2xl border border-border/60 bg-background/90 px-2 py-2 shadow-sm transition-[background-color,border-color,box-shadow] duration-300 motion-reduce:transition-none supports-[backdrop-filter]:bg-background/75 sm:px-3",
+        scrolled && "border-border bg-background/95 shadow-lg supports-[backdrop-filter]:bg-background/90",
+      )}>
+        <div className="flex items-center gap-2">
+          <Link href="/" className="flex size-8 shrink-0 items-center justify-center rounded-md border border-primary/20 bg-primary/10 font-mono text-xs font-semibold transition-colors hover:bg-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" aria-label="Ayush Khatri — Home">AK</Link>
+          <span className="min-w-0 flex-1 truncate text-sm font-medium tracking-tight md:hidden">Ayush Khatri<span className="text-primary">.</span></span>
+          <ul className="hidden flex-1 items-center justify-center gap-1 md:flex">
+            {navItems.map((item) => (
+              <li key={item.path}>
+                <Link href={item.path} aria-current={isActive(item.path) ? "page" : undefined} className={cn(
+                  "flex min-h-11 items-center gap-1.5 rounded-lg px-3 text-sm font-medium transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                  isActive(item.path) ? "bg-muted text-foreground" : "text-muted-foreground",
+                )}>
+                  {isActive(item.path) && <span className="size-1.5 rounded-full bg-primary" aria-hidden="true" />}
+                  {item.name}
                 </Link>
-              </Button>
-
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="group min-h-12 w-full gap-3 rounded-xl border-border/80 bg-background/50 px-5 text-sm hover:bg-muted sm:w-auto"
-              >
-                <a
-                  href="/resume-ak.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Résumé
-                  <ArrowUpRight
-                    aria-hidden="true"
-                    className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 motion-reduce:transition-none"
-                  />
-                </a>
-              </Button>
-            </div>
+              </li>
+            ))}
+          </ul>
+          <div className="ml-auto flex shrink-0 items-center gap-1">
+            <Button asChild size="sm" className="hidden rounded-lg text-xs md:inline-flex">
+              <a href="mailto:ayushkhatri.dev@gmail.com">Contact <ArrowUpRight className="size-3.5" aria-hidden="true" /></a>
+            </Button>
+            <ThemeButton />
+            <Sheet open={open} onOpenChange={setOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="size-11 rounded-xl md:hidden" aria-label="Open navigation"><Menu className="size-5" aria-hidden="true" /></Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="group/nav inset-y-2 right-2 flex h-[calc(100dvh-1rem)] w-[min(88vw,22rem)] flex-col gap-0 overflow-y-auto rounded-3xl border border-border/70 bg-background p-0 shadow-2xl data-[state=open]:duration-300 data-[state=closed]:duration-200">
+                <div className="border-b border-border/60 px-5 pb-5 pt-7">
+                  <div className="mb-5 flex size-11 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 font-mono text-sm font-semibold" aria-hidden="true">AK</div>
+                  <SheetTitle className="text-lg font-semibold tracking-tight">Ayush Khatri<span className="text-primary">.</span></SheetTitle>
+                  <SheetDescription className="mt-1 text-xs">A little more about me and my work.</SheetDescription>
+                </div>
+                <nav aria-label="Mobile navigation" className="px-3 py-5">
+                  <p className="mb-3 px-3 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">Explore</p>
+                  <ul className="space-y-1">
+                    {navItems.map((item, index) => (
+                      <li key={item.path} style={{ animationDelay: ${60 + index * 40}ms }} className="motion-safe:group-data-[state=open]/nav:animate-in motion-safe:group-data-[state=open]/nav:fade-in-0 motion-safe:group-data-[state=open]/nav:slide-in-from-right-3 motion-safe:duration-300 motion-safe:fill-mode-both">
+                        <SheetClose asChild>
+                          <Link href={item.path} aria-current={isActive(item.path) ? "page" : undefined} className={cn(
+                            "group/item flex min-h-12 items-center gap-3 rounded-xl border px-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                            isActive(item.path) ? "border-primary/20 bg-primary/10 text-foreground" : "border-transparent text-muted-foreground hover:bg-muted/70 hover:text-foreground",
+                          )}>
+                            <item.icon className="size-4" aria-hidden="true" />
+                            <span className="flex-1">{item.name}</span>
+                            {isActive(item.path) ? <span className="size-1.5 rounded-full bg-primary" aria-hidden="true" /> : <ArrowRight className="size-3.5 opacity-40 transition-transform group-hover/item:translate-x-0.5 motion-reduce:transition-none" aria-hidden="true" />}
+                          </Link>
+                        </SheetClose>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+                <div className="mt-auto p-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
+                  <div className="rounded-2xl border border-border/60 bg-muted/30 p-4">
+                    <p className="text-sm font-medium">Have something in mind?</p>
+                    <p className="mb-4 mt-1 text-xs text-muted-foreground">Let’s make it happen.</p>
+                    <SheetClose asChild>
+                      <Button asChild className="min-h-11 w-full justify-between rounded-xl text-xs"><a href="mailto:ayushkhatri.dev@gmail.com">Let’s talk <ArrowUpRight className="size-4" aria-hidden="true" /></a></Button>
+                    </SheetClose>
+                  </div>
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
-
-        {/* Bottom utility row */}
-        <div
-          className={`${entrance} flex flex-col gap-5 border-t border-border/70 pt-5 [animation-delay:350ms] sm:flex-row sm:items-center sm:justify-between sm:gap-6`}
-        >
-          <div className="min-w-0">
-            <p className="mb-2.5 text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
-              Tools I work with
-            </p>
-
-            <ul className="flex flex-wrap gap-2" aria-label="Technology stack">
-              {stack.map((tech) => (
-                <li
-                  key={tech}
-                  className="rounded-md border border-border/60 bg-muted/25 px-2.5 py-1.5 text-[11px] font-medium text-muted-foreground sm:text-xs"
-                >
-                  {tech}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="flex items-center justify-between gap-3 sm:justify-end">
-            <span className="text-xs text-muted-foreground sm:sr-only">
-              Around the web
-            </span>
-
-            <ul className="flex flex-wrap items-center gap-1">
-              {socials.map(({ name, icon: Icon, url }) => (
-                <li key={name}>
-                  <Button
-                    asChild
-                    variant="ghost"
-                    size="icon"
-                    className="size-11 rounded-xl text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-                  >
-                    <a
-                      href={url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${name} (opens in a new tab)`}
-                      title={name}
-                    >
-                      <Icon className="size-4" aria-hidden="true" />
-                    </a>
-                  </Button>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
+      </nav>
+    </header>
   );
-}
+};
+
+export default Navbar;
