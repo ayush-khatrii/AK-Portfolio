@@ -14,7 +14,7 @@ const infoIcons = {
 const AboutProfile = () => (
   <div className="grid items-center gap-6 lg:gap-10">
     <div>
-      <p className="max-w-full text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base">
+      <p className="max-w-full text-pretty text-base leading-8 text-muted-foreground sm:text-base">
         {aboutContent.greeting}{" "}
         <span className="font-medium text-foreground">{aboutContent.name}</span>, a <Age />-year-old{" "}
         <code className="rounded border border-border/60 bg-muted/70 px-1.5 py-0.5 font-mono text-[0.88em] font-medium text-foreground">
@@ -27,7 +27,7 @@ const AboutProfile = () => (
       </p>
     </div>
 
-    <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-3 lg:grid-cols-4">
+    <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-3 lg:grid-cols-2">
       {aboutInfo.map((item) => {
         const Icon = infoIcons[item.icon as keyof typeof infoIcons];
 
@@ -42,7 +42,7 @@ const AboutProfile = () => (
                 {item.label}
               </span>
 
-              <span className="mt-1 block max-w-[14rem] truncate text-xs font-medium leading-none text-foreground sm:max-w-[18rem] sm:text-sm">
+              <span className="mt-1 block max-w-[14rem] break-words text-xs font-medium leading-relaxed text-foreground sm:max-w-[18rem] sm:text-sm">
                 {item.value}
               </span>
             </span>
@@ -50,7 +50,7 @@ const AboutProfile = () => (
         );
 
         const className =
-          "group inline-flex min-w-0 max-w-full items-center gap-2.5 rounded-full border border-border/60 bg-muted/30 px-2 py-1.5 pr-4 transition-all duration-200 hover:border-border hover:bg-muted/60 sm:gap-3 sm:px-2.5 sm:py-1.5 sm:pr-5";
+          "group inline-flex min-w-0 max-w-full items-center gap-2.5 rounded-xl border border-border bg-card px-4 py-4 transition-all duration-200 hover:border-border hover:bg-muted/60 sm:gap-3 sm:px-2.5 sm:py-1.5 sm:pr-5";
 
         return item.href ? (
           <a

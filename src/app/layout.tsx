@@ -6,17 +6,10 @@ import Navbar from "@/components/Navbar";
 import { siteMetadata } from "@/lib/sitemetadata";
 import Footer from "@/components/Footer";
 import { getCurrentYear } from "@/lib/current-year";
-import { Alan_Sans, DM_Mono } from "next/font/google";
+import localFont from "next/font/local";
 
-const alan_sans = Alan_Sans({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-});
-
-const dm_mono = DM_Mono({
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
-});
+const geist = localFont({ src: "./fonts/GeistVF.woff", variable: "--font-geist-sans", display: "swap" });
+const mono = localFont({ src: "./fonts/GeistMonoVF.woff", variable: "--font-geist-mono", display: "swap" });
 
 export const metadata = siteMetadata;
 
@@ -29,7 +22,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
-      <body className={`${alan_sans.className}`}>
+      <body className={`${geist.variable} ${mono.variable} font-sans`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
@@ -38,8 +31,8 @@ export default async function RootLayout({
         >
           <main className="min-h-screen">
             <Navbar />
-            <div className="w-full sm:px-4">
-              <div className="relative mx-auto min-h-screen w-full max-w-6xl border-border md:border-x md:border-dashed">
+            <div className="w-full">
+              <div className="site-content relative mx-auto min-h-screen w-full max-w-6xl pt-20 has-[.portfolio-hero]:pt-0">
                 {children}
                 <Footer currentYear={currentYear} />
               </div>

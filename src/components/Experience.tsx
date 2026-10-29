@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "motion/react";
 import { work } from "@/constants";
 import { WorkExperience, type ExperienceItemType } from "@/components/work-experience";
 import SectionHeading from "@/components/SectionHeading";
@@ -28,11 +27,7 @@ const Experience = () => (
     id="experience"
     className="scroll-mt-24 overflow-x-hidden border-t border-border/60 py-8 font-sans sm:py-10"
   >
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
+    <div
     >
       <div className="px-4 sm:px-6 lg:px-8">
         <SectionHeading title="Work Experience" description="" />
@@ -41,7 +36,7 @@ const Experience = () => (
         className="border-t border-b w-full divide-y divide-border/60 px-4 sm:px-6 lg:px-8"
         experiences={experiences}
       />
-    </motion.div>
+    </div>
   </section>
 );
 

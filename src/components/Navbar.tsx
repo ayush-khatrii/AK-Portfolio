@@ -77,11 +77,11 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-background/80 px-3 pb-0 pt-2 backdrop-blur-xl sm:px-4">
+    <header className="fixed inset-x-0 top-0 z-50 h-20 w-full px-3 py-3 sm:px-6">
       <nav
         aria-label="Primary navigation"
         className={cn(
-          "mx-auto w-full max-w-6xl rounded-2xl border border-border/60 bg-background/90 p-2 shadow-sm",
+          "mx-auto w-full max-w-6xl rounded-2xl border border-border/60 bg-background/90 p-2 shadow-sm backdrop-blur-xl",
           "transition-[background-color,border-color,box-shadow] duration-300 motion-reduce:transition-none",
           "supports-[backdrop-filter]:bg-background/75 sm:px-3",
           scrolled &&
@@ -127,14 +127,14 @@ export default function Navbar() {
                       "transition-colors hover:bg-muted hover:text-foreground",
                       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                       active
-                        ? "bg-muted text-foreground"
+                        ? "bg-accent text-accent-foreground"
                         : "text-muted-foreground",
                     )}
                   >
                     {active && (
                       <span
                         aria-hidden="true"
-                        className="size-1.5 shrink-0 rounded-full bg-primary"
+                        className="size-1.5 shrink-0 rounded-full bg-accent"
                       />
                     )}
 
@@ -244,7 +244,7 @@ export default function Navbar() {
                               {active ? (
                                 <span
                                   aria-hidden="true"
-                                  className="size-1.5 shrink-0 rounded-full bg-primary"
+                                  className="size-1.5 shrink-0 rounded-full bg-accent"
                                 />
                               ) : (
                                 <ArrowRight

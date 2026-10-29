@@ -45,27 +45,27 @@ export default function Hero() {
   return (
     <section
       aria-labelledby="hero-title"
-      className="relative isolate overflow-hidden px-4 pb-8 pt-4 sm:px-6 sm:pb-10 sm:pt-5 lg:px-8 lg:pb-12 lg:pt-6"
+      className="portfolio-hero relative isolate flex min-h-svh min-h-dvh flex-col justify-center overflow-hidden px-5 pb-6 pt-24 sm:px-8 lg:px-12"
     >
       {/* Soft ambient background */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10"
       >
-        <div className="absolute left-1/2 top-0 h-72 w-full max-w-3xl -translate-x-1/2 rounded-full bg-primary/[0.04] blur-3xl" />
+        <div className="absolute left-1/2 top-0 h-72 w-full max-w-3xl -translate-x-1/2 rounded-full bg-accent/20 blur-3xl" />
 
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border/70 to-transparent" />
       </div>
 
-      <div className="mx-auto w-full max-w-5xl">
+      <div className="mx-auto flex w-full max-w-5xl flex-1 flex-col justify-between gap-6">
         {/* Compact introduction */}
         <div
           className={`${entrance} flex flex-wrap items-center justify-between gap-x-4 gap-y-3`}
         >
           <div className="inline-flex min-h-8 items-center gap-2 rounded-full border border-border/70 bg-muted/30 px-3 py-1.5">
             <span className="relative flex size-2 shrink-0">
-              <span className="absolute inset-0 rounded-full bg-primary/25 motion-safe:animate-ping" />
-              <span className="relative size-2 rounded-full bg-primary" />
+              <span className="absolute inset-0 rounded-full bg-accent/25 motion-safe:animate-ping" />
+              <span className="relative size-2 rounded-full bg-accent" />
             </span>
 
             <span className="text-[10px] font-medium tracking-wide text-muted-foreground sm:text-xs">
@@ -79,7 +79,7 @@ export default function Hero() {
           </span>
         </div>
 
-        <div className="pb-8 pt-8 sm:pb-10 sm:pt-10 lg:pb-12 lg:pt-12">
+        <div className="py-8 sm:py-12 lg:py-16">
           <p
             className={`${entrance} flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground [animation-delay:70ms] sm:text-base`}
           >
@@ -102,11 +102,11 @@ export default function Hero() {
 
           <h1
             id="hero-title"
-            className={`${entrance} mt-5 max-w-[15ch] text-balance text-[clamp(2.5rem,7vw,5.75rem)] font-semibold leading-[1.04] tracking-[-0.055em] text-foreground [animation-delay:140ms]`}
+            className={`${entrance} mt-5 max-w-[15ch] text-balance text-[clamp(2.65rem,8.8vw,7.5rem)] font-semibold leading-[1.04] tracking-[-0.055em] text-foreground [animation-delay:140ms]`}
           >
             Ideas into code.
             <br />
-            <span className="text-muted-foreground">
+            <span className="text-cobalt dark:text-lime">
               Code into impact.
             </span>
           </h1>
@@ -126,7 +126,7 @@ export default function Hero() {
               <Button
                 asChild
                 size="lg"
-                className="group min-h-12 w-full gap-3 rounded-xl px-5 text-sm sm:w-auto"
+                className="group min-h-12 w-full gap-3 rounded-full bg-accent px-6 text-sm text-accent-foreground hover:bg-accent/85 sm:w-auto"
               >
                 <Link href="/projects">
                   View projects
@@ -180,7 +180,8 @@ export default function Hero() {
             </ul>
           </div> */}
 
-          <div className="flex items-center justify-between gap-3 sm:justify-end">
+          <div className="flex w-full items-center justify-between gap-3">
+            <a href="#about" aria-label="Scroll to About Me" className="flex size-11 items-center justify-center rounded-full border border-border transition-colors hover:border-primary hover:text-primary"><ArrowDown className="size-4" /></a>
             <span className="text-xs text-muted-foreground sm:sr-only">
               Around the web
             </span>

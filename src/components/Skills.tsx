@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "motion/react";
 import type { ComponentType, SVGProps } from "react";
 import { FiCode } from "react-icons/fi";
 import { GiBearFace } from "react-icons/gi";
@@ -60,29 +59,18 @@ function SkillBadge({ skill }: { skill: string }) {
 }
 
 const Skills = () => (
-  <section className="overflow-x-hidden border-t border-dotted border-border/60 px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+  <section className="overflow-x-hidden border-t border-solid border-border/60 px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
     <SectionHeading title="Skills" description="" />
-    <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="border-y border-dotted border-border/60">
-      <Table>
-        <TableBody>
-          {skills.map((skillCategory) => (
-            <TableRow key={skillCategory.category} className="border-border/40 align-top hover:bg-muted/40">
-              <TableCell className="px-3 py-3">
-                <p className="text-sm font-medium text-foreground">{skillCategory.category}</p>
-                <div className="mt-2 flex flex-wrap gap-1 sm:hidden">
-                  {skillCategory.items.map((skill) => <SkillBadge key={skill} skill={skill} />)}
-                </div>
-              </TableCell>
-              <TableCell className="hidden px-3 py-3 sm:table-cell">
-                <div className="flex flex-wrap gap-2">
-                  {skillCategory.items.map((skill) => <SkillBadge key={skill} skill={skill} />)}
-                </div>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </motion.div>
+    <div className="">
+      <div className="grid gap-4 sm:grid-cols-2">
+        {skills.map((category) => (
+          <div key={category.category} className="rounded-2xl border border-border bg-card p-5 sm:p-7">
+            <h3 className="mb-5 text-base font-medium tracking-tight">{category.category}</h3>
+            <div className="flex flex-wrap gap-2">{category.items.map(skill => <SkillBadge key={skill} skill={skill} />)}</div>
+          </div>
+        ))}
+      </div>
+    </div>
   </section>
 );
 
