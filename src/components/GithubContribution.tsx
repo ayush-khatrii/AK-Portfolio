@@ -26,8 +26,8 @@ const GithubContribution = () => (
         fontSize={12}
         style={{ width: "100%" }}
         theme={{
-          light: ["#e9eef7", "#e4f4a9", "#bfdc54", "#849f18", "#536800"],
-          dark: ["#101927", "#33440e", "#637e15", "#9fc71c", "#D4FF24"],
+          light: ["#ffffff0d", "#e4f4a9", "#bfdc54", "#849f18", "#536800"],
+          dark: ["#ffffff0d", "#33440e", "#637e15", "#9fc71c", "#D4FF24"],
         }}
         showWeekdayLabels={["sun", "mon", "tue", "wed", "thu", "fri", "sat"]}
         weekStart={1}
