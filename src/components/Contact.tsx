@@ -125,14 +125,14 @@ export const ContactForm = ({ onSuccess }: ContactFormProps) => {
           <Textarea id={`${formId}-message`} name="message" placeholder="Your message here..." value={message} onChange={(e) => setMessage(e.target.value)} required rows={5} className="min-h-36 resize-y border-border/40 bg-muted/20 font-mono text-sm focus-visible:border-primary/40" />
         </div>
         <div className="flex justify-end py-4">
-          <Button type="submit" className="h-11 w-full sm:w-auto" disabled={isSubmitting}>
+          <Button type="submit" disabled={isSubmitting}>
             {isSubmitting ? <><Loader2 className="animate-spin" />Sending...</> : <><Send />Send Message</>}
           </Button>
         </div>
       </form>
       <div className="flex flex-col gap-3 border-y border-border/40 bg-muted/20 px-3 py-4 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-pretty text-sm text-muted-foreground">Or reach me directly at: <span className="break-all font-mono text-foreground">{EMAIL_ADDRESS}</span></p>
-        <Button variant="outline" size="sm" onClick={copyEmailToClipboard} className="h-11 border-border/40 sm:h-9"><Copy />Copy</Button>
+        <Button variant="outline" size="sm" onClick={copyEmailToClipboard}><Copy />Copy</Button>
       </div>
     </div>
   );

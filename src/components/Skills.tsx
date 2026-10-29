@@ -49,29 +49,8 @@ const skillIcons: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
 
 function SkillBadge({ skill }: { skill: string }) {
   const Icon = skillIcons[skill] ?? FiCode;
-
-  return (
-    <Badge variant="outline" className="gap-2 border-border bg-muted/50 font-mono text-sm font-normal text-foreground/80 transition-colors hover:border-primary/40 hover:text-foreground">
-      <Icon className="size-4 shrink-0" aria-hidden="true" focusable="false" />
-      <span className="font-medium ">{skill}</span>
-    </Badge>
-  );
+  return <li className="flex items-center gap-2 py-1 text-xs text-muted-foreground transition-colors hover:text-foreground"><Icon className="size-4 shrink-0 text-foreground" aria-hidden="true" /><span>{skill}</span></li>;
 }
-
-const Skills = () => (
-  <section className="overflow-x-hidden border-t border-solid border-border/60 px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
-    <SectionHeading title="Skills" description="" />
-    <div className="">
-      <div className="grid gap-4 sm:grid-cols-2">
-        {skills.map((category) => (
-          <div key={category.category} className="rounded-2xl border border-border bg-card p-5 sm:p-7">
-            <h3 className="mb-5 text-base font-medium tracking-tight">{category.category}</h3>
-            <div className="flex flex-wrap gap-2">{category.items.map(skill => <SkillBadge key={skill} skill={skill} />)}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-);
-
-export default Skills;
+export default function Skills() {
+  return <section className="section-shell"><SectionHeading title="Skills" /><div className="divide-y divide-border border-y border-border">{skills.map((category, index) => <div key={category.category} className="grid gap-3 py-5 sm:grid-cols-[13rem_1fr]"><h3 className="flex items-baseline gap-3 text-xs font-medium"><span className="font-mono text-[10px] text-muted-foreground">0{index + 1}</span>{category.category}</h3><ul className="grid grid-cols-2 gap-x-4 gap-y-1 sm:grid-cols-3">{category.items.map(skill => <SkillBadge key={skill} skill={skill} />)}</ul></div>)}</div></section>;
+}

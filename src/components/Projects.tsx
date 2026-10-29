@@ -13,7 +13,7 @@ const Projects = () => (
     <div>
       <ProjectRepository items={project} />
       <div className="mt-4 flex justify-end">
-        <Button asChild variant="ghost" className="group h-11 font-mono text-xs">
+        <Button asChild variant="ghost">
           <Link href="/projects">View all <ArrowRight className="transition-transform group-hover:translate-x-1" /></Link>
         </Button>
       </div>

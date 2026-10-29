@@ -18,11 +18,11 @@ const formatDate = (dateString: string) => {
 const GithubContribution = () => (
   <section className="overflow-x-hidden border-t border-solid border-border/60 px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
     <SectionHeading title="GitHub Graph" description="" />
-    <div className="w-full overflow-x-auto rounded-2xl border border-border bg-card p-4 sm:p-7">
+    <div className="w-full overflow-x-auto border-y border-border bg-transparent py-5">
       <GitHubCalendar
-        blockSize={15}
-        blockMargin={4}
-        blockRadius={3}
+        blockSize={11}
+        blockMargin={3}
+        blockRadius={2}
         fontSize={12}
         style={{ width: "100%" }}
         theme={{

@@ -5,7 +5,7 @@
 
 :root {
   --background: #f7f8fb; --foreground: #101725;
-  --card: #ffffff; --card-foreground: #101725;
+  --card: #f7f8fb; --card-foreground: #101725;
   --popover: #ffffff; --popover-foreground: #101725;
   --primary: #1558C9; --primary-foreground: #ffffff;
   --secondary: #e9eef7; --secondary-foreground: #101725;
@@ -13,7 +13,7 @@
   --accent: #D4FF24; --accent-foreground: #030407;
   --destructive: #c93646; --destructive-foreground: #ffffff;
   --border: #d9dfeb; --input: #d9dfeb; --ring: #1558C9;
-  --radius: 0.875rem;
+  --radius: 0.5rem;
   --chart-1: #D4FF24; --chart-2: #a7ce22; --chart-3: #77971c; --chart-4: #4b6416; --chart-5: #263611;
   --sidebar: var(--card); --sidebar-foreground: var(--foreground);
   --sidebar-primary: var(--primary); --sidebar-primary-foreground: #ffffff;
@@ -22,7 +22,7 @@
 }
 .dark {
   --background: #030407; --foreground: #f2f5fa;
-  --card: #0b1019; --card-foreground: #f2f5fa;
+  --card: #030407; --card-foreground: #f2f5fa;
   --popover: #0b1019; --popover-foreground: #f2f5fa;
   --primary: #1558C9; --primary-foreground: #ffffff;
   --secondary: #101927; --secondary-foreground: #f2f5fa;
@@ -125,17 +125,16 @@
   }
 }
 
-/* Shared rhythm across every route; the hero owns the complete first viewport. */
-.site-content > div > section:not(.portfolio-hero),
-.site-content > section:not(.portfolio-hero) {
-  padding: clamp(3rem, 7vw, 6rem) clamp(1.25rem, 4vw, 3rem);
+/* Compact editorial rhythm shared by every route. */
+.section-shell, .site-content > div > section:not(.portfolio-hero), .site-content > section:not(.portfolio-hero) {
+  padding: 2.5rem 1.25rem;
+  border-top: 1px solid var(--border);
 }
-.site-content section { scroll-margin-top: 6rem; }
+@media (min-width: 640px) {
+  .section-shell, .site-content > div > section:not(.portfolio-hero), .site-content > section:not(.portfolio-hero) { padding: 3rem 2rem; }
+}
+.site-content section { scroll-margin-top: 5rem; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }

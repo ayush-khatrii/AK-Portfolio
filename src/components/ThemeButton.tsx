@@ -11,13 +11,12 @@ const ThemeButton = () => {
       type="button"
       variant="outline"
       size="icon-sm"
-      className="relative border-border/40 bg-background/40"
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
       aria-label="Toggle color theme"
       title="Toggle color theme"
     >
-      <SunIcon className="size-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-      <MoonIcon className="absolute size-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+      <SunIcon className="size-4 dark:hidden" />
+      <MoonIcon className="hidden size-4 dark:block" />
       <span className="sr-only">Toggle color theme</span>
     </Button>
   );
