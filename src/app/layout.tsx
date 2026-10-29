@@ -32,7 +32,7 @@ export default async function RootLayout({
           <main className="min-h-screen">
             <Navbar />
             <div className="w-full">
-              <div className="site-content relative mx-auto min-h-screen w-full max-w-6xl pt-20 has-[.portfolio-hero]:pt-0">
+              <div className="site-content relative mx-auto min-h-screen w-full max-w-5xl pt-16 has-[.portfolio-hero]:pt-0">
                 {children}
                 <Footer currentYear={currentYear} />
               </div>

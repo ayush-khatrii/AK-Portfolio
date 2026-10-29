@@ -65,7 +65,6 @@ const Socials = () => {
       <Button
        variant="outline"
        size="sm"
-       className="hover:scale-110 hover:px-3 cursor-pointer transition-transform duration-200"
       >
        Blog
       </Button>
@@ -74,7 +73,6 @@ const Socials = () => {
       <Button
        variant="default"
        size="sm"
-       className="hover:scale-110 hover:px-3 cursor-pointer transition-transform duration-200"
       >
        Resume
       </Button>

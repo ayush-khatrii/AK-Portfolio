@@ -1,43 +1,9 @@
-"use client";
-
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { work } from "@/constants";
-import { WorkExperience, type ExperienceItemType } from "@/components/work-experience";
+import { Button } from "@/components/ui/button";
 import SectionHeading from "@/components/SectionHeading";
-
-
-const experiences: ExperienceItemType[] = work.map((item) => ({
-  id: item.workId ?? item.title,
-  companyName: item.title,
-  location: item.location,
-  isCurrentEmployer: !item.employmentPeriod.end,
-  positions: [{
-    id: `${item.workId ?? item.title}-role`,
-    title: item.position,
-    employmentPeriod: item.employmentPeriod,
-    icon: item.icon ? <item.icon /> : undefined,
-    description: item.content.map((point) => `- ${point}`).join("\n\n"),
-    detailsHref: item.workId ? `/work/${item.workId}` : undefined,
-    skills: item.techStack,
-    isExpanded: false,
-  }],
-}));
-
-const Experience = () => (
-  <section
-    id="experience"
-    className="scroll-mt-24 overflow-x-hidden border-t border-border/60 py-8 font-sans sm:py-10"
-  >
-    <div
-    >
-      <div className="px-4 sm:px-6 lg:px-8">
-        <SectionHeading title="Work Experience" description="" />
-      </div>
-      <WorkExperience
-        className="border-t border-b w-full divide-y divide-border/60 px-4 sm:px-6 lg:px-8"
-        experiences={experiences}
-      />
-    </div>
-  </section>
-);
-
-export default Experience;
+import Timeline from "@/components/Timeline";
+export default function Experience() {
+  return <section id="experience" className="section-shell"><SectionHeading title="Work Experience" /><Timeline entries={work.map(item => ({ id: item.workId ?? item.title, date: item.date, title: item.position, subtitle: item.title, location: item.location, content: <><ul className="space-y-2">{item.content.map(point => <li key={point} className="flex gap-2"><span aria-hidden="true" className="text-cobalt dark:text-lime">—</span><span>{point}</span></li>)}</ul><ul className="my-4 flex flex-wrap gap-x-3 gap-y-1 font-mono text-[10px]">{item.techStack.map(tech => <li key={tech}>{tech}</li>)}</ul>{item.workId && <Button asChild variant="outline" size="sm"><Link href={`/work/${item.workId}`}>Work details <ArrowUpRight /></Link></Button>}</> }))} /></section>;
+}

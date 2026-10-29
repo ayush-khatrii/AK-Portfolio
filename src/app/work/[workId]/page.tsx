@@ -1,61 +1,17 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, CalendarDays, MapPin } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { work } from "@/constants";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-
-export const generateStaticParams = () =>
-  work.flatMap((item) => item.workId ? [{ workId: item.workId }] : []);
-
-const WorkDetailPage = async ({
-  params,
-}: {
-  params: Promise<{ workId: string }>;
-}) => {
+export const generateStaticParams = () => work.flatMap(item => item.workId ? [{ workId: item.workId }] : []);
+export default async function WorkDetailPage({ params }: { params: Promise<{ workId: string }> }) {
   const { workId } = await params;
-  const item = work.find((entry) => entry.workId === workId);
-
+  const item = work.find(entry => entry.workId === workId);
   if (!item) notFound();
-
-  return (
-    <article className="min-h-[70svh] px-5 py-12 sm:px-8 sm:py-16 lg:px-12">
-      <Button asChild variant="ghost" size="sm" className="mb-10 h-11 px-0 font-mono text-xs text-muted-foreground hover:bg-transparent hover:text-foreground">
-        <Link href="/#experience"><ArrowLeft />Back to experience</Link>
-      </Button>
-
-      <header className="rounded-2xl border border-border bg-card p-6 sm:p-10">
-        <p className="font-mono text-xs uppercase tracking-[0.16em] text-cobalt dark:text-lime sm:text-xs">Work Experience / {item.workId}</p>
-        <h1 className="mt-4 text-balance text-3xl font-medium tracking-[-0.045em] sm:text-5xl">{item.position}</h1>
-        <p className="mt-3 text-lg text-muted-foreground sm:text-xl">{item.title}</p>
-        <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 font-mono text-xs text-muted-foreground">
-          <span className="flex items-center gap-2"><CalendarDays className="size-4 text-primary" />{item.date}</span>
-          <span className="flex items-center gap-2"><MapPin className="size-4 text-primary" />{item.location}</span>
-        </div>
-      </header>
-
-      <Separator className="my-10 bg-border/40 sm:my-12" />
-
-      <section aria-labelledby="work-details-title">
-        <h2 id="work-details-title" className="text-xl font-medium tracking-tight sm:text-2xl">Work details</h2>
-        <ul className="mt-6 space-y-3">
-          {item.content.map((point, index) => (
-            <li key={`${item.workId}-${index}`} className="relative rounded-xl border border-border bg-card p-5 pl-9 text-pretty text-sm leading-7 text-muted-foreground before:absolute before:left-4 before:top-8 before:size-1.5 before:rounded-full before:bg-primary sm:text-base">{point}</li>
-          ))}
-        </ul>
-      </section>
-
-      <section aria-labelledby="work-stack-title" className="mt-12 sm:mt-14">
-        <h2 id="work-stack-title" className="text-xl font-medium tracking-tight sm:text-2xl">Tech Stack/Tools:</h2>
-        <div className="mt-5 flex flex-wrap gap-1.5">
-          {item.techStack.map((tech) => (
-            <Badge key={tech} variant="outline" className="border-border/40 bg-muted/50 font-mono text-xs font-normal text-foreground/80">{tech}</Badge>
-          ))}
-        </div>
-      </section>
-    </article>
-  );
-};
-
-export default WorkDetailPage;
+  return <article className="px-5 py-10 sm:px-8">
+    <Button asChild variant="ghost" size="sm"><Link href="/#experience"><ArrowLeft />Back to experience</Link></Button>
+    <header className="border-b border-border pb-7 pt-8"><p className="mb-4 font-mono text-[10px] uppercase tracking-widest text-cobalt dark:text-lime">Work Experience / {item.workId}</p><h1 className="max-w-xl text-3xl font-medium tracking-[-0.05em] sm:text-5xl">{item.position}</h1><p className="mt-3 text-base text-muted-foreground">{item.title}</p><div className="mt-5 flex flex-wrap gap-4 font-mono text-[10px] text-muted-foreground"><span>{item.date}</span><span>{item.location}</span></div></header>
+    <section className="grid gap-5 border-b border-border py-7 sm:grid-cols-[10rem_1fr]"><h2 className="text-sm font-medium">Work details</h2><ul className="space-y-4 text-sm leading-7 text-muted-foreground">{item.content.map((point, i) => <li key={i} className="flex gap-3"><span aria-hidden="true" className="font-mono text-[10px] text-cobalt dark:text-lime">{String(i + 1).padStart(2, "0")}</span><span>{point}</span></li>)}</ul></section>
+    <section className="grid gap-5 py-7 sm:grid-cols-[10rem_1fr]"><h2 className="text-sm font-medium">Tech Stack/Tools:</h2><ul className="flex flex-wrap gap-x-4 gap-y-2 font-mono text-xs text-muted-foreground">{item.techStack.map(tech => <li key={tech}>{tech}</li>)}</ul></section>
+  </article>;
+}

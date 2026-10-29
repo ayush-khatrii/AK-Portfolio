@@ -1,11 +1,9 @@
-type SectionHeadingProps = { title: string; description?: string };
-
-export default function SectionHeading({ title, description }: SectionHeadingProps) {
+type Props = { title: string; description?: string };
+const numbers: Record<string, string> = { "About Me": "01", "GitHub Graph": "02", "Work Experience": "03", Skills: "04", Projects: "05", "Education Timeline": "06", Gallery: "07", Blogs: "08", "Get in Touch": "09" };
+export default function SectionHeading({ title, description }: Props) {
   if (!title && !description) return null;
-  return (
-    <header className="mb-8 sm:mb-12">
-      {title && <div className="flex items-center gap-4"><span aria-hidden="true" className="h-7 w-1 rounded-full bg-cobalt dark:bg-lime" /><h2 className="text-balance text-3xl font-medium tracking-[-0.045em] sm:text-4xl lg:text-5xl">{title}</h2></div>}
-      {description && <p className="mt-4 max-w-2xl text-pretty text-sm leading-7 text-muted-foreground sm:text-base">{description}</p>}
-    </header>
-  );
+  return <header className="mb-6">
+    {title && <div className="flex items-baseline gap-3"><span className="font-mono text-[10px] text-cobalt dark:text-lime">{numbers[title] ?? "↗"}</span><h2 className="text-xl font-medium tracking-[-0.04em] sm:text-2xl">{title}</h2></div>}
+    {description && <p className="mt-2 max-w-xl text-sm leading-6 text-muted-foreground">{description}</p>}
+  </header>;
 }
