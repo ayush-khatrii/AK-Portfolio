@@ -1,24 +1,15 @@
-"use client";
-
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { project } from "@/constants";
 import { Button } from "@/components/ui/button";
 import ProjectRepository from "@/components/ProjectRepository";
 import SectionHeading from "@/components/SectionHeading";
+import Reveal from "@/components/Reveal";
 
-const Projects = () => (
-  <section className="overflow-x-hidden border-t border-solid border-border/60 px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
-    <SectionHeading title="Projects" description="" />
-    <div>
-      <ProjectRepository items={project} />
-      <div className="mt-4 flex justify-end">
-        <Button asChild variant="ghost">
-          <Link href="/projects">View all <ArrowRight className="transition-transform group-hover:translate-x-1" /></Link>
-        </Button>
-      </div>
-    </div>
-  </section>
-);
-
-export default Projects;
+export default function Projects() {
+  return <section className="section-shell">
+    <Reveal><SectionHeading title="Projects" /></Reveal>
+    <ProjectRepository items={project} />
+    <div className="mt-5 flex justify-start"><Button asChild variant="link" className="px-0"><Link href="/projects">View all <ArrowRight /></Link></Button></div>
+  </section>;
+}

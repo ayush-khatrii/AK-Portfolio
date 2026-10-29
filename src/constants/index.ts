@@ -13,8 +13,18 @@ export const aboutContent = {
 };
 
 export const aboutInfo = [
-  { icon: "mail", label: "Email", value: "ayushkhatri.dev@gmail.com", href: "mailto:ayushkhatri.dev@gmail.com" },
-  { icon: "website", label: "Website", value: "ayushkhatri.in", href: "https://ayushkhatri.in" },
+  {
+    icon: "mail",
+    label: "Email",
+    value: "ayushkhatri.dev@gmail.com",
+    href: "mailto:ayushkhatri.dev@gmail.com",
+  },
+  {
+    icon: "website",
+    label: "Website",
+    value: "ayushkhatri.in",
+    href: "https://ayushkhatri.in",
+  },
   { icon: "location", label: "Location", value: "India 🇮🇳" },
   { icon: "role", label: "Role", value: "Full-Stack Developer" },
 ];
@@ -50,7 +60,7 @@ const skills = [
   {
     category: "Workflow & AI",
     items: ["VSCode", "Cursor", "ChatGPT", "Claude", "Gemini", "Redis"],
-  }
+  },
 ];
 
 type WorkItem = {
@@ -119,11 +129,11 @@ const work: WorkItem[] = [
     workId: "freelance-video-editor",
     title: "Freelance Projects",
     position: "Video Editor & Content Designer",
-    date: "Dec 2023 – Dec 2024",
-    employmentPeriod: { start: "12.2023", end: "12.2024" },
+    date: "Dec 2023 – 2026",
+    employmentPeriod: { start: "12.2023", end: "2026" },
     location: "Remote, India",
     content: [
-      "Edited 50+ videos for multiple clients, including YouTube long-form content, Shorts, and Reels.",
+      "Edited 100+ videos for multiple clients, including YouTube long-form content, Shorts, and Reels.",
       "Designed around 20+ custom thumbnails for creators to boost click rates and improve their overall channel look.",
       "Handled everything from rough cuts to final exports while communicating directly with clients to match their creative direction and meet deadlines.",
     ],
@@ -144,7 +154,8 @@ const project = [
     desc: "Explore public GitHub repositories in a VS Code-style workspace without cloning. Browse files, read syntax-highlighted code, search within files, and share links to the exact code.",
     githubLink: "https://github.com/ayush-khatrii/srcmap",
     liveLink: "https://srcmap.cc",
-    image: "https://github.com/user-attachments/assets/f6b5ca64-63d9-4e4c-ae05-fae564ddd1fa",
+    image:
+      "https://github.com/user-attachments/assets/f6b5ca64-63d9-4e4c-ae05-fae564ddd1fa",
     techStack: [
       "Next.js",
       "React.js",
@@ -158,12 +169,13 @@ const project = [
     ],
   },
   {
-    "title": "LessonMap",
-    "desc": "A full-stack AI-powered course creation platform that helps educators turn ideas into structured, shareable learning experiences with drag-and-drop curriculum building, resource management, learner progress tracking, and subscription-based premium features.",
-    "githubLink": "https://github.com/ayush-khatrii/Lesson-Map",
-    "liveLink": "https://lessonmap.vercel.app",
-    "image": "https://raw.githubusercontent.com/ayush-khatrii/Lesson-Map/main/docs/screenshots/home.png",
-    "techStack": [
+    title: "LessonMap",
+    desc: "A full-stack AI-powered course creation platform that helps educators turn ideas into structured, shareable learning experiences with drag-and-drop curriculum building, resource management, learner progress tracking, and subscription-based premium features.",
+    githubLink: "https://github.com/ayush-khatrii/Lesson-Map",
+    liveLink: "https://lessonmap.vercel.app",
+    image:
+      "https://raw.githubusercontent.com/ayush-khatrii/Lesson-Map/main/docs/screenshots/home.png",
+    techStack: [
       "Next.js",
       "React.js",
       "TypeScript",
@@ -174,16 +186,16 @@ const project = [
       "DeepSeek AI",
       "Cloudflare R2",
       "Dodo Payments",
-      "dnd-kit"
-    ]
+      "dnd-kit",
+    ],
   },
   {
-    "title": "QChat — Real-Time Room-Based Chat",
-    "desc": "Built a real-time room-based chat platform with custom room codes, instant messaging, typing indicators, online presence, paginated message history, Google OAuth, and background push notifications via FireBase (FCM)",
-    "githubLink": "https://github.com/ayush-khatrii/q-chat",
-    "liveLink": "",
-    "image": "https://placehold.co/1280x720/1a1a1a/ffffff?text=QChat",
-    "techStack": [
+    title: "QChat — Real-Time Room-Based Chat",
+    desc: "Built a real-time room-based chat platform with custom room codes, instant messaging, typing indicators, online presence, paginated message history, Google OAuth, and background push notifications via FireBase (FCM)",
+    githubLink: "https://github.com/ayush-khatrii/q-chat",
+    liveLink: "",
+    image: "https://placehold.co/1280x720/1a1a1a/ffffff?text=QChat",
+    techStack: [
       "Next.js",
       "React.js",
       "TypeScript",
@@ -192,8 +204,8 @@ const project = [
       "Prisma",
       "PostgreSQL",
       "Firebase Cloud Messaging",
-      "TailwindCSS"
-    ]
+      "TailwindCSS",
+    ],
   },
   {
     title: "Cab Booking Web App, Shivay Safar",
@@ -271,11 +283,31 @@ const project = [
 ];
 
 const galleryImages = [
-  { src: "https://pub-af34f3541dfc46e5a8aa21faf70e7de6.r2.dev/i-1.jpeg", title: "Me 1", alt: "Me 1 — Ayush Khatri" },
-  { src: "https://pub-af34f3541dfc46e5a8aa21faf70e7de6.r2.dev/1-2.jpeg", title: "Me 2", alt: "Me 2 — Ayush Khatri" },
-  { src: "https://pub-af34f3541dfc46e5a8aa21faf70e7de6.r2.dev/1-8.jpeg", title: "Me 8", alt: "Me 8 — Ayush Khatri" },
-  { src: "https://pub-af34f3541dfc46e5a8aa21faf70e7de6.r2.dev/1-10.jpeg", title: "Me 10", alt: "Me 10 — Ayush Khatri" },
-  { src: "https://pub-af34f3541dfc46e5a8aa21faf70e7de6.r2.dev/1-11.jpeg", title: "Me 11", alt: "Me 11 — Ayush Khatri" },
+  {
+    src: "https://pub-af34f3541dfc46e5a8aa21faf70e7de6.r2.dev/i-1.jpeg",
+    title: "Me 1",
+    alt: "Me 1 — Ayush Khatri",
+  },
+  {
+    src: "https://pub-af34f3541dfc46e5a8aa21faf70e7de6.r2.dev/1-2.jpeg",
+    title: "Me 2",
+    alt: "Me 2 — Ayush Khatri",
+  },
+  {
+    src: "https://pub-af34f3541dfc46e5a8aa21faf70e7de6.r2.dev/1-8.jpeg",
+    title: "Me 8",
+    alt: "Me 8 — Ayush Khatri",
+  },
+  {
+    src: "https://pub-af34f3541dfc46e5a8aa21faf70e7de6.r2.dev/1-10.jpeg",
+    title: "Me 10",
+    alt: "Me 10 — Ayush Khatri",
+  },
+  {
+    src: "https://pub-af34f3541dfc46e5a8aa21faf70e7de6.r2.dev/1-11.jpeg",
+    title: "Me 11",
+    alt: "Me 11 — Ayush Khatri",
+  },
 ];
 
 export { skills, work, project, galleryImages };

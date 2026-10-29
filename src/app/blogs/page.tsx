@@ -1,10 +1,6 @@
 import SectionHeading from "@/components/SectionHeading";
+import Reveal from "@/components/Reveal";
 
 export default function BlogsPage() {
-  return (
-    <section className="min-h-[70svh] px-5 py-12 sm:px-8">
-      <SectionHeading title="Blogs" />
-      <div aria-hidden="true" className="h-px bg-border" />
-    </section>
-  );
+  return <section className="page-shell"><Reveal><SectionHeading as="h1" title="Blogs" /></Reveal><div aria-hidden="true" className="h-px bg-border" /></section>;
 }

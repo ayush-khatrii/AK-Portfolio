@@ -1,30 +1,66 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "lenis/dist/lenis.css";
 
 @custom-variant dark (&:is(.dark *));
+/* Only actionable elements receive press feedback, including Button asChild. */
+@custom-variant press (&:is(button, a[href], [role="button"]):not(:disabled):not([aria-disabled="true"]):is(:active, [data-pressed="true"]));
 
 :root, .dark {
   color-scheme: dark;
-  --background: #030407; --foreground: #f3f4ed;
-  --card: #030407; --card-foreground: #f3f4ed;
-  --popover: #030407; --popover-foreground: #f3f4ed;
-  --primary: #D4FF24; --primary-foreground: #030407;
-  --secondary: #D4FF2414; --secondary-foreground: #f3f4ed;
-  --muted: #ffffff08; --muted-foreground: #a1a49b;
-  --accent: #D4FF24; --accent-foreground: #030407;
-  --destructive: #D4FF24; --destructive-foreground: #030407;
-  --border: #ffffff1c; --input: #ffffff26; --ring: #D4FF24;
-  --radius: 0.5rem;
-  --chart-1: #D4FF24; --chart-2: #a7ce22; --chart-3: #77971c; --chart-4: #4b6416; --chart-5: #263611;
-  --sidebar: var(--background); --sidebar-foreground: var(--foreground);
-  --sidebar-primary: var(--primary); --sidebar-primary-foreground: #030407;
-  --sidebar-accent: var(--secondary); --sidebar-accent-foreground: var(--foreground);
-  --sidebar-border: var(--border); --sidebar-ring: var(--ring);
+  --background: #050608;
+  --foreground: #f4f5ef;
+  --card: #0c0e10;
+  --card-foreground: var(--foreground);
+  --popover: #101215;
+  --popover-foreground: var(--foreground);
+  --primary: #d4ff24;
+  --primary-foreground: #101400;
+  --secondary: #171b13;
+  --secondary-foreground: #e3e9d8;
+  --muted: #131619;
+  --muted-foreground: #a3a79b;
+  --accent: #1c2410;
+  --accent-foreground: var(--primary);
+  --destructive: #ff8c8c;
+  --destructive-foreground: #290707;
+  --success: #b2d66a;
+  --border: #24282a;
+  --input: #343a3b;
+  --ring: var(--primary);
+  --overlay: #000000b3;
+  --mask: #000;
+  --aurora-dark: #172311;
+  --aurora-mid: #6c8a27;
+  --aurora-bright: var(--primary);
+  --spotlight: #d4ff2414;
+  --surface-shadow: 0 20px 64px -40px #00000080;
+  --chart-1: #121810;
+  --chart-2: #33440e;
+  --chart-3: #637e15;
+  --chart-4: #9fc71c;
+  --chart-5: var(--primary);
+  --sidebar: var(--card);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--accent-foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+  --radius: 0.75rem;
+  --section-space: 1.5rem;
+  --page-space: 1.5rem;
+  --heading-space: 1rem;
+  --glass-fill: color-mix(in srgb, var(--card) 72%, transparent);
+  --glass-fill-scrolled: color-mix(in srgb, var(--card) 88%, transparent);
+  --glass-border: color-mix(in srgb, var(--foreground) 16%, transparent);
+  --glass-highlight: color-mix(in srgb, var(--foreground) 12%, transparent);
+  --glass-glint: color-mix(in srgb, var(--foreground) 4%, transparent);
+  --glass-shadow: 0 12px 36px -16px color-mix(in srgb, var(--mask) 75%, transparent);
 }
 
 @theme inline {
-
-  --color-lime: #D4FF24;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -41,6 +77,8 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-overlay: var(--overlay);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -58,74 +96,125 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   --font-sans: var(--font-alan-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono:  ui-monospace, SFMono-Regular, monospace;
+  --font-mono: ui-monospace, SFMono-Regular, monospace;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --animate-accordion-down: accordion-down 240ms ease-out;
+  --animate-accordion-up: accordion-up 200ms ease-out;
+  @keyframes accordion-down {
+    from { height: 0; opacity: 0; }
+    to { height: var(--radix-accordion-content-height); opacity: 1; }
+  }
+  @keyframes accordion-up {
+    from { height: var(--radix-accordion-content-height); opacity: 1; }
+    to { height: 0; opacity: 0; }
+  }
+  --color-line: color-mix(in oklab, var(--border) 64%, var(--background))
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    @apply overflow-x-hidden bg-background text-foreground antialiased;
-  }
-
-  ::selection {
-    @apply bg-primary/25 text-foreground;
-  }
+  * { @apply border-border outline-ring/50; }
+  html { scroll-padding-top: 6rem; }
+  body { @apply bg-background font-sans text-foreground antialiased; }
+  button, a, input, textarea { -webkit-tap-highlight-color: transparent; }
+  a, button { touch-action: manipulation; }
+  :focus-visible { outline: 2px solid var(--ring); outline-offset: 5px; }
+  ::selection { background: var(--primary); color: var(--primary-foreground); }
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  .text-pretty {
-    text-wrap: pretty;
-  }
-
-  .section-rail {
-    @apply border-l border-dotted border-border/40 pl-4 sm:pl-6;
-  }
-}
-@keyframes experience-expand {
-  from { height: 0; opacity: 0; }
-  to { height: var(--radix-collapsible-content-height); opacity: 1; }
-}
-
-@keyframes experience-collapse {
-  from { height: var(--radix-collapsible-content-height); opacity: 1; }
-  to { height: 0; opacity: 0; }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .experience-details[data-state="open"] {
-    animation: experience-expand 200ms ease-out;
-  }
-
-  .experience-details[data-state="closed"] {
-    animation: experience-collapse 200ms ease-out;
+  /* Touch feedback snaps on immediately, then eases back out on release. */
+  @media (hover: none) and (pointer: coarse) {
+    :is(button, a[href], [role="button"]):is(:active, [data-pressed="true"]) {
+      transition-duration: 0ms;
+    }
   }
 }
 
-/* Compact editorial rhythm shared by every route. */
-.section-shell, .site-content > div > section:not(.portfolio-hero), .site-content > section:not(.portfolio-hero) {
-  padding: 2rem 1.25rem;
-  border-top: 1px solid var(--border);
+@layer components {
+  .site-container { @apply mx-auto w-full max-w-5xl px-5 sm:px-8; }
+  .section-shell { @apply border-t border-border/70; padding-block: var(--section-space); }
+  .page-shell { padding-block: var(--page-space); }
+  .eyebrow { @apply font-mono text-[10px] font-normal uppercase tracking-[0.18em] text-muted-foreground sm:text-[11px]; }
+  .section-title { @apply text-3xl font-medium leading-tight tracking-[-0.04em] sm:text-4xl; }
+  .body-copy { @apply text-base leading-7 text-muted-foreground; }
+  .site-ambient { background: radial-gradient(ellipse at 80% 20%, var(--spotlight), transparent 65%); }
+  .site-ascii-scrim {
+    background:
+      radial-gradient(ellipse at 50% 40%, color-mix(in srgb, var(--background) 88%, transparent) 10%, transparent 75%),
+      linear-gradient(to bottom, transparent 35%, var(--background) 100%);
+  }
+  .hero-system-grid {
+    background-image:
+      linear-gradient(to right, var(--border) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--border) 1px, transparent 1px),
+      radial-gradient(ellipse at 50% 50%, var(--spotlight), transparent 68%);
+    background-size: 44px 44px, 44px 44px, auto;
+    opacity: 0.65;
+    mask-image: linear-gradient(to bottom, transparent, black 18%, black 82%, transparent);
+  }
+  .liquid-nav, .liquid-sheet {
+    isolation: isolate;
+    border: 1px solid var(--glass-border);
+    background: var(--card);
+    box-shadow: inset 0 1px 0 var(--glass-highlight), inset 0 -1px 0 var(--glass-glint), var(--glass-shadow);
+  }
+  .liquid-nav {
+    position: relative;
+    transition: background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+  }
+  .liquid-nav::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(125deg, var(--glass-highlight), transparent 36%, transparent 72%, var(--glass-glint));
+  }
+  @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .liquid-nav, .liquid-sheet {
+      background: var(--glass-fill);
+      -webkit-backdrop-filter: blur(24px) saturate(150%);
+      backdrop-filter: blur(24px) saturate(150%);
+    }
+    .liquid-nav[data-scrolled="true"], .liquid-sheet { background: var(--glass-fill-scrolled); }
+  }
+  .skip-link { @apply fixed left-5 top-3 z-[100] -translate-y-24 rounded-md bg-primary px-4 py-3 text-sm text-primary-foreground focus:translate-y-0; }
 }
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+  .section-rail { @apply border-l border-border pl-5 sm:pl-8; }
+}
+
+.site-content section[id] { scroll-margin-top: 6rem; }
 @media (min-width: 640px) {
-  .section-shell, .site-content > div > section:not(.portfolio-hero), .site-content > section:not(.portfolio-hero) { padding: 2.5rem 2rem; }
+  :root { --section-space: 2rem; --page-space: 2rem; --heading-space: 1.25rem; }
 }
-.site-content section { scroll-margin-top: 5rem; }
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .liquid-nav, .liquid-nav[data-scrolled="true"], .liquid-sheet {
+    background: var(--card);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+@utility screen-line-top {
+    @apply relative before:absolute before:top-0 before:left-[-100vw] before:-z-1 before:h-px before:w-[200vw] before:bg-line;
+}
+
+@utility screen-line-bottom {
+    @apply relative after:absolute after:bottom-0 after:left-[-100vw] after:-z-1 after:h-px after:w-[200vw] after:bg-line;
 }

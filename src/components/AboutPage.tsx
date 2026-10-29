@@ -1,11 +1,7 @@
 import SectionHeading from "@/components/SectionHeading";
 import AboutProfile from "@/components/AboutProfile";
+import Reveal from "@/components/Reveal";
 
-const AboutPage = () => (
-  <section className="min-h-auto overflow-x-hidden px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
-    <SectionHeading title="About Me" description="" />
-    <AboutProfile />
-  </section>
-);
-
-export default AboutPage;
+export default function AboutPage() {
+  return <section className="page-shell"><Reveal><SectionHeading as="h1" title="About Me" /></Reveal><AboutProfile /></section>;
+}

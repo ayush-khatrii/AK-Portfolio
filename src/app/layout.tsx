@@ -1,26 +1,31 @@
-// @ts-ignore
 import "./globals.css";
+import localFont from "next/font/local";
 import { ThemeProvider } from "@/providers";
 import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/Navbar";
-import { siteMetadata } from "@/lib/sitemetadata";
 import Footer from "@/components/Footer";
+import SmoothScroll from "@/components/SmoothScroll";
+import PressFeedback from "@/components/PressFeedback";
+import SiteBackground from "@/components/SiteBackground";
+import { siteMetadata } from "@/lib/sitemetadata";
 import { getCurrentYear } from "@/lib/current-year";
-import { Alan_Sans } from "next/font/google";
-const alan = Alan_Sans({ subsets: ["latin"], weight: ["300", "400", "500", "600", "700"], variable: "--font-alan-sans" });
+
+const alan = localFont({
+  src: "./fonts/AlanSans-Variable.ttf",
+  weight: "300 900",
+  display: "swap",
+  variable: "--font-alan-sans",
+});
 
 export const metadata = siteMetadata;
 
 export default async function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   const currentYear = await getCurrentYear();
-
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
-      <body className={`${alan.variable} ${alan.className}`}>
+      <body className={`${alan.variable} relative isolate flex min-h-svh flex-col`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
@@ -28,15 +33,23 @@ export default async function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          <main className="min-h-screen">
-            <Navbar />
-            <div className="w-full">
-              <div className="site-content relative mx-auto min-h-screen w-full max-w-3xl border-x border-border/50 pt-24 has-[.portfolio-hero]:pt-0">
-                {children}
-                <Footer currentYear={currentYear} />
-              </div>
-            </div>
+          <SmoothScroll />
+          <PressFeedback />
+          {/* <SiteBackground /> */}
+          <a href="#main-content" className="skip-link">
+            Skip to content
+          </a>
+          <Navbar />
+          <main
+            id="main-content"
+            tabIndex={-1}
+            className="site-container site-content relative flex-1 pt-24"
+          >
+            {children}
           </main>
+          <div className="site-container mt-auto">
+            <Footer currentYear={currentYear} />
+          </div>
           <Toaster position="top-center" />
         </ThemeProvider>
       </body>

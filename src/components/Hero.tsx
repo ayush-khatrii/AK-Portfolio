@@ -1,27 +1,111 @@
 import Link from "next/link";
-import { ArrowDown, ArrowUpRight, MapPin } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ArrowUpRight, FileText } from "lucide-react";
 import { aboutContent } from "@/constants";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import SocialLinks from "@/components/SocialLinks";
+import ShapeWaves from "@/components/ShapeWaves";
+import Reveal from "@/components/Reveal";
 
 export default function Hero() {
-  return <section aria-labelledby="hero-title" className="portfolio-hero flex min-h-svh min-h-dvh flex-col px-5 pb-5 pt-24 sm:px-8 sm:pb-8">
-    <div className="flex items-center justify-between gap-4 font-mono text-[10px] text-muted-foreground sm:text-xs">
-      <span className="flex items-center gap-2"><span className="size-1.5 rounded-full bg-lime" />Available for new projects</span>
-      <span className="flex items-center gap-1"><MapPin className="size-3" />Based in India</span>
-    </div>
-    <div className="flex flex-1 flex-col justify-center py-8 sm:py-12">
-      <div className="mb-8 flex items-center gap-4"><span aria-hidden="true" className="flex size-14 items-center justify-center border border-primary/40 font-mono text-xl text-primary">AK<span className="text-sm">↗</span></span><div><p className="text-xs text-muted-foreground">Hey, I’m</p><p className="text-2xl font-medium tracking-tight">{aboutContent.name}.</p></div></div>
-      <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.18em] text-lime">{aboutContent.role}</p>
-      <h1 id="hero-title" className="max-w-[14ch] text-[clamp(2.5rem,6vw,4.5rem)] font-medium leading-[0.98] tracking-[-0.045em]">Ideas into code.<br /><span className="text-lime">Code into impact.</span></h1>
-      <div className="mt-7 grid gap-6 sm:grid-cols-1">
-        <p className="max-w-[45ch] text-sm leading-6 text-muted-foreground">I build thoughtful web experiences and dependable backend services—turning complex requirements into applications that feel simple to use.</p>
-        <div className="flex flex-wrap gap-2"><Button asChild><Link href="/projects">View projects <ArrowUpRight /></Link></Button><Button asChild variant="outline"><a href="/resume-ak.pdf" target="_blank" rel="noopener noreferrer">Résumé <ArrowUpRight /></a></Button></div>
+  return (
+    <section
+      aria-labelledby="hero-title"
+      className="relative isolate flex min-h-[calc(100svh-6rem)] flex-col pb-8 sm:pb-6"
+    >
+      <div className="relative min-h-[200px] flex-1 overflow-hidden ">
+        <div
+          aria-hidden="true"
+          className="hero-system-grid pointer-events-none absolute inset-0"
+        />
+        <div className="absolute inset-0 opacity-45">
+          <ShapeWaves
+            text="ak"
+            fontFamily='Geist, "Geist Sans", system-ui, sans-serif'
+            fontWeight={500}
+            textSize={0.7}
+            shapes="mixed"
+            cellSize={8}
+            dotSize={0.75}
+            color="#d4ff24"
+            hoverColor="#eaff8b"
+            backgroundColor="#000"
+            speed={1}
+            scale={1}
+            contrast={1}
+            brightness={0}
+            flow={0}
+            direction={0}
+            fade={0.25}
+            interactive
+            splashRadius={45}
+            splashStrength={2}
+            glow={0.35}
+            intro
+            introDuration={2}
+            paused={false}
+          />
+        </div>
       </div>
-    </div>
-    <div className="mb-4 flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground"><ArrowDown className="size-3" aria-hidden="true" />Around the web</div>
-    <div className="border-x border-border">
-      <SocialLinks />
-    </div>
-  </section>;
+
+      <Reveal className="relative grid gap-3 py-4 sm:gap-5 sm:py-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:gap-8">
+        <div className="min-w-0">
+          <div className="space-y-2 sm:space-y-3">
+            <Badge
+              variant="outline"
+              className="gap-2 rounded-full py-1 pl-2 pr-3 font-mono text-[10px] font-normal uppercase tracking-wider text-muted-foreground"
+            >
+              <span className="relative flex size-1.5">
+                <span className="absolute inline-flex size-full animate-ping rounded-full bg-primary/60 motion-reduce:animate-none" />
+                <span className="relative inline-flex size-1.5 rounded-full bg-primary" />
+              </span>
+              Open to opportunities
+            </Badge>
+
+            <h1
+              id="hero-title"
+              className="text-balance text-4xl font-semibold leading-[1.05] tracking-[-0.045em] sm:text-5xl md:text-6xl"
+            >
+              {aboutContent.name}
+              <span className="text-muted-foreground">.</span>
+            </h1>
+
+            <p className="text-base font-medium tracking-tight text-foreground/80 sm:text-lg">
+              {aboutContent.role}
+            </p>
+            <div className="flex flex-wrap items-center gap-2">
+              <Button asChild size="sm" className="h-9 gap-1.5 px-4">
+                <Link href="/projects">
+                  View projects <ArrowUpRight className="size-3.5" />
+                </Link>
+              </Button>
+              <Button
+                asChild
+                size="sm"
+                variant="outline"
+                className="h-9 gap-1.5 px-4 shadow-none"
+              >
+                <a
+                  href="/resume-ak.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FileText className="size-3.5" /> Résumé
+                </a>
+              </Button>
+            </div>
+          </div>
+
+          <p className="mt-3 max-w-[52ch] text-pretty text-sm leading-6 text-muted-foreground sm:mt-4 sm:text-[15px] sm:leading-7">
+            I build thoughtful web experiences and dependable backend services
+            that feel simple to use.
+          </p>
+        </div>
+
+        <div className="flex flex-col items-start gap-3 ">
+          <SocialLinks variant="icon" />
+        </div>
+      </Reveal>
+    </section>
+  );
 }

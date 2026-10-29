@@ -22,9 +22,9 @@ export const ContactForm = ({ onSuccess }: ContactFormProps) => {
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const copyEmailToClipboard = () => {
-    navigator.clipboard.writeText(EMAIL_ADDRESS);
-    toast.success("Email address copied!");
+  const copyEmailToClipboard = async () => {
+    try { await navigator.clipboard.writeText(EMAIL_ADDRESS); toast.success("Email address copied!"); }
+    catch { toast.error("Unable to copy. Please select the email address to copy it."); }
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -74,12 +74,12 @@ export const ContactForm = ({ onSuccess }: ContactFormProps) => {
     {
       id: "name",
       label: "Name",
-      node: <Input id={`${formId}-name`} name="name" autoComplete="name" placeholder="Your name" value={name} onChange={(e) => setName(e.target.value)} required className="h-11 border-border/40 bg-muted/20 font-mono text-sm focus-visible:border-primary/40" />,
+      node: <Input id={`${formId}-name`} name="name" autoComplete="name" placeholder="Your name" value={name} onChange={(e) => setName(e.target.value)} required className="h-11 border-border/40 bg-muted/20 text-sm focus-visible:border-primary/40" />,
     },
     {
       id: "email",
       label: "Email",
-      node: <Input id={`${formId}-email`} name="email" type="email" autoComplete="email" placeholder="your.email@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required className="h-11 border-border/40 bg-muted/20 font-mono text-sm focus-visible:border-primary/40" />,
+      node: <Input id={`${formId}-email`} name="email" type="email" autoComplete="email" placeholder="your.email@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required className="h-11 border-border/40 bg-muted/20 text-sm focus-visible:border-primary/40" />,
     },
     {
       id: "phone",
@@ -99,7 +99,7 @@ export const ContactForm = ({ onSuccess }: ContactFormProps) => {
             minLength={7}
             maxLength={24}
             aria-describedby={`${formId}-phone-hint`}
-            className="h-11 border-border/40 bg-muted/20 font-mono text-sm focus-visible:border-primary/40"
+            className="h-11 border-border/40 bg-muted/20 text-sm focus-visible:border-primary/40"
           />
           <p id={`${formId}-phone-hint`} className="text-pretty text-xs text-muted-foreground">
             Include your country code so I can reply on WhatsApp.
@@ -113,24 +113,24 @@ export const ContactForm = ({ onSuccess }: ContactFormProps) => {
     <div className="border-t border-border/40">
       <form onSubmit={handleSubmit}>
         {fields.map((field, index) => (
-          <div key={field.id} className="grid gap-2 border-b border-border/40 py-4 sm:grid-cols-[3rem_8rem_1fr] sm:items-center sm:gap-4">
+          <div key={field.id} className="grid gap-2 border-b border-border/40 py-3 sm:grid-cols-[2rem_7rem_1fr] sm:items-center sm:gap-4">
             <span className="hidden font-mono text-xs text-muted-foreground/50 sm:block">0{index + 1}</span>
-            <label htmlFor={`${formId}-${field.id}`} className="font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground">{field.label}</label>
+            <label htmlFor={`${formId}-${field.id}`} className="text-xs text-foreground text-muted-foreground">{field.label}</label>
             {field.node}
           </div>
         ))}
-        <div className="grid gap-2 border-b border-border/40 py-4 sm:grid-cols-[3rem_8rem_1fr] sm:items-start sm:gap-4">
+        <div className="grid gap-2 border-b border-border/40 py-3 sm:grid-cols-[2rem_7rem_1fr] sm:items-start sm:gap-4">
           <span className="hidden pt-3 font-mono text-xs text-muted-foreground/50 sm:block">04</span>
-          <label htmlFor={`${formId}-message`} className="pt-0 font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground sm:pt-3">Message</label>
-          <Textarea id={`${formId}-message`} name="message" placeholder="Your message here..." value={message} onChange={(e) => setMessage(e.target.value)} required rows={5} className="min-h-36 resize-y border-border/40 bg-muted/20 font-mono text-sm focus-visible:border-primary/40" />
+          <label htmlFor={`${formId}-message`} className="pt-0 text-xs text-foreground text-muted-foreground sm:pt-3">Message</label>
+          <Textarea id={`${formId}-message`} name="message" placeholder="Your message here..." value={message} onChange={(e) => setMessage(e.target.value)} required rows={4} className="min-h-28 resize-y border-border/40 bg-muted/20 text-sm focus-visible:border-primary/40" />
         </div>
-        <div className="flex justify-end py-4">
+        <div className="flex justify-start py-3">
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting ? <><Loader2 className="animate-spin" />Sending...</> : <><Send />Send Message</>}
           </Button>
         </div>
       </form>
-      <div className="flex flex-col gap-3 border-y border-border/40 bg-muted/20 px-3 py-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-3 rounded-lg border border-border bg-background px-4 py-3 sm:flex-row sm:items-start">
         <p className="text-pretty text-sm text-muted-foreground">Or reach me directly at: <span className="break-all font-mono text-foreground">{EMAIL_ADDRESS}</span></p>
         <Button variant="outline" size="sm" onClick={copyEmailToClipboard}><Copy />Copy</Button>
       </div>
@@ -140,7 +140,7 @@ export const ContactForm = ({ onSuccess }: ContactFormProps) => {
 
 const Contact = () => {
   return (
-    <section id="contact" className="scroll-mt-24 overflow-x-hidden py-12 sm:py-16">
+    <section id="contact" className="section-shell">
       <SectionHeading title="Get in Touch" description="Have a project or idea in mind? Tell me about it and let’s build something great." />
       <div>
         <ContactForm />

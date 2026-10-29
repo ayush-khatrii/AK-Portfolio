@@ -22,7 +22,7 @@ const education = [
 ];
 
 const Page = () => (
-  <div className="overflow-x-hidden">
+  <div className="min-w-0">
     <AboutPage />
     <EducationTimeline items={education} />
     <GithubContribution />
