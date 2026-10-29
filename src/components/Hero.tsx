@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, FileText } from "lucide-react";
+import { ArrowDownRight, ArrowRight, ArrowUpRight, FileText } from "lucide-react";
 import { aboutContent } from "@/constants";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -75,8 +75,8 @@ export default function Hero() {
             </p>
             <div className="flex flex-wrap items-center gap-2">
               <Button asChild size="sm" className="h-9 gap-1.5 px-4">
-                <Link href="/projects">
-                  View projects <ArrowUpRight className="size-3.5" />
+                <Link href="/#about">
+                  About me <ArrowRight className="size-3.5" />
                 </Link>
               </Button>
               <Button
