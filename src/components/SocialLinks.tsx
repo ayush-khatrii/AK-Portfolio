@@ -1,4 +1,4 @@
-import type { ComponentProps, ComponentType, SVGProps } from "react";
+import type { ComponentType, SVGProps } from "react";
 import { ArrowUpRight, Github, Instagram, Linkedin } from "lucide-react";
 import { FaXTwitter } from "react-icons/fa6";
 import { cn } from "@/lib/utils";
