@@ -20,6 +20,8 @@ export default function Hero() {
       </div>
     </div>
     <div className="mb-4 flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-muted-foreground"><ArrowDown className="size-3" aria-hidden="true" />Around the web</div>
-    <SocialLinks />
+    <div className="border-x border-border">
+      <SocialLinks />
+    </div>
   </section>;
 }
