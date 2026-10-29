@@ -1,5 +1,10 @@
 import Link from "next/link";
-import { ArrowDownRight, ArrowRight, ArrowUpRight, FileText } from "lucide-react";
+import {
+  ArrowDownRight,
+  ArrowRight,
+  ArrowUpRight,
+  FileText,
+} from "lucide-react";
 import { aboutContent } from "@/constants";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -13,42 +18,40 @@ export default function Hero() {
       aria-labelledby="hero-title"
       className="relative isolate flex min-h-[calc(100svh-6rem)] flex-col pb-8 sm:pb-6"
     >
-      <div className="relative min-h-[200px] flex-1 overflow-hidden ">
-        <div
-          aria-hidden="true"
-          className="hero-system-grid pointer-events-none absolute inset-0"
-        />
-        <div className="absolute inset-0 opacity-45">
+      {/* Mobile starts at the navbar bottom (56px + borders, plus 12px at sm).
+          Desktop follows the same content width and top spacing as other sections. */}
+      <div className="relative left-1/2 mt-[calc(3.5rem+2px-6rem)] min-h-[300px] w-screen -translate-x-1/2 flex-1 overflow-hidden sm:mt-[calc(4.25rem+2px-6rem)] md:left-auto md:mt-0 md:w-full md:translate-x-0">
+        <div className="absolute inset-0 opacity-45 [mask-image:linear-gradient(to_bottom,black_85%,transparent)] md:[mask-image:linear-gradient(to_bottom,transparent,black_10%,black_85%,transparent)]">
           <ShapeWaves
             text="ak"
             fontFamily='Geist, "Geist Sans", system-ui, sans-serif'
-            fontWeight={500}
-            textSize={0.7}
+            fontWeight={600}
+            textSize={0.6}
             shapes="mixed"
-            cellSize={8}
-            dotSize={0.75}
+            cellSize={10}
+            dotSize={0.65}
             color="#d4ff24"
-            hoverColor="#eaff8b"
+            hoverColor="#C5FF68"
             backgroundColor="#000"
             speed={1}
             scale={1}
             contrast={1}
-            brightness={0}
+            brightness={0.4}
             flow={0}
             direction={0}
             fade={0.25}
             interactive
-            splashRadius={45}
-            splashStrength={2}
+            splashRadius={40}
+            splashStrength={0.4}
             glow={0.35}
             intro
-            introDuration={2}
+            introDuration={1.6}
             paused={false}
           />
         </div>
       </div>
 
-      <Reveal className="relative grid gap-3 py-4 sm:gap-5 sm:py-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:gap-8">
+      <Reveal className="relative grid gap-3 py-4 sm:gap-5  lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:gap-8">
         <div className="min-w-0">
           <div className="space-y-2 sm:space-y-3">
             <Badge

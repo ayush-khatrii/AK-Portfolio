@@ -1,9 +1,18 @@
-'use client';
+"use client";
 
 // Inspired by https://vercel.com/labs
-import { useEffect, useRef, useState } from 'react';
-import { effect, frame, init, sampler, storage, surface, target, uniforms } from 'vgpu';
-import type { Gpu, StorageBuffer, Texture } from 'vgpu';
+import { useEffect, useRef, useState } from "react";
+import {
+  effect,
+  frame,
+  init,
+  sampler,
+  storage,
+  surface,
+  target,
+  uniforms,
+} from "vgpu";
+import type { Gpu, StorageBuffer, Texture } from "vgpu";
 
 type ChargeBuffer = StorageBuffer & { destroy(): void };
 
@@ -263,12 +272,19 @@ struct Composite { strength: vec4f }
 }
 `;
 
-const parseColor = (value: string | undefined, fallback: string): [number, number, number] => {
-  const source = typeof value === 'string' ? value.trim() : '';
-  const match = /^#?([\da-f]{3}|[\da-f]{6})$/i.exec(source) || /^#?([\da-f]{6})$/i.exec(fallback);
+const parseColor = (
+  value: string | undefined,
+  fallback: string,
+): [number, number, number] => {
+  const source = typeof value === "string" ? value.trim() : "";
+  const match =
+    /^#?([\da-f]{3}|[\da-f]{6})$/i.exec(source) ||
+    /^#?([\da-f]{6})$/i.exec(fallback);
   let hex = (match as RegExpExecArray)[1];
-  if (hex.length === 3) hex = hex.replace(/./g, char => char + char);
-  return [0, 2, 4].map(offset => parseInt(hex.slice(offset, offset + 2), 16) / 255) as [number, number, number];
+  if (hex.length === 3) hex = hex.replace(/./g, (char) => char + char);
+  return [0, 2, 4].map(
+    (offset) => parseInt(hex.slice(offset, offset + 2), 16) / 255,
+  ) as [number, number, number];
 };
 
 export interface ShapeWavesProps {
@@ -330,16 +346,16 @@ interface ShapeWavesSettings {
 }
 
 export default function ShapeWaves({
-  text = '',
+  text = "",
   fontFamily = 'Geist, "Geist Sans", system-ui, sans-serif',
   fontWeight = 500,
   textSize = 0.6,
-  shapes = 'mixed',
+  shapes = "mixed",
   cellSize = 10,
   dotSize = 0.75,
-  color = '#929292',
-  hoverColor = '#ffffff',
-  backgroundColor = '#000000',
+  color = "#929292",
+  hoverColor = "#ffffff",
+  backgroundColor = "#000000",
   speed = 1,
   scale = 1,
   contrast = 1,
@@ -356,18 +372,20 @@ export default function ShapeWaves({
   introKey = 0,
   paused = false,
   onError,
-  className = ''
+  className = "",
 }: ShapeWavesProps) {
   const rootRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [ready, setReady] = useState(false);
-  const settingsRef = useRef<ShapeWavesSettings>(null as unknown as ShapeWavesSettings);
+  const settingsRef = useRef<ShapeWavesSettings>(
+    null as unknown as ShapeWavesSettings,
+  );
   const applySettingsRef = useRef<() => void>(() => {});
   const applyMaskRef = useRef<() => void>(() => {});
-  const onErrorRef = useRef<ShapeWavesProps['onError']>(onError);
+  const onErrorRef = useRef<ShapeWavesProps["onError"]>(onError);
 
   settingsRef.current = {
-    text: String(text ?? ''),
+    text: String(text ?? ""),
     fontFamily,
     fontWeight,
     textSize,
@@ -391,7 +409,7 @@ export default function ShapeWaves({
     intro,
     introDuration: Math.max(0.1, introDuration),
     introKey,
-    paused
+    paused,
   };
   onErrorRef.current = onError;
 
@@ -415,9 +433,9 @@ export default function ShapeWaves({
     glow,
     intro,
     introDuration,
-    paused
-  ].join('|');
-  const maskSignature = [text, fontFamily, fontWeight, textSize].join('|');
+    paused,
+  ].join("|");
+  const maskSignature = [text, fontFamily, fontWeight, textSize].join("|");
   const replayRef = useRef<() => void>(() => {});
 
   useEffect(() => {
@@ -467,9 +485,9 @@ export default function ShapeWaves({
     let visibilityObserver: IntersectionObserver | undefined;
     let wakeRenderer: () => void = () => {};
     const pointer = { x: 0, y: 0, at: 0, inside: false };
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const maskCanvas = document.createElement('canvas');
-    const maskContext = maskCanvas.getContext('2d') as CanvasRenderingContext2D;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const maskCanvas = document.createElement("canvas");
+    const maskContext = maskCanvas.getContext("2d") as CanvasRenderingContext2D;
 
     const handleWake = () => wakeRenderer();
     const invalidateBounds = () => {
@@ -477,7 +495,10 @@ export default function ShapeWaves({
     };
     const splash = (x: number, y: number, strength: number) => {
       const settings = settingsRef.current;
-      const sigma = Math.max(0.5, ((settings.splashRadius * dpr) / cellPx) * 0.5);
+      const sigma = Math.max(
+        0.5,
+        ((settings.splashRadius * dpr) / cellPx) * 0.5,
+      );
       const reach = Math.ceil(sigma * 2.5);
       const centerCol = (x * dpr - gridOrigin[0]) / cellPx - 0.5;
       const centerRow = (y * dpr - gridOrigin[1]) / cellPx - 0.5;
@@ -489,7 +510,8 @@ export default function ShapeWaves({
         const dy = row - centerRow;
         for (let col = minCol; col <= maxCol; col++) {
           const dx = col - centerCol;
-          const bump = strength * Math.exp(-(dx * dx + dy * dy) / (2 * sigma * sigma));
+          const bump =
+            strength * Math.exp(-(dx * dx + dy * dy) / (2 * sigma * sigma));
           const index = row * cols + col;
           heights[index] = Math.min(1.2, heights[index] + bump);
         }
@@ -503,12 +525,20 @@ export default function ShapeWaves({
       const now = performance.now();
       const x = event.clientX - bounds.left;
       const y = event.clientY - bounds.top;
-      const inside = x >= 0 && y >= 0 && x <= bounds.width && y <= bounds.height;
+      const inside =
+        x >= 0 && y >= 0 && x <= bounds.width && y <= bounds.height;
       if (inside) {
         const elapsed = pointer.inside ? Math.max(8, now - pointer.at) : 16;
-        const travelled = pointer.inside ? Math.hypot(x - pointer.x, y - pointer.y) : 0;
+        const travelled = pointer.inside
+          ? Math.hypot(x - pointer.x, y - pointer.y)
+          : 0;
         const speed = (travelled / elapsed) * 1000;
-        splash(x, y, Math.min(1, 0.22 + speed * 0.0006) * settingsRef.current.splashStrength);
+        splash(
+          x,
+          y,
+          Math.min(1, 0.22 + speed * 0.0006) *
+            settingsRef.current.splashStrength,
+        );
         wakeRenderer();
       }
       pointer.x = x;
@@ -531,96 +561,141 @@ export default function ShapeWaves({
       gpu = undefined;
       failedGpu?.dispose();
       setReady(false);
-      onErrorRef.current?.(error instanceof Error ? error : new Error(String(error)));
+      onErrorRef.current?.(
+        error instanceof Error ? error : new Error(String(error)),
+      );
     };
 
     const measureSurface = (): [number, number] => {
       dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
-      return [Math.max(1, Math.round(canvas.clientWidth * dpr)), Math.max(1, Math.round(canvas.clientHeight * dpr))];
+      return [
+        Math.max(1, Math.round(canvas.clientWidth * dpr)),
+        Math.max(1, Math.round(canvas.clientHeight * dpr)),
+      ];
     };
 
     void (async () => {
       try {
-        const activeGpu = await init({ powerPreference: 'low-power' });
+        const activeGpu = await init({ powerPreference: "low-power" });
         gpu = activeGpu;
         if (disposed) return activeGpu.dispose();
         unsubscribeGpuError = activeGpu.onError(reportFailure);
 
         const initialSize = measureSurface();
         const outputFormat = (
-          navigator as Navigator & { gpu: { getPreferredCanvasFormat(): string } }
+          navigator as Navigator & {
+            gpu: { getPreferredCanvasFormat(): string };
+          }
         ).gpu.getPreferredCanvasFormat();
-        const output = surface(activeGpu, canvas, { dpr, size: initialSize, autoResize: false, format: outputFormat });
+        const output = surface(activeGpu, canvas, {
+          dpr,
+          size: initialSize,
+          autoResize: false,
+          format: outputFormat,
+        });
 
         const params = uniforms(activeGpu, {
-          resolution: [initialSize[0], initialSize[1], 1 / initialSize[0], 1 / initialSize[1]],
+          resolution: [
+            initialSize[0],
+            initialSize[1],
+            1 / initialSize[0],
+            1 / initialSize[1],
+          ],
           placement: [0, 0, 1, 0],
           grid: [10, 0.75, 0, 1],
           field: [320, 0.5, 2.8, 0],
           motion: [0, 0, 0, 0.25],
           color: [0.573, 0.573, 0.573, 1],
           hover: [1, 1, 1, 0],
-          background: [0, 0, 0, 1]
+          background: [0, 0, 0, 1],
         });
         const linearSampler = sampler(activeGpu, {
-          minFilter: 'linear',
-          magFilter: 'linear',
-          addressModeU: 'clamp-to-edge',
-          addressModeV: 'clamp-to-edge'
+          minFilter: "linear",
+          magFilter: "linear",
+          addressModeU: "clamp-to-edge",
+          addressModeV: "clamp-to-edge",
         });
         const createMaskTexture = (maskWidth: number, maskHeight: number) =>
           activeGpu.device.createTexture({
             size: [maskWidth, maskHeight],
-            format: 'rgba8unorm',
-            usage: ['texture_binding', 'copy_dst', 'render_attachment'],
-            label: 'shape-waves-mask'
+            format: "rgba8unorm",
+            usage: ["texture_binding", "copy_dst", "render_attachment"],
+            label: "shape-waves-mask",
           });
         const initialMaskTexture = createMaskTexture(1, 1);
         maskTexture = initialMaskTexture;
-        const initialChargeBuffer = storage(activeGpu, 4, 'read') as ChargeBuffer;
+        const initialChargeBuffer = storage(
+          activeGpu,
+          4,
+          "read",
+        ) as ChargeBuffer;
         initialChargeBuffer.write(charges);
         chargeBuffer = initialChargeBuffer;
 
         const scene = effect(activeGpu, SCENE_SHADER, {
-          label: 'shape-waves-scene',
-          set: { params, maskTexture: initialMaskTexture, maskSampler: linearSampler, charges: initialChargeBuffer }
+          label: "shape-waves-scene",
+          set: {
+            params,
+            maskTexture: initialMaskTexture,
+            maskSampler: linearSampler,
+            charges: initialChargeBuffer,
+          },
         });
-        const sceneTarget = target(activeGpu, { size: initialSize, format: 'rgba8unorm', label: 'shape-waves-scene' });
-        const glowSize = (size: readonly [number, number]): [number, number] => [
+        const sceneTarget = target(activeGpu, {
+          size: initialSize,
+          format: "rgba8unorm",
+          label: "shape-waves-scene",
+        });
+        const glowSize = (
+          size: readonly [number, number],
+        ): [number, number] => [
           Math.max(1, Math.ceil(size[0] / 2)),
-          Math.max(1, Math.ceil(size[1] / 2))
+          Math.max(1, Math.ceil(size[1] / 2)),
         ];
         const glowA = target(activeGpu, {
           size: glowSize(initialSize),
-          format: 'rgba8unorm',
-          label: 'shape-waves-glow-a'
+          format: "rgba8unorm",
+          label: "shape-waves-glow-a",
         });
         const glowB = target(activeGpu, {
           size: glowSize(initialSize),
-          format: 'rgba8unorm',
-          label: 'shape-waves-glow-b'
+          format: "rgba8unorm",
+          label: "shape-waves-glow-b",
         });
         const blurParamsX = uniforms(activeGpu, { direction: [0, 0, 4, 1] });
         const blurParamsY = uniforms(activeGpu, { direction: [0, 0, 4, 0] });
         const blurX = effect(activeGpu, BLUR_SHADER, {
-          label: 'shape-waves-glow-x',
-          set: { blur: blurParamsX, sourceTexture: sceneTarget, sourceSampler: linearSampler }
+          label: "shape-waves-glow-x",
+          set: {
+            blur: blurParamsX,
+            sourceTexture: sceneTarget,
+            sourceSampler: linearSampler,
+          },
         });
         const blurY = effect(activeGpu, BLUR_SHADER, {
-          label: 'shape-waves-glow-y',
-          set: { blur: blurParamsY, sourceTexture: glowA, sourceSampler: linearSampler }
+          label: "shape-waves-glow-y",
+          set: {
+            blur: blurParamsY,
+            sourceTexture: glowA,
+            sourceSampler: linearSampler,
+          },
         });
         const compositeParams = uniforms(activeGpu, { strength: [2, 0, 0, 0] });
         const composite = effect(activeGpu, COMPOSITE_SHADER, {
-          label: 'shape-waves-composite',
-          set: { composite: compositeParams, sceneTexture: sceneTarget, glowTexture: glowB, linearSampler }
+          label: "shape-waves-composite",
+          set: {
+            composite: compositeParams,
+            sceneTexture: sceneTarget,
+            glowTexture: glowB,
+            linearSampler,
+          },
         });
         await Promise.all([
           scene.compile({ colors: [outputFormat] }),
           scene.compile(sceneTarget),
           blurX.compile(glowA),
           blurY.compile(glowB),
-          composite.compile({ colors: [outputFormat] })
+          composite.compile({ colors: [outputFormat] }),
         ]);
         if (disposed) return;
 
@@ -630,18 +705,30 @@ export default function ShapeWaves({
         const configureGrid = () => {
           const settings = settingsRef.current;
           const [width, height] = output.size;
-          const nextCols = Math.max(1, Math.round(width / (settings.cellSize * dpr)));
+          const nextCols = Math.max(
+            1,
+            Math.round(width / (settings.cellSize * dpr)),
+          );
           cellPx = width / nextCols;
           const nextRows = Math.max(1, Math.floor(height / cellPx));
           gridOrigin = [0, (height - nextRows * cellPx) / 2];
-          if (nextCols === cols && nextRows === rows && charges.length === cols * rows) return;
+          if (
+            nextCols === cols &&
+            nextRows === rows &&
+            charges.length === cols * rows
+          )
+            return;
           cols = nextCols;
           rows = nextRows;
           charges = new Float32Array(cols * rows);
           heights = new Float32Array(cols * rows);
           previousHeights = new Float32Array(cols * rows);
           chargesActive = false;
-          const nextBuffer = storage(activeGpu, charges.byteLength, 'read') as ChargeBuffer;
+          const nextBuffer = storage(
+            activeGpu,
+            charges.byteLength,
+            "read",
+          ) as ChargeBuffer;
           nextBuffer.write(charges);
           scene.set({ charges: nextBuffer });
           chargeBuffer?.destroy();
@@ -661,9 +748,16 @@ export default function ShapeWaves({
               const left = base + (col === 0 ? col : col - 1);
               const right = base + (col === lastCol ? col : col + 1);
               const height = heights[index];
-              const laplacian = heights[left] + heights[right] + heights[up + col] + heights[down + col] - 4 * height;
-              const velocity = (height - previousHeights[index]) * WAVE_FRICTION;
-              const next = (height + velocity + WAVE_SPEED * laplacian) * WAVE_DECAY;
+              const laplacian =
+                heights[left] +
+                heights[right] +
+                heights[up + col] +
+                heights[down + col] -
+                4 * height;
+              const velocity =
+                (height - previousHeights[index]) * WAVE_FRICTION;
+              const next =
+                (height + velocity + WAVE_SPEED * laplacian) * WAVE_DECAY;
               previousHeights[index] = next;
               const charge = Math.min(1, Math.max(0, next));
               charges[index] = charge;
@@ -678,7 +772,10 @@ export default function ShapeWaves({
 
         const updateCharges = (deltaSeconds: number) => {
           if (!chargesActive) return false;
-          simulationBacklog = Math.min(simulationBacklog + deltaSeconds, SIMULATION_STEP * 4);
+          simulationBacklog = Math.min(
+            simulationBacklog + deltaSeconds,
+            SIMULATION_STEP * 4,
+          );
           let peak = 1;
           while (simulationBacklog >= SIMULATION_STEP) {
             simulationBacklog -= SIMULATION_STEP;
@@ -696,23 +793,35 @@ export default function ShapeWaves({
 
         const isAnimating = () => {
           const settings = settingsRef.current;
-          return visible && !document.hidden && !settings.paused && settings.speed > 0 && !reduceMotion.matches;
+          return (
+            visible &&
+            !document.hidden &&
+            !settings.paused &&
+            settings.speed > 0 &&
+            !reduceMotion.matches
+          );
         };
 
         const render = (now: number) => {
           frameId = 0;
           if (disposed || failed) return;
           const settings = settingsRef.current;
-          const deltaSeconds = lastFrameTime ? Math.min(0.1, (now - lastFrameTime) / 1000) : 0;
+          const deltaSeconds = lastFrameTime
+            ? Math.min(0.1, (now - lastFrameTime) / 1000)
+            : 0;
           lastFrameTime = now;
           const animating = isAnimating();
           if (animating) {
             time += deltaSeconds * TIME_RATE * settings.speed;
             const angle = (settings.direction * Math.PI) / 180;
             const distance = settings.flow * cellPx * deltaSeconds;
-            drift = [drift[0] + Math.cos(angle) * distance, drift[1] + Math.sin(angle) * distance];
+            drift = [
+              drift[0] + Math.cos(angle) * distance,
+              drift[1] + Math.sin(angle) * distance,
+            ];
           }
-          const hovering = visible && !document.hidden && updateCharges(deltaSeconds);
+          const hovering =
+            visible && !document.hidden && updateCharges(deltaSeconds);
           if (introArmed) {
             introArmed = false;
             introStart = now;
@@ -720,20 +829,32 @@ export default function ShapeWaves({
           }
           const introPlaying = introProgress < INTRO_END;
           if (introPlaying) {
-            introProgress = Math.min(INTRO_END, ((now - introStart) / 1000 / settings.introDuration) * INTRO_END);
+            introProgress = Math.min(
+              INTRO_END,
+              ((now - introStart) / 1000 / settings.introDuration) * INTRO_END,
+            );
           }
-          params.set({ placement: [gridOrigin[0], gridOrigin[1], rows, introProgress] });
+          params.set({
+            placement: [gridOrigin[0], gridOrigin[1], rows, introProgress],
+          });
           params.set({
             field: [
               NOISE_CELLS * cellPx * settings.scale,
               0.5 - (settings.brightness - 0.5) * 0.4,
               2.8 * settings.contrast,
-              time
-            ]
+              time,
+            ],
           });
-          params.set({ motion: [drift[0], drift[1], settings.text.trim() ? 1 : 0, settings.fade] });
+          params.set({
+            motion: [
+              drift[0],
+              drift[1],
+              settings.text.trim() ? 1 : 0,
+              settings.fade,
+            ],
+          });
           try {
-            frame(activeGpu, currentFrame => {
+            frame(activeGpu, (currentFrame) => {
               if (!glowEnabled()) {
                 currentFrame.pass(output, scene);
                 return;
@@ -751,7 +872,8 @@ export default function ShapeWaves({
             presented = true;
             setReady(true);
           }
-          if (animating || hovering || introPlaying) frameId = requestAnimationFrame(render);
+          if (animating || hovering || introPlaying)
+            frameId = requestAnimationFrame(render);
           else lastFrameTime = 0;
         };
 
@@ -765,13 +887,19 @@ export default function ShapeWaves({
           const content = settings.text.trim();
           const [surfaceWidth, surfaceHeight] = output.size;
           const hasText = content.length > 0;
-          const maskScale = hasText ? Math.min(1, MAX_MASK_SIZE / Math.max(surfaceWidth, surfaceHeight)) : 0;
-          const maskWidth = hasText ? Math.max(1, Math.round(surfaceWidth * maskScale)) : 1;
-          const maskHeight = hasText ? Math.max(1, Math.round(surfaceHeight * maskScale)) : 1;
+          const maskScale = hasText
+            ? Math.min(1, MAX_MASK_SIZE / Math.max(surfaceWidth, surfaceHeight))
+            : 0;
+          const maskWidth = hasText
+            ? Math.max(1, Math.round(surfaceWidth * maskScale))
+            : 1;
+          const maskHeight = hasText
+            ? Math.max(1, Math.round(surfaceHeight * maskScale))
+            : 1;
 
           maskCanvas.width = maskWidth;
           maskCanvas.height = maskHeight;
-          maskContext.fillStyle = '#000';
+          maskContext.fillStyle = "#000";
           maskContext.fillRect(0, 0, maskWidth, maskHeight);
 
           if (hasText) {
@@ -783,20 +911,29 @@ export default function ShapeWaves({
               fontPx = Math.max(1, (fontPx * maxWidth) / measured);
               maskContext.font = `${settings.fontWeight} ${fontPx}px ${settings.fontFamily}`;
             }
-            maskContext.textAlign = 'center';
-            maskContext.textBaseline = 'alphabetic';
+            maskContext.textAlign = "center";
+            maskContext.textBaseline = "alphabetic";
             const metrics = maskContext.measureText(content);
-            const x = (maskWidth + metrics.actualBoundingBoxLeft - metrics.actualBoundingBoxRight) / 2;
-            const y = (maskHeight + metrics.actualBoundingBoxAscent - metrics.actualBoundingBoxDescent) / 2;
-            maskContext.fillStyle = '#fff';
+            const x =
+              (maskWidth +
+                metrics.actualBoundingBoxLeft -
+                metrics.actualBoundingBoxRight) /
+              2;
+            const y =
+              (maskHeight +
+                metrics.actualBoundingBoxAscent -
+                metrics.actualBoundingBoxDescent) /
+              2;
+            maskContext.fillStyle = "#fff";
             maskContext.fillText(content, x, y);
           }
 
           const nextTexture = createMaskTexture(maskWidth, maskHeight);
-          activeGpu.gpu.queue.copyExternalImageToTexture({ source: maskCanvas }, { texture: nextTexture.gpu }, [
-            maskWidth,
-            maskHeight
-          ]);
+          activeGpu.gpu.queue.copyExternalImageToTexture(
+            { source: maskCanvas },
+            { texture: nextTexture.gpu },
+            [maskWidth, maskHeight],
+          );
           scene.set({ maskTexture: nextTexture });
           maskTexture?.destroy();
           maskTexture = nextTexture;
@@ -808,10 +945,18 @@ export default function ShapeWaves({
           configureGrid();
           params.set({
             placement: [gridOrigin[0], gridOrigin[1], rows, introProgress],
-            grid: [cellPx, Math.min(1, Math.max(0.1, settings.dotSize)), SHAPE_MODES[settings.shapes] ?? 0, cols],
-            color: [...parseColor(settings.color, '#929292'), 1],
-            hover: [...parseColor(settings.hoverColor, '#ffffff'), glowEnabled() ? 1 : 0],
-            background: [...parseColor(settings.backgroundColor, '#000000'), 1]
+            grid: [
+              cellPx,
+              Math.min(1, Math.max(0.1, settings.dotSize)),
+              SHAPE_MODES[settings.shapes] ?? 0,
+              cols,
+            ],
+            color: [...parseColor(settings.color, "#929292"), 1],
+            hover: [
+              ...parseColor(settings.hoverColor, "#ffffff"),
+              glowEnabled() ? 1 : 0,
+            ],
+            background: [...parseColor(settings.backgroundColor, "#000000"), 1],
           });
           compositeParams.set({ strength: [2 * settings.glow, 0, 0, 0] });
           if (settings.intro !== lastIntro) {
@@ -848,7 +993,8 @@ export default function ShapeWaves({
           if (disposed || failed) return;
           invalidateBounds();
           const nextSize = measureSurface();
-          if (nextSize[0] !== output.size[0] || nextSize[1] !== output.size[1]) output.resize(nextSize);
+          if (nextSize[0] !== output.size[0] || nextSize[1] !== output.size[1])
+            output.resize(nextSize);
           const [width, height] = output.size;
           sceneTarget.resize([width, height]);
           const half = glowSize([width, height]);
@@ -864,7 +1010,13 @@ export default function ShapeWaves({
         applySettingsRef.current = applySettings;
         applyMaskRef.current = applyMask;
         replayRef.current = () => {
-          if (disposed || failed || !settingsRef.current.intro || reduceMotion.matches) return;
+          if (
+            disposed ||
+            failed ||
+            !settingsRef.current.intro ||
+            reduceMotion.matches
+          )
+            return;
           introArmed = true;
           wakeRenderer();
         };
@@ -872,17 +1024,22 @@ export default function ShapeWaves({
         resizeObserver = new ResizeObserver(resize);
         resizeObserver.observe(root);
         visibilityObserver = new IntersectionObserver(
-          entries => {
-            visible = entries.some(entry => entry.isIntersecting);
+          (entries) => {
+            visible = entries.some((entry) => entry.isIntersecting);
             if (visible) wakeRenderer();
           },
-          { threshold: 0 }
+          { threshold: 0 },
         );
         visibilityObserver.observe(root);
-        document.addEventListener('visibilitychange', handleWake);
-        reduceMotion.addEventListener('change', handleWake);
-        window.addEventListener('pointermove', handlePointerMove, { passive: true });
-        window.addEventListener('scroll', invalidateBounds, { capture: true, passive: true });
+        document.addEventListener("visibilitychange", handleWake);
+        reduceMotion.addEventListener("change", handleWake);
+        window.addEventListener("pointermove", handlePointerMove, {
+          passive: true,
+        });
+        window.addEventListener("scroll", invalidateBounds, {
+          capture: true,
+          passive: true,
+        });
 
         resize();
         applyMask();
@@ -897,10 +1054,12 @@ export default function ShapeWaves({
       applySettingsRef.current = () => {};
       applyMaskRef.current = () => {};
       replayRef.current = () => {};
-      document.removeEventListener('visibilitychange', handleWake);
-      reduceMotion.removeEventListener('change', handleWake);
-      window.removeEventListener('pointermove', handlePointerMove);
-      window.removeEventListener('scroll', invalidateBounds, { capture: true } as EventListenerOptions);
+      document.removeEventListener("visibilitychange", handleWake);
+      reduceMotion.removeEventListener("change", handleWake);
+      window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("scroll", invalidateBounds, {
+        capture: true,
+      } as EventListenerOptions);
       resizeObserver?.disconnect();
       visibilityObserver?.disconnect();
       unsubscribeGpuError?.();
@@ -921,7 +1080,7 @@ export default function ShapeWaves({
     >
       <canvas
         ref={canvasRef}
-        className={`pointer-events-none absolute inset-0 block h-full w-full transition-opacity duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${ready ? 'opacity-100' : 'opacity-0'}`}
+        className={`pointer-events-none absolute inset-0 block h-full w-full transition-opacity duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${ready ? "opacity-100" : "opacity-0"}`}
       />
     </div>
   );

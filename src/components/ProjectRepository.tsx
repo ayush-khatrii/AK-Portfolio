@@ -12,7 +12,7 @@ type ProjectItem = (typeof project)[number];
 export default function ProjectRepository({ items, headingLevel = "h3" }: { items: ProjectItem[]; headingLevel?: "h2" | "h3" }) {
   return <Accordion type="multiple" className="space-y-2">
     {items.map((item, index) => <AccordionItem key={item.title} value={item.title} className="border-0">
-      <SpotlightCard spotlightColor="var(--primary)" intensity={0.035} borderGlow={0.15} proximity={0} flare={false} className="!rounded-xl !p-0" style={{ "--spotlight-card-surface": "var(--card)", "--spotlight-card-border": "var(--border)", "--spotlight-card-shadow": "none" } as React.CSSProperties}>
+      <SpotlightCard spotlightColor="var(--primary)" intensity={0.08} borderGlow={0.22} proximity={0} flare={false} className="!rounded-xl !p-0" style={{ "--spotlight-card-surface": "var(--card)", "--spotlight-card-border": "var(--border)", "--spotlight-card-shadow": "none" } as React.CSSProperties}>
         <AccordionTrigger headingLevel={headingLevel} className="group gap-4 px-4 py-3 text-left hover:no-underline sm:gap-5 sm:px-5 sm:py-4 [&>svg]:text-muted-foreground">
           <span aria-hidden="true" className="self-start pt-1.5 font-mono text-[10px] text-primary/70">{String(index + 1).padStart(2, "0")}</span>
           <span className="min-w-0 flex-1">

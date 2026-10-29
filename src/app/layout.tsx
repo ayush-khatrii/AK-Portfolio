@@ -25,7 +25,9 @@ export default async function RootLayout({
   const currentYear = await getCurrentYear();
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
-      <body className={`${alan.variable} relative isolate flex min-h-svh flex-col`}>
+      <body
+        className={`${alan.variable} relative isolate flex min-h-svh flex-col`}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

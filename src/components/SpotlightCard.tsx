@@ -115,7 +115,7 @@ const SpotlightCard = ({
     const noise = grainRef.current;
     const edge = edgeRef.current;
     if (!root || !light || !noise || !edge) return undefined;
-    if (window.matchMedia('(prefers-reduced-motion: reduce), (pointer: coarse)').matches) return undefined;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
 
     const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
     const state = { x: 0, y: 0, presence: 0, flare: 0, time: Math.random() * 60, pressed: false, visible: true };
@@ -214,6 +214,7 @@ const SpotlightCard = ({
     wakeRef.current = wake;
 
     const onMove = (event: PointerEvent) => {
+      if (event.pointerType === 'touch') return;
       pointer.x = event.clientX;
       pointer.y = event.clientY;
       pointer.active = true;
@@ -225,6 +226,7 @@ const SpotlightCard = ({
       wake();
     };
     const onDown = (event: PointerEvent) => {
+      if (event.pointerType === 'touch') return;
       pointer.x = event.clientX;
       pointer.y = event.clientY;
       pointer.active = true;

@@ -54,131 +54,121 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="pointer-events-none fixed inset-x-0 top-0 z-50 mx-auto w-full max-w-5xl sm:top-3 sm:w-full md:w-full">
-      <div className="w-full">
-        <nav
-          aria-label="Primary navigation"
-          data-scrolled={scrolled}
-          className="bg-background border pointer-events-auto flex min-h-14 items-center gap-3 rounded-none px-3 py-1.5 sm:rounded-full md:gap-4"
-        >
-          <Link
-            href="/"
-            aria-label="Ayush Khatri — Home"
-            className="flex shrink-0 items-center gap-2 text-sm font-medium tracking-tight"
-            onClick={() => setOpen(false)}
+      <header className="pointer-events-none fixed inset-x-0 border md:rounded-full border-b/0 top-0 z-50 mx-auto w-full max-w-5xl sm:top-3 sm:w-full md:w-full">
+        <div className="w-full">
+          <nav
+            aria-label="Primary navigation"
+            data-scrolled={scrolled}
+            className=" bg-black/90 backdrop:blur-3xl sm:bg-background/90 pointer-events-auto flex min-h-14 items-center gap-3 rounded-none px-3 py-1.5 sm:rounded-full md:gap-4"
           >
-            <Image
-              src="/og-image.png"
-              alt=""
-              aria-hidden="true"
-              width={32}
-              height={32}
-              preload
-              className="size-8 shrink-0 rounded-full object-cover ring-1 ring-primary/20"
-            />
-            <span>
-              Ayush Khatri<span className="text-primary">.</span>
-            </span>
-          </Link>
-          <ul className="ml-auto hidden items-center gap-1 md:flex">
-            {navItems.map((item) => (
-              <li key={item.path}>
-                <Link
-                  href={item.path}
-                  aria-current={isActive(item.path) ? "page" : undefined}
-                  className={cn(
-                    "relative flex min-h-9 items-center gap-1.5 rounded-full border border-transparent px-2.5 text-xs transition-colors hover:bg-foreground/5 hover:text-foreground press:bg-foreground/5 press:text-foreground",
-                    isActive(item.path)
-                      ? "border-foreground/10 bg-foreground/5 text-foreground"
-                      : "text-muted-foreground",
-                  )}
-                >
-                  {isActive(item.path) && (
-                    <span
-                      aria-hidden="true"
-                      className="size-1 rounded-full bg-primary"
-                    />
-                  )}
-                  {item.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <Button
-            size="sm"
-            variant="outline"
-            onClick={openContact}
-            className="hidden h-9 shrink-0 rounded-full border-foreground/15 bg-foreground/5 px-3 md:inline-flex"
-          >
-            Contact <ArrowUpRight className="size-3.5" />
-          </Button>
-          <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                aria-label="Open navigation"
-                className="ml-auto rounded-full md:hidden"
-              >
-                <Menu />
-              </Button>
-            </SheetTrigger>
-            <SheetContent
-              data-lenis-prevent
-              side="right"
-              className="liquid-sheet inset-y-3 right-3 flex h-[calc(100dvh-1.5rem)] w-[calc(100%-1.5rem)] flex-col overflow-y-auto rounded-3xl border px-5 pb-5 pt-14 sm:max-w-sm"
+            <Link
+              href="/"
+              aria-label="Ayush Khatri — Home"
+              className="flex shrink-0 items-center gap-2 text-sm font-medium tracking-tight"
+              onClick={() => setOpen(false)}
             >
-              <SheetTitle className="text-2xl tracking-tight">
+              <Image
+                src="/og-image.png"
+                alt=""
+                aria-hidden="true"
+                width={32}
+                height={32}
+                preload
+                className="size-8 shrink-0 rounded-full object-cover ring-1 ring-primary/20"
+              />
+              <span>
                 Ayush Khatri<span className="text-primary">.</span>
-              </SheetTitle>
-              <SheetDescription></SheetDescription>
-              <nav aria-label="Mobile navigation" className="mt-5">
-                <ul>
-                  {navItems.map((item, index) => (
-                    <li key={item.path} className="border-b border-border">
-                      <SheetClose asChild>
-                        <Link
-                          href={item.path}
-                          aria-current={
-                            isActive(item.path) ? "page" : undefined
-                          }
-                          className={cn(
-                            "flex items-center gap-4 py-3 text-lg",
-                            isActive(item.path)
-                              ? "text-primary"
-                              : "text-foreground",
-                          )}
-                        >
-                          <span
-                            aria-hidden="true"
-                            className="font-mono text-[10px] text-muted-foreground"
-                          >
-                            0{index + 1}
-                          </span>
-                          {item.name}
-                          <ArrowRight
-                            aria-hidden="true"
-                            className="ml-auto size-4"
-                          />
-                        </Link>
-                      </SheetClose>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-              <div className="mt-6 border-t border-border pt-5">
-                <p className="text-base">Have something in mind?</p>
-                <p className="mb-5 mt-2 text-sm text-muted-foreground">
-                  Let’s make it happen.
-                </p>
-                <Button onClick={openContact}>
-                  Let’s talk <ArrowUpRight />
+              </span>
+            </Link>
+            <ul className="ml-auto hidden items-center gap-1 md:flex">
+              {navItems.map((item) => (
+                <li key={item.path}>
+                  <Link
+                    href={item.path}
+                    aria-current={isActive(item.path) ? "page" : undefined}
+                    className="nav-link flex min-h-9 items-center px-2.5 text-xs"
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={openContact}
+              className="hidden h-9 shrink-0 rounded-full border-foreground/15 bg-foreground/5 px-3 md:inline-flex"
+            >
+              Contact <ArrowUpRight className="size-3.5" />
+            </Button>
+            <Sheet open={open} onOpenChange={setOpen}>
+              <SheetTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  aria-label="Open navigation"
+                  className="ml-auto rounded-full md:hidden"
+                >
+                  <Menu />
                 </Button>
-              </div>
-            </SheetContent>
-          </Sheet>
-        </nav>
-      </div>
+              </SheetTrigger>
+              <SheetContent
+                data-lenis-prevent
+                side="right"
+                onCloseAutoFocus={(event) => {
+                  if (contactOpen) event.preventDefault();
+                }}
+                className="inset-0 flex h-dvh w-full max-w-none flex-col gap-0 overflow-y-auto overscroll-contain rounded-none border-0 bg-background px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-14 shadow-none sm:max-w-none"
+              >
+                <SheetTitle className="text-2xl tracking-tight">
+                  Ayush Khatri<span className="text-primary">.</span>
+                </SheetTitle>
+                <SheetDescription className="sr-only">
+                  Explore the portfolio or get in touch.
+                </SheetDescription>
+                <nav aria-label="Mobile navigation" className="mt-3">
+                  <ul>
+                    {navItems.map((item, index) => (
+                      <li key={item.path} className="border-b border-border">
+                        <SheetClose asChild>
+                          <Link
+                            href={item.path}
+                            aria-current={
+                              isActive(item.path) ? "page" : undefined
+                            }
+                            className={cn(
+                              "flex min-h-11 items-center gap-4 py-2 text-lg transition-colors duration-300 ease-out hover:text-primary focus-visible:text-primary motion-reduce:transition-none",
+                              isActive(item.path)
+                                ? "text-primary"
+                                : "text-foreground",
+                            )}
+                          >
+                            <span
+                              aria-hidden="true"
+                              className="font-mono text-[10px] text-muted-foreground"
+                            >
+                              0{index + 1}
+                            </span>
+                            {item.name}
+                            <ArrowRight
+                              aria-hidden="true"
+                              className="ml-auto size-4"
+                            />
+                          </Link>
+                        </SheetClose>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+                <div className="mt-auto flex w-full flex-col gap-3">
+                  <Button size={"sm"} className="w-full " onClick={openContact}>
+                    Let’s talk <ArrowUpRight />
+                  </Button>
+                </div>
+              </SheetContent>
+            </Sheet>
+          </nav>
+        </div>
       </header>
 
       <Sheet open={contactOpen} onOpenChange={setContactOpen}>
