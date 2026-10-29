@@ -3,7 +3,6 @@
 import React from "react";
 import GitHubCalendar from "react-github-calendar";
 import { Tooltip as ReactTooltip } from "react-tooltip";
-import { motion } from "motion/react";
 import SectionHeading from "@/components/SectionHeading";
 
 const formatDate = (dateString: string) => {
@@ -17,9 +16,9 @@ const formatDate = (dateString: string) => {
 };
 
 const GithubContribution = () => (
-  <section className="overflow-x-hidden border-t border-dotted border-border/60 px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+  <section className="overflow-x-hidden border-t border-solid border-border/60 px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
     <SectionHeading title="GitHub Graph" description="" />
-    <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="w-full border-y border-dotted border-border/60 bg-muted/20 px-2 py-5 sm:px-4">
+    <div className="w-full overflow-x-auto rounded-2xl border border-border bg-card p-4 sm:p-7">
       <GitHubCalendar
         blockSize={15}
         blockMargin={4}
@@ -27,8 +26,8 @@ const GithubContribution = () => (
         fontSize={12}
         style={{ width: "100%" }}
         theme={{
-          light: ["var(--muted)", "var(--primary)"],
-          dark: ["var(--muted)", "var(--primary)"],
+          light: ["#e9eef7", "#e4f4a9", "#bfdc54", "#849f18", "#536800"],
+          dark: ["#101927", "#33440e", "#637e15", "#9fc71c", "#D4FF24"],
         }}
         showWeekdayLabels={["sun", "mon", "tue", "wed", "thu", "fri", "sat"]}
         weekStart={1}
@@ -50,7 +49,7 @@ const GithubContribution = () => (
         border="1px solid var(--border)"
         className="!z-50 !rounded-md !bg-popover !px-3 !py-1.5 !font-mono !text-xs md:!text-sm !text-popover-foreground !shadow-md"
       />
-    </motion.div>
+    </div>
   </section>
 );
 

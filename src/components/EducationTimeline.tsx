@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "motion/react";
 import { Building2, MapPin } from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
 
@@ -14,13 +13,13 @@ type EducationItem = {
 };
 
 const EducationTimeline = ({ items }: { items: EducationItem[] }) => (
-  <section className="border-t border-dotted border-border/60 px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+  <section className="border-t border-solid border-border/60 px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
     <SectionHeading title="Education Timeline" description="The academic foundation that shaped my path into software development." />
-    <motion.ol initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="relative space-y-0">
-      <span aria-hidden="true" className="absolute bottom-7 left-[5px] top-7 border-l border-dotted border-border/70" />
+    <ol className="relative space-y-4">
+      <span aria-hidden="true" className="absolute bottom-7 left-[5px] top-7 border-l border-solid border-border/70" />
       {items.map((item) => (
-        <li key={item.id} className="relative border-b border-dotted border-border/50 py-5 pl-8 first:border-t sm:pl-10">
-          <span aria-hidden="true" className="absolute left-0 top-7 size-3 rounded-full border-2 border-primary bg-background shadow-[0_0_0_4px_var(--background)]" />
+        <li key={item.id} className="relative rounded-2xl border border-border bg-card p-6 pl-8 sm:p-8 sm:pl-10">
+          <span aria-hidden="true" className="absolute left-0 top-7 size-3 rounded-full border-2 border-accent bg-background shadow-[0_0_0_4px_var(--background)]" />
           <div className="grid gap-4 sm:grid-cols-[8rem_minmax(0,1fr)] sm:gap-8">
             <time className="h-fit w-fit border border-border/50 bg-muted/50 px-2 py-1 font-mono text-xs text-foreground sm:text-xs">{item.date}</time>
             <div>
@@ -34,7 +33,7 @@ const EducationTimeline = ({ items }: { items: EducationItem[] }) => (
           </div>
         </li>
       ))}
-    </motion.ol>
+    </ol>
   </section>
 );
 

@@ -1,7 +1,6 @@
 "use client";
 
 import { useId, useState, type FormEvent } from "react";
-import { motion } from "motion/react";
 import { Copy, Loader2, Send } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -143,9 +142,9 @@ const Contact = () => {
   return (
     <section id="contact" className="scroll-mt-24 overflow-x-hidden py-12 sm:py-16">
       <SectionHeading title="Get in Touch" description="Have a project or idea in mind? Tell me about it and let’s build something great." />
-      <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
+      <div>
         <ContactForm />
-      </motion.div>
+      </div>
     </section>
   );
 };

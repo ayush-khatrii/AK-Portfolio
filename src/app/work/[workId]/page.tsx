@@ -20,13 +20,13 @@ const WorkDetailPage = async ({
   if (!item) notFound();
 
   return (
-    <article className="min-h-[70svh] px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+    <article className="min-h-[70svh] px-5 py-12 sm:px-8 sm:py-16 lg:px-12">
       <Button asChild variant="ghost" size="sm" className="mb-10 h-11 px-0 font-mono text-xs text-muted-foreground hover:bg-transparent hover:text-foreground">
         <Link href="/#experience"><ArrowLeft />Back to experience</Link>
       </Button>
 
-      <header>
-        <p className="font-mono text-xs uppercase tracking-[0.16em] text-primary sm:text-xs">Work Experience / {item.workId}</p>
+      <header className="rounded-2xl border border-border bg-card p-6 sm:p-10">
+        <p className="font-mono text-xs uppercase tracking-[0.16em] text-cobalt dark:text-lime sm:text-xs">Work Experience / {item.workId}</p>
         <h1 className="mt-4 text-balance text-3xl font-medium tracking-[-0.045em] sm:text-5xl">{item.position}</h1>
         <p className="mt-3 text-lg text-muted-foreground sm:text-xl">{item.title}</p>
         <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 font-mono text-xs text-muted-foreground">
@@ -39,9 +39,9 @@ const WorkDetailPage = async ({
 
       <section aria-labelledby="work-details-title">
         <h2 id="work-details-title" className="text-xl font-medium tracking-tight sm:text-2xl">Work details</h2>
-        <ul className="section-rail mt-6 space-y-5">
+        <ul className="mt-6 space-y-3">
           {item.content.map((point, index) => (
-            <li key={`${item.workId}-${index}`} className="relative pl-5 text-pretty text-sm leading-relaxed text-muted-foreground before:absolute before:left-0 before:top-[0.65em] before:size-1.5 before:rounded-full before:bg-primary sm:text-base">{point}</li>
+            <li key={`${item.workId}-${index}`} className="relative rounded-xl border border-border bg-card p-5 pl-9 text-pretty text-sm leading-7 text-muted-foreground before:absolute before:left-4 before:top-8 before:size-1.5 before:rounded-full before:bg-primary sm:text-base">{point}</li>
           ))}
         </ul>
       </section>
