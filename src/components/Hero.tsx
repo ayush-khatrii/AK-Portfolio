@@ -11,7 +11,6 @@ import { Button } from "@/components/ui/button";
 import SocialLinks from "@/components/SocialLinks";
 import ShapeWaves from "@/components/ShapeWaves";
 import Reveal from "@/components/Reveal";
-import HeroLogo from "@/components/HeroLogo";
 
 export default function Hero() {
   return (
@@ -68,13 +67,10 @@ export default function Hero() {
 
             <h1
               id="hero-title"
-              className="flex items-center gap-3 text-[clamp(1.75rem,8vw,2.25rem)] font-semibold leading-[1.05] tracking-[-0.045em] sm:gap-4 sm:text-5xl md:text-6xl"
+              className="text-balance text-4xl font-semibold leading-[1.05] tracking-[-0.045em] sm:text-5xl md:text-6xl"
             >
-              <HeroLogo />
-              <span className="min-w-0 text-balance">
-                {aboutContent.name}
-                <span className="text-muted-foreground">.</span>
-              </span>
+              {aboutContent.name}
+              <span className="text-muted-foreground">.</span>
             </h1>
 
             <p className="text-base font-medium tracking-tight text-foreground/80 sm:text-lg">
