@@ -54,12 +54,12 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="pointer-events-none fixed inset-x-0 border md:rounded-full border-b/0 top-0 z-50 mx-auto w-full max-w-5xl sm:top-3 sm:w-full md:w-full">
+      <header className="pointer-events-none fixed inset-x-0 top-0 z-50 mx-auto w-full max-w-5xl sm:top-3 sm:px-5">
         <div className="w-full">
           <nav
             aria-label="Primary navigation"
             data-scrolled={scrolled}
-            className=" bg-black/90 backdrop:blur-3xl sm:bg-background/90 pointer-events-auto flex min-h-14 items-center gap-3 rounded-none px-3 py-1.5 sm:rounded-full md:gap-4"
+            className="pointer-events-auto flex min-h-14 items-center gap-3 bg-background/90 px-5 py-1.5 backdrop-blur-xl transition-colors duration-200 data-[scrolled=true]:bg-background/95 motion-reduce:transition-none sm:rounded-full sm:px-3 md:gap-4"
           >
             <Link
               href="/"
@@ -107,9 +107,9 @@ export default function Navbar() {
                   variant="ghost"
                   size="icon"
                   aria-label="Open navigation"
-                  className="ml-auto rounded-full md:hidden"
+                  className="ml-auto size-11 rounded-full text-foreground/50 transition-colors hover:bg-transparent hover:text-foreground/80 focus-visible:text-foreground motion-reduce:transition-none md:hidden"
                 >
-                  <Menu />
+                  <Menu aria-hidden="true" className="size-[18px]" strokeWidth={1.5} />
                 </Button>
               </SheetTrigger>
               <SheetContent
