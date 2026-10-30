@@ -54,7 +54,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="pointer-events-none fixed inset-x-0 border md:rounded-full border-b/0 top-0 z-50 mx-auto w-full max-w-5xl sm:top-3 sm:w-full md:w-full">
+      <header className="pointer-events-none fixed inset-x-0 border-b border-foreground/8 md:rounded-full md:border md:border-border top-0 z-50 mx-auto w-full max-w-5xl sm:top-3 sm:w-full md:w-full">
         <div className="w-full">
           <nav
             aria-label="Primary navigation"
