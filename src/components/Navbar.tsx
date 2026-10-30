@@ -54,12 +54,12 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="pointer-events-none fixed inset-x-0 border-b border-foreground/8 md:rounded-full md:border md:border-border top-0 z-50 mx-auto w-full max-w-5xl sm:top-3 sm:w-full md:w-full">
+      <header className="pointer-events-none fixed inset-x-0 top-0 z-50 mx-auto w-full max-w-5xl sm:top-3 sm:w-full md:w-full">
         <div className="w-full">
           <nav
             aria-label="Primary navigation"
             data-scrolled={scrolled}
-            className=" bg-black/90 backdrop:blur-3xl sm:bg-background/90 pointer-events-auto flex min-h-14 items-center gap-3 rounded-none px-3 py-1.5 sm:rounded-full md:gap-4"
+            className="liquid-nav pointer-events-auto flex min-h-14 items-center gap-3 rounded-none px-3 py-1.5 sm:rounded-full md:gap-4"
           >
             <Link
               href="/"
@@ -118,7 +118,8 @@ export default function Navbar() {
                 onCloseAutoFocus={(event) => {
                   if (contactOpen) event.preventDefault();
                 }}
-                className="inset-0 flex h-dvh w-full max-w-none flex-col gap-0 overflow-y-auto overscroll-contain rounded-none border-0 bg-background px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-14 shadow-none sm:max-w-none"
+                overlayClassName="bg-black/25 backdrop-blur-none"
+                className="liquid-sheet inset-0 flex h-dvh w-full max-w-none flex-col gap-0 overflow-y-auto overscroll-contain rounded-none border-0 px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-14 shadow-none sm:max-w-none"
               >
                 <SheetTitle className="text-2xl tracking-tight">
                   Ayush Khatri<span className="text-primary">.</span>
@@ -129,7 +130,7 @@ export default function Navbar() {
                 <nav aria-label="Mobile navigation" className="mt-3">
                   <ul>
                     {navItems.map((item, index) => (
-                      <li key={item.path} className="border-b border-border">
+                      <li key={item.path} className="border-b border-foreground/8">
                         <SheetClose asChild>
                           <Link
                             href={item.path}
@@ -137,7 +138,7 @@ export default function Navbar() {
                               isActive(item.path) ? "page" : undefined
                             }
                             className={cn(
-                              "flex min-h-11 items-center gap-4 py-2 text-lg transition-colors duration-300 ease-out hover:text-primary focus-visible:text-primary motion-reduce:transition-none",
+                              "liquid-menu-link flex min-h-11 items-center gap-4 py-2 text-lg transition-colors duration-300 ease-out hover:text-primary focus-visible:text-primary motion-reduce:transition-none",
                               isActive(item.path)
                                 ? "text-primary"
                                 : "text-foreground",
